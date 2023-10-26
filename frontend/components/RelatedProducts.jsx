@@ -28,8 +28,8 @@ const RelatedProducts = () => {
                 containerClass="-mx-[10px]"
                 itemClass="px-[10px]"
             >
-                {[0,1,2,3,4].map((product) => (
-                   <ProductCard/>
+                {[0,1,2,3,4].map((product, index) => (
+                   <ProductCard key={index}/>
                 ))}
             </Carousel>
         </div>

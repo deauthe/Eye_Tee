@@ -402,7 +402,7 @@ const SignUp = () => {
                   </button>
                 </div>
                 <p className="text-sm text-center font-titleFont font-medium">
-                  Don't have an Account?{" "}
+                  {" "} Dont have an Account?
                   <Link href={"/auth/login"}>
                     <span className="hover:text-blue-600 duration-300">
                       Sign in

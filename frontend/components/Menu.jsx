@@ -33,7 +33,7 @@ const Menu = ({ showCatMenu, setShowCatMenu, categories }) => {
                                 {showCatMenu && (
                                     <ul className="bg-white absolute top-6 left-0 min-w-[250px] px-1 py-1 text-black shadow-lg">
                                         {categories?.map(
-                                            (item) => {
+                                            (item, index) => {
                                                 return (
                                                     // <Link
                                                     //     key={item.id}
@@ -51,7 +51,7 @@ const Menu = ({ showCatMenu, setShowCatMenu, categories }) => {
                                                     //         </span>
                                                     //     </li>
                                                     // </Link>
-                                                    <h2>good</h2>
+                                                    <h2 key={index}>good</h2>
                                                 );
                                             }
                                         )}

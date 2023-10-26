@@ -5,7 +5,7 @@ import logo from "../../public/logo.png";
 import Image from "next/image";
 import Wrapper from "@/components/Wrapper";
 import {FcGoogle} from 'react-icons/fc';
-const login = () => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   // ============= Initial State End here ===============
@@ -20,6 +20,7 @@ const login = () => {
     setEmail(e.target.value);
     setErrEmail("");
   };
+
   const handlePassword = (e) => {
     setPassword(e.target.value);
     setErrPassword("");
@@ -194,7 +195,7 @@ const login = () => {
                 </button>
                 </div>
                 <p className="text-sm text-center font-titleFont font-medium">
-                  Don't have an Account? {/* <Link href={"/"}> */}
+                  Dont have an Account? {/* <Link href={"/"}> */}
                   <Link href={"/auth/signup"}>
                     <span className="hover:text-blue-600 duration-300">
                       Sign up
@@ -225,4 +226,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;
