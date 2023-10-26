@@ -4,6 +4,7 @@ import Wrapper from "./Wrapper";
 import Link from "next/link";
 import Menu from "./Menu";
 import MenuMobile from "./MenuMobile";
+import {CgProfile} from 'react-icons/cg';
 
 import { IoMdHeartEmpty } from "react-icons/io";
 import { BsCart } from "react-icons/bs";
@@ -77,7 +78,7 @@ const Header = () => {
           )}
 
           {/* {Search button} */}
-          <div class="input-container">
+          <div class="input-container ml-2 ">
             <input
               type="text"
               name="text"
@@ -166,6 +167,14 @@ const Header = () => {
                 </div>
               )}
             </div>
+          </Link>
+
+          {/* profile section  */}
+
+          <Link href="/">
+          <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative">
+            <CgProfile className="text-[17px] md:text-[25px]"></CgProfile>
+          </div>
           </Link>
           {/* Icon end */}
 
