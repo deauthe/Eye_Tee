@@ -7,17 +7,17 @@ const ProductCard = () => {
   return (
     <Link
       href="/"
-      className="transform overflow-hidden bg-black/[0.15] duration-200 hover:scale-105 cursor-pointer rounded-lg shadow-md"
+      className="transform overflow-hidden bg-white/[0.85] duration-200 hover:scale-[1.02] cursor-pointer rounded-lg shadow-md"
     >
       <div className="relative">
         <div className="absolute right-4 top-3 ">
          <div className="flex flex-col gap-3">
-         <span className="text-xl bg-black/[0.15] p-1.5 rounded-full shadow hover:bg-blue-400 transition-all duration-200">
+         <span className="text-xl p-1.5 rounded-full shadowbg-blue-400 transition-all  bg-blue-400 duration-200">
             {" "}
             <FiShare2 />
           </span>
 
-          <span className="text-xl bg-black/[0.15] p-1.5 rounded-full shadow hover:bg-red-400 transition-all duration-200">
+          <span className="text-xl p-1.5 rounded-full shadow bg-red-400 transition-all duration-200">
             {" "}
             <AiOutlineHeart />
           </span>

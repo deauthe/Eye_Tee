@@ -19,11 +19,12 @@ export default function Home() {
           <div className="text-[28px] md:text-[34px] mb-1  font-semibold leading-tight">
             Unleash The Unique Style Categories
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-7 mb-5 px-5 md:px-0">
+          <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-1 my-7 mb-5 px-5 md:px-0">
             <CategoryCard/>
             <CategoryCard/>
             <CategoryCard/>
-
+            <CategoryCard/>
+            <CategoryCard/>
           </div>
           {/* <div className="text-md md:text-xl">
             Explore a world of fashion where your creativity knows no bounds.
@@ -36,7 +37,7 @@ export default function Home() {
           </div>
 
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-6 px-5 md:px-0">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 my-6 px-5 md:px-0">
           {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((product) => (
             <ProductCard />
           ))}

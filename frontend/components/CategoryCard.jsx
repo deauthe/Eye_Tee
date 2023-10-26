@@ -3,12 +3,13 @@ import React from "react";
 // import hoddie from '../public/C_hoodie.png'
 const CategoryCard = () => {
   return (
-    <div className="border-2 border-black rounded-lg">
-      <div className="bg-purple-200 m-1.5 shadow flex items-end  gap-3 justify-center rounded-md">
-        <Image src='/C_hoodie.png' alt="none" width={70} height={70}></Image>
-        <p className="text-[28px] md:text-[34px] mb-4  font-[500] leading-tight" >Hoodies</p>
-      </div>
+   <div className="flex flex-col items-center ">
+    <div className="border w-[130px] h-[130px] border-black rounded-full flex justify-center items-center bg-slate-50">
+         <Image src='/C_hoodie.png' alt="none" width={95} height={95}></Image>
     </div>
+    <p className="text-lg">Hoodie</p>
+   </div>
+
   );
 };
 
