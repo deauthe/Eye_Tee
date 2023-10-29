@@ -141,7 +141,7 @@ const Header = () => {
         <div className="flex items-center gap-2 text-black">
           {/* {Button } */}
 
-          <a class="fancy" href="#">
+          <a class="fancy " href="#">
             <span class="top-key"></span>
             <span class="text">Sell Your Art</span>
             <span class="bottom-key-1"></span>
