@@ -6,7 +6,8 @@ import ProductCard from "@/components/ProductCard";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import DesignerCards from "@/components/DesignerCards";
-import {MdAddIcCall} from 'react-icons/md';
+import NextModel from "@/components/NextModel";
+
 
 const PublicProfile = () => {
   const responsive = {
@@ -24,6 +25,11 @@ const PublicProfile = () => {
     },
   };
 
+
+ 
+
+
+
   return (
     <Wrapper>
       <div className="bg-[#f7d59c] h-[11em] relative mb-[60px]">
@@ -33,9 +39,9 @@ const PublicProfile = () => {
         <button className="bg-black hover:bg-black hover:text-white transition-all duration-300 px-5 py-2 rounded-full absolute right-[210px] bottom-[-15px] text-white">
           Follow <span>+</span>
         </button>
-        <button className= " flex  items-center  gap-1 bg-blue-400 hover:bg-black text-white hover:text-white transition-all duration-300 px-5 py-2 rounded-full absolute right-[60px] bottom-[-15px]">
-          Contact <MdAddIcCall/>
-        </button>
+       <div className="absolute right-[60px] bottom-[-15px]">
+      <NextModel/>
+       </div>
         <div className="absolute left-[200px] top-[70px]">
           <h3 className="font-[600] text-3xl"> Samanvay Arya</h3>
           <p>@asamanvay</p>
