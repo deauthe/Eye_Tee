@@ -1,14 +1,29 @@
 import "@/styles/globals.css";
 import Head from "next/head";
-
+import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-
 import { Provider } from "react-redux";
 import store from "@/store/store";
-
+import LoadingBar from "react-top-loading-bar";
 import { NextUIProvider } from "@nextui-org/react";
+import { useRouter } from "next/router";
 export default function App({ Component, pageProps }) {
+  const router = useRouter();
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    // START VALUE - WHEN LOADING WILL START
+    router.events.on("routeChangeStart", () => {
+      setProgress(40);
+    });
+
+    // COMPLETE VALUE - WHEN LOADING IS FINISHED
+    router.events.on("routeChangeComplete", () => {
+      setProgress(100);
+    });
+  }, []);
+
   return (
     <>
       <Head>
@@ -27,15 +42,23 @@ export default function App({ Component, pageProps }) {
           rel="stylesheet"
         />
       </Head>
-      
-        <Provider store={store}>
+
+      <Provider store={store}>
         <NextUIProvider>
           <Header />
+          <LoadingBar
+            color="rgb(0, 0, 0)"
+            height={7}
+            progress={progress}
+            waitingTime={400}
+            onLoaderFinished={() => {
+              setProgress(0);
+            }}
+          />
           <Component {...pageProps} />
           <Footer />
-          </NextUIProvider>
-        </Provider>
-      
+        </NextUIProvider>
+      </Provider>
     </>
   );
 }

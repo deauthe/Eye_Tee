@@ -15,6 +15,23 @@ const ProductDetails = () => {
     const [selectedSize, setSelectedSize] = useState();
     const [showError, setShowError] = useState(false);
     const dispatch = useDispatch();
+    const price = 100;
+    const product = [
+        {
+            "name": "Product Name",
+            "image_urls": [
+              "https://example.com/image1.jpg",
+              "https://example.com/image2.jpg",
+              "https://example.com/image3.jpg",
+              "https://example.com/image4.jpg",
+              "https://example.com/image5.jpg"
+            ],
+            "selected_image_url": "https://media.istockphoto.com/id/1350560575/photo/pair-of-blue-running-sneakers-on-white-background-isolated.webp?b=1&s=170667a&w=0&k=20&c=liUSgX6SafJ7HWvefFqR9-pnf3KuH6v1lwQ6iEpePWc=",
+            "subtitle": "Product Subtitle",
+            "designer_name": "Designer Name"
+          }
+          
+    ];
     // const p = product?.data?.[0]?.attributes;
 
     const notify = () => {
@@ -50,7 +67,7 @@ const ProductDetails = () => {
 
                         {/* PRODUCT SUBTITLE */}
                         <div className="text-lg font-semibold mb-5">
-                          mine
+                        description
                         </div>
 
                         {/* PRODUCT PRICE */}
@@ -100,20 +117,20 @@ const ProductDetails = () => {
                                     <div
                                         key={i}
                                         className={`border rounded-md text-center py-3 font-medium ${
-                                            item.enabled
+                                           true
                                                 ? "hover:border-black cursor-pointer"
                                                 : "cursor-not-allowed bg-black/[0.1] opacity-50"
                                         } ${
-                                            selectedSize === item.size
+                                            selectedSize === item
                                                 ? "border-black"
                                                 : ""
                                         }`}
                                         onClick={() => {
-                                            setSelectedSize(item.size);
+                                            setSelectedSize(item);
                                             setShowError(false);
                                         }}
                                     >
-                                        {item.size}
+                                        {item}
                                     </div>
                                 ))}
                             </div>
@@ -144,9 +161,11 @@ const ProductDetails = () => {
                                 } else {
                                     dispatch(
                                         addToCart({
-                                            ...product?.data?.[0],
+                                            // ...product?.data?.[0],
+                                          product,
                                             selectedSize,
-                                            oneQuantityPrice: p.price,
+                                            price,
+                                        
                                         })
                                     );
                                     notify();

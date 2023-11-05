@@ -4,7 +4,7 @@ import Wrapper from "./Wrapper";
 import Link from "next/link";
 import Menu from "./Menu";
 import MenuMobile from "./MenuMobile";
-import {CgProfile} from 'react-icons/cg';
+import { CgProfile } from "react-icons/cg";
 
 import { IoMdHeartEmpty } from "react-icons/io";
 import { BsCart } from "react-icons/bs";
@@ -15,6 +15,8 @@ import { useSelector } from "react-redux";
 import logo from "../public/logo.png";
 
 const Header = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
   const [showCatMenu, setShowCatMenu] = useState(false);
   const [show, setShow] = useState("translate-y-0");
@@ -26,6 +28,13 @@ const Header = () => {
     { id: 3, name: "Mugs", url: "/" },
   ];
   const { cartItems } = useSelector((state) => state.cart);
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleMouseEvents =()=>{
+    setIsHovered(!isHovered);
+  }
 
   const controlNavbar = () => {
     if (window.scrollY > 200) {
@@ -169,13 +178,42 @@ const Header = () => {
             </div>
           </Link>
 
-          {/* profile section  */}
+          {/* profile  dropdown section  */}
 
-          <Link href="/">
-          <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative">
-            <CgProfile className="text-[17px] md:text-[25px]"></CgProfile>
+          <div className="relative inline-block text-left">
+            <div onClick={toggleDropdown} onMouseOver={handleMouseEvents}>
+              <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative">
+                <CgProfile className="text-[17px] md:text-[25px]" />
+              </div>
+            </div>
+
+            {isOpen && (
+              <ul className="absolute z-10 right-0 mt-2 w-36 bg-white border rounded-lg shadow-lg">
+                <li>
+                  <Link href="/auth/login">
+                    <p className="block px-4 py-2 text-gray-800 hover:bg-gray-200">
+                      login
+                    </p>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/auth/designer">
+                    < p className="block px-4 py-2 text-gray-800 hover:bg-gray-200">
+                     Designer login
+                    </p>
+                  </Link>
+                </li>
+                {/* <li>
+                  <Link href="/">
+                    <p className="block px-4 py-2 text-gray-800 hover-bg-gray-200  hover:bg-gray-200">
+                      Graphic Design
+                    </p>
+                  </Link>
+                </li> */}
+              </ul>
+            )}
           </div>
-          </Link>
+
           {/* Icon end */}
 
           {/* Mobile icon start */}
