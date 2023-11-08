@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
 import Link from "next/link";
 import logo from "../../public/logo.png";
@@ -8,7 +8,6 @@ import { FcGoogle } from "react-icons/fc";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const Login = () => {
-
   const toastify = (messge, res) => {
     if (res) {
       toast.success(messge);
@@ -16,9 +15,7 @@ const Login = () => {
       toast.error(messge);
     }
   };
-
-
-
+  const [output, setOutput] = useState('');
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   // ============= Initial State End here ===============
@@ -40,10 +37,6 @@ const Login = () => {
   };
   // ============= Event Handler End here ===============
 
-
-
-
-
   const handleSignIn = async () => {
     const apiUrl = "https://eye-eye-tee.onrender.com/api/user/login";
 
@@ -51,7 +44,6 @@ const Login = () => {
       email: email,
       password: password,
     });
-
 
     const headers = {
       "Content-Type": "application/json",
@@ -68,8 +60,6 @@ const Login = () => {
       if (response.ok) {
         const responseData = await response.json();
         toastify(responseData.message, response.ok);
-       
-        
       } else {
         console.error("API call failed with status:", response.status);
         return null;
@@ -80,10 +70,35 @@ const Login = () => {
     }
   };
 
+  const handleGoogleAuuth = async () => {
+    const apiUrl = "http://localhost:8080/api/auth/google";
+
+    const popup = window.open(apiUrl, 'Google OAuth', 'width=600 , height=600');
+
+    const checkPopupClosed = setInterval(()=>{
+      if(popup.closed){
+        clearInterval(checkPopupClosed);
+        fetch('http://localhost:8080/api/auth/google/callback')
+        .then((response)=> response.json())
+        .then((data)=>{
+          setOutput(JSON.stringify(data, null , 2));
+        })
+        .catch((error)=>{
+          console.error("Error fetching data", error);
+        })
+      }
+    }, 1000)
+  };
+
+  useEffect(() => {
+    const outputElement = document.getElementById('output');
+    if (outputElement) {
+      outputElement.innerHTML = output;
+    }
+  }, [output]);
 
 
 
- 
   return (
     <Wrapper>
       <div className="w-full h-screen flex items-center justify-center my-5">
@@ -251,17 +266,18 @@ const Login = () => {
                       <FcGoogle />
                     </span>
                     <button
-                      // onClick={}
+                      onClick={handleGoogleAuuth}
                       className=" text-md font-[550] gap-2 border-2 border-black border-l-0 pl-1 p-1 pr-5 rounded-r-full"
                     >
                       Continue with google{" "}
                     </button>
+                    <div id="output"></div>
                   </div>
                 </div>
               </div>
             </div>
           )}
-          <ToastContainer/>
+          <ToastContainer />
         </div>
       </div>
     </Wrapper>

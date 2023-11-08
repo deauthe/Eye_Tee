@@ -1,57 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>API Call Example</title>
+    <title>Google OAuth Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        #loginBtn {
+            background-color: #4285F4;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        #output {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-  <h1>Create User</h1>
-  <form id="userForm">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required><br>
-    
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required><br>
+    <button id="loginBtn">Login with Google</button>
+    <div id="output"></div>
+    <script>
+        document.getElementById('loginBtn').addEventListener('click', function() {
+            // Replace with your Google OAuth API endpoint
+            const googleOAuthURL = 'http://localhost:8080/api/auth/google';
 
-    <button type="submit">Create User</button>
-  </form>
+            // Open the Google OAuth page in a new tab/window
+            const popup = window.open(googleOAuthURL, 'Google OAuth', 'width=600,height=600');
 
-  <p id="responseMessage"></p>
+            // Check if the popup window is closed
+            const checkPopupClosed = setInterval(function() {
+                if (popup.closed) {
+                    clearInterval(checkPopupClosed);
 
-  <script>
-    document.getElementById('userForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-      
-      const apiUrl = 'https://eye-eye-tee.onrender.com/api/user/create';
-      const username = document.getElementById('username').value;
-      const email = document.getElementById('email').value;
-      const requestBody = JSON.stringify({ username, email });
-
-      const headers = {
-        'Content-Type': 'application/json',
-        'x-api-key': 'token',
-      };
-
-      fetch(apiUrl, {
-        method: 'POST',
-        headers: headers,
-        body: requestBody,
-      })
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          } else {
-            throw new Error('API call failed with status ' + response.status);
-          }
-        })
-        .then((data) => {
-          document.getElementById('responseMessage').textContent = 'User created successfully: ' + JSON.stringify(data);
-        })
-        .catch((error) => {
-          document.getElementById('responseMessage').textContent = 'An error occurred: ' + error.message;
+                    // Make an API call to get the returned object
+                    fetch('http://localhost:8080/api/auth/google/callback')
+                        .then(response => response.json())
+                        .then(data => {
+                            // Handle the response data here
+                            const outputElement = document.getElementById('output');
+                            outputElement.innerHTML = JSON.stringify(data, null, 2);
+                        })
+                        .catch(error => {
+                            console.error('Error fetching data:', error);
+                        });
+                }
+            }, 1000);
         });
-    });
-  </script>
+    </script>
 </body>
 </html>

@@ -8,10 +8,18 @@ import {BsPiggyBank} from 'react-icons/bs';
 import wish from '../../public/wish.png';
 import art from '../../public/art.png';
 import EditProfile from "@/components/EditProfile";
+import banerImage from '../../public/banner.webp';
+import DropzoneComponent from "@/components/Dropzone";
+import DesignCarousel from "@/components/DesignCarousel";
+
+
 const UserProfile = () => {
   return (
     <Wrapper>
      <div className="bg-[#f7d59c] h-[11em] relative mb-[60px]">
+    <div className="h-[11em] overflow-hidden bg-cover bg-center ">
+    <Image src={banerImage} alt="Banner"></Image>
+    </div>
         <div className="overflow-hidden rounded-full inline-block absolute bottom-[-40px] left-[20px]">
           <Image src={profile} alt="profile" width={170} height={170} />
         </div>
@@ -24,7 +32,7 @@ const UserProfile = () => {
      Total Earning 
      <BsPiggyBank/>
        </button>
-        <div className="absolute left-[200px] top-[70px]">
+        <div className="absolute left-[200px] top-[70px] text-[#ebd9bb]">
           <h3 className="font-[600] text-3xl"> Samanvay Arya</h3>
           <p>@asamanvay</p>
           <div className="flex gap-4">
@@ -39,7 +47,7 @@ const UserProfile = () => {
       </div>
 
 
-      <div className="flex items-center gap-10 mb-10 ">
+      {/* <div className="flex items-center gap-10 mb-10 ">
         <div className="bg-white/80  px-10 py-5 shadow rounded-md flex flex-col gap-3 items-center">
           <Image src={art} width={100} alt="img"></Image>
           <button className="font-[600] text-white bg-black rounded-full px-4 py-2 ">Sell Your Art</button>
@@ -50,8 +58,25 @@ const UserProfile = () => {
           <button className="font-[600] text-white bg-black rounded-full px-4 py-2 ">Wish List</button>
         </div>
 
+      </div> */}
 
 
+
+
+
+      <div>
+       <DropzoneComponent/>
+      </div>
+
+
+      <div>
+      <div className="text-[28px] md:text-[34px] my-4  font-semibold leading-tight">
+            Your Designs
+          </div>
+
+          <div>
+            <DesignCarousel/>
+          </div>
       </div>
 
       
