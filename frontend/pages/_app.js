@@ -8,7 +8,7 @@ import store from "@/store/store";
 import LoadingBar from "react-top-loading-bar";
 import { NextUIProvider } from "@nextui-org/react";
 import { useRouter } from "next/router";
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps,emotionCache }) {
   const router = useRouter();
   const [progress, setProgress] = useState(0);
 

@@ -1,5 +1,6 @@
-import React, { useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Link from "next/link";
 import logo from "../../public/logo.png";
 import Image from "next/image";
@@ -11,11 +12,20 @@ const Login = () => {
   const toastify = (messge, res) => {
     if (res) {
       toast.success(messge);
+      toast.info("You can login as a Designer");
     } else {
       toast.error(messge);
     }
   };
-  const [output, setOutput] = useState('');
+
+  const storeUserSession = (designer, userID) => {
+    sessionStorage.setItem("idDesigner", designer);
+    sessionStorage.setItem("userID", userID);
+  };
+
+  const [output, setOutput] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   // ============= Initial State End here ===============
@@ -38,7 +48,7 @@ const Login = () => {
   // ============= Event Handler End here ===============
 
   const handleSignIn = async () => {
-    const apiUrl = "https://eye-eye-tee.onrender.com/api/user/login";
+    const apiUrl = "http://localhost:8080/api/user/login";
 
     const requestBody = JSON.stringify({
       email: email,
@@ -57,8 +67,12 @@ const Login = () => {
         body: requestBody,
       });
 
+      const responseData = await response.json();
+      console.log(responseData);
+
+      storeUserSession(responseData.data.isDesigner, responseData.data._id);
+
       if (response.ok) {
-        const responseData = await response.json();
         toastify(responseData.message, response.ok);
       } else {
         console.error("API call failed with status:", response.status);
@@ -69,35 +83,58 @@ const Login = () => {
       return null;
     }
   };
-
-  const handleGoogleAuuth = async () => {
+  const handleGoogleAuth = async () => {
     const apiUrl = "http://localhost:8080/api/auth/google";
-
-    const popup = window.open(apiUrl, 'Google OAuth', 'width=600 , height=600');
-
-    const checkPopupClosed = setInterval(()=>{
-      if(popup.closed){
+  
+    const popup = window.open(apiUrl, "Google OAuth", "width=600 , height=600");
+  
+    const checkPopupClosed = setInterval(() => {
+      if (popup.closed) {
         clearInterval(checkPopupClosed);
-        fetch('http://localhost:8080/api/auth/google/callback')
-        .then((response)=> response.json())
-        .then((data)=>{
-          setOutput(JSON.stringify(data, null , 2));
-        })
-        .catch((error)=>{
-          console.error("Error fetching data", error);
-        })
+  
+        // Fetch data from http://localhost:8080/api/success
+        fetch("http://localhost:8080/api/auth/google/callback")
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+          })
+          .then((data) => {
+            const { _id, email } = data;
+            console.log("Google authentication data:", _id, email);
+  
+            // Optionally, store Google authentication data in the session
+            storeUserSession(email, _id);
+          })
+          .catch((error) => {
+            console.error("Error fetching Google authentication data", error);
+          });
+  
+        // Fetch data from http://localhost:8080/api/success
+        fetch("http://localhost:8080/api/success")
+          .then((successResponse) => {
+            if (successResponse.ok) {
+              return successResponse.json();
+            } else {
+              throw new Error(`HTTP error! Status: ${successResponse.status}`);
+            }
+          })
+          .then((successData) => {
+            // Assuming successData contains the data you want to store in the session
+            console.log("Success data:", successData);
+  
+            // Store additional success data in the session
+            sessionStorage.setItem("additionalData", JSON.stringify(successData));
+          })
+          .catch((error) => {
+            console.error("Error fetching success data", error);
+          });
       }
-    }, 1000)
+    }, 1000);
   };
-
-  useEffect(() => {
-    const outputElement = document.getElementById('output');
-    if (outputElement) {
-      outputElement.innerHTML = output;
-    }
-  }, [output]);
-
-
+  
 
   return (
     <Wrapper>
@@ -220,17 +257,26 @@ const Login = () => {
                   </div>
 
                   {/* Password */}
-                  <div className="flex flex-col gap-.5">
+                  <div className="flex flex-col gap-.5 relative">
                     <p className="font-titleFont text-base font-semibold text-gray-600">
                       Password
                     </p>
-                    <input
-                      onChange={handlePassword}
-                      value={password}
-                      className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
-                      type="password"
-                      placeholder="Create password"
-                    />
+                    <div className="relative">
+                      <input
+                        onChange={handlePassword}
+                        value={password}
+                        className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none pr-8"
+                        type={showPassword ? "text" : "password"}
+                        placeholder="Create password"
+                      />
+                      {/* View Password Button */}
+                      <span
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute right-2 top-2 cursor-pointer"
+                      >
+                        {showPassword ? <FaEyeSlash /> : <FaEye />}
+                      </span>
+                    </div>
                     {errPassword && (
                       <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
                         <span className="font-bold italic mr-1">!</span>
@@ -266,7 +312,7 @@ const Login = () => {
                       <FcGoogle />
                     </span>
                     <button
-                      onClick={handleGoogleAuuth}
+                      onClick={handleGoogleAuth}
                       className=" text-md font-[550] gap-2 border-2 border-black border-l-0 pl-1 p-1 pr-5 rounded-r-full"
                     >
                       Continue with google{" "}

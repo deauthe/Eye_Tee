@@ -9,7 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@mantine/core": "^7.2.1",
+    "@mui/material": "^5.14.17",
     "@nextui-org/react": "^2.1.13",
     "@reduxjs/toolkit": "^1.9.7",
     "framer-motion": "^10.16.4",

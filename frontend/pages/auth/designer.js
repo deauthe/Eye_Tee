@@ -1,80 +1,58 @@
+import Wrapper from "@/components/Wrapper";
 import React, { useState } from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
 import logoLight from "../../public/logo.png";
 import Link from "next/link";
 import Image from "next/image";
 import { FcGoogle } from "react-icons/fc";
-import Wrapper from "@/components/Wrapper";
-
-const Designer = () => {
-  // ============= Initial State Start here =============
-  const [next, setNext] = useState(false);
+const designer = () => {
+  // react states =>  value
   const [clientName, setClientName] = useState("");
   const [artistName, setArtistName] = useState("");
-  const [clientBio, setClientBio] = useState("");
-  const [errBio, setErrBio] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [age, setage] = useState("");
-  const [address, setAddress] = useState("");
+  const [clientdescription, setClientdescription] = useState("");
+  const [phone, setPhone] = useState(null);
+  const [addressLine1, setAddressLine1] = useState("");
+  const [addressLine2, setAddressLine2] = useState("");
   const [city, setCity] = useState("");
+  const [postalCode, setPostalCode] = useState(null);
+  const [addressType, setAddressType] = useState("");
+  const [state, setState] = useState("");
+  const [panCardNumber, setPanCardNumber] = useState(null);
+  const [portfolioLinks, setPortfolioLinks] = useState("");
+  const [cvLinks, setCvLinks] = useState("");
+  const [CoverPhoto, setCoverPhoto] = useState({});
+  const [ProfilePhoto, setProfilePhoto] = useState({});
   const [country, setCountry] = useState("");
-  const [zip, setZip] = useState("");
-  const [checked, setChecked] = useState(false);
-  // ============= Initial State End here ===============
-  // ============= Error Msg Start here =================
+console.log(CoverPhoto, ProfilePhoto);
+  // react state => errors
   const [errClientName, setErrClientName] = useState("");
   const [errArtistName, setErrArtistName] = useState("");
-
-  const [errEmail, setErrEmail] = useState("");
+  const [errdescription, setErrdescription] = useState("");
   const [errPhone, setErrPhone] = useState("");
-  const [errage, setErrage] = useState("");
-  const [errAddress, setErrAddress] = useState("");
+  const [errAddressLine1, setErrAddressLine1] = useState("");
+  const [errAddressLine2, setErrAddressLine2] = useState("");
   const [errCity, setErrCity] = useState("");
+  const [errPostalCode, setErrPostalCode] = useState("");
+  const [errAddressType, setErrAddressType] = useState("");
+  const [errState, setErrState] = useState("");
+  const [errPanCardNumber, setErrPanCardNumber] = useState("");
+  const [errPortfolioLinks, setErrPortfolioLinks] = useState("");
+  const [errCvLinks, setErrCvLinks] = useState("");
+  const [errCoverPhoto, setErrCoverPhoto] = useState("");
+  const [errProfilePhoto, setErrProfilePhoto] = useState(null);
   const [errCountry, setErrCountry] = useState("");
-  const [errZip, setErrZip] = useState("");
-
-  const [selectedIdentification, setSelectedIdentification] = useState("");
-  const [identification, setIdentification] = useState("");
-  const [errIdentification, setErrIdentification] = useState("");
-
-  const [bankName, setBankName] = useState("");
-  const [bankAccountNumber, setBankAccountNumber] = useState("");
-  const [ifscCode, setIfscCode] = useState("");
-  const [paypalId, setPaypalId] = useState("");
-  const [userAgreement, setUserAgreement] = useState(false);
-
-  const [errBankName, setErrBankName] = useState("");
-  const [errBankAccountNumber, setErrBankAccountNumber] = useState("");
-  const [errIfscCode, setErrIfscCode] = useState("");
-  const [errPaypalId, setErrPaypalId] = useState("");
-
-  // ============= Error Msg End here ===================
-  const [successMsg, setSuccessMsg] = useState("");
-
-  // ============= Event Handler Start here =============
-  const handleIdentificationChange = (e) => {
-    setSelectedIdentification(e.target.value);
-  };
-
-  // Function to handle changes in the identification input
-  const handleIdentificationInput = (e) => {
-    setIdentification(e.target.value);
-  };
-
+  // handle functions
   const handleName = (e) => {
     setClientName(e.target.value);
     setErrClientName("");
   };
-
   const handleArtist = (e) => {
     setArtistName(e.target.value);
     setErrArtistName("");
   };
-
-  const handleBio = (e) => {
-    setClientBio(e.target.value);
-    setErrBio("");
+  const handledescription = (e) => {
+    setClientdescription(e.target.value);
+    setErrdescription("");
   };
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -84,132 +62,141 @@ const Designer = () => {
     setPhone(e.target.value);
     setErrPhone("");
   };
-  const handleage = (e) => {
-    setage(e.target.value);
-    setErrage("");
-  };
-  const handleAddress = (e) => {
-    setAddress(e.target.value);
-    setErrAddress("");
-  };
+
   const handleCity = (e) => {
     setCity(e.target.value);
     setErrCity("");
   };
-  const handleCountry = (e) => {
+  const handleAddressLine1 = (e) => {
+    setAddressLine1(e.target.value);
+    setErrAddressLine1("");
+  };
+  const handleAddressLine2 = (e) => {
+    setAddressLine2(e.target.value);
+    setErrAddressLine2("");
+  };
+  const handlePostalCode = (e) => {
+    setPostalCode(e.target.value);
+    setErrPostalCode("");
+  };
+  const handleaddressType = (e) => {
+    setAddressType(e.target.value);
+    setErrAddressType("");
+  };
+  const handleState = (e) => {
+    setState(e.target.value);
+    setErrState("");
+  };
+  const handlePanCardNumber = (e) => {
+    setPanCardNumber(e.target.value);
+    setErrPanCardNumber("");
+  };
+  const handlePortfolioLinks = (e) => {
+    setPortfolioLinks(e.target.value);
+    setErrPortfolioLinks("");
+  };
+  const handlecvLinks = (e) => {
+    setCvLinks(e.target.value);
+    setErrCvLinks("");
+  };
+  const handleCountry =(e)=>{
     setCountry(e.target.value);
-    setErrCountry("");
-  };
-  const handleZip = (e) => {
-    setZip(e.target.value);
-    setErrZip("");
-  };
-
-  console.log(age);
-  // ============= Event Handler End here ===============
-  // ================= Email Validation start here =============
-  const EmailValidation = (email) => {
-    return String(email)
-      .toLowerCase()
-      .match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i);
-  };
-  // ================= Email Validation End here ===============
-
-  // Handle Next function
-
-  const handleNext = () => {
-    if (!clientName) {
-      setErrClientName("Enter your name");
+    setErrCountry();
+  }
+  const handleCoverPhoto = (e) => {
+    e.preventDefault();
+    const file = e.target.files[0];
+    if (CoverPhoto && CoverPhoto.objectURL) {
+      URL.revokeObjectURL(CoverPhoto.objectURL);
     }
-
-    if (!artistName) {
-      setErrArtistName("Enter Artist name");
+    const objectURL = URL.createObjectURL(file);
+    setCoverPhoto({
+      file
+    });
+    setErrCoverPhoto("");
+  };
+  const handleProfilePhoto = (e) => {
+    e.preventDefault();
+    const file = e.target.files[0];
+    if (ProfilePhoto && ProfilePhoto.objectURL) {
+      URL.revokeObjectURL(ProfilePhoto.objectURL);
     }
+    const profileURL = URL.createObjectURL(file);
+    setProfilePhoto({
+      file
+    });
+    setErrProfilePhoto("");
+  };
 
-    if (!clientBio) {
-      setErrBio("Enter your bio");
-    }
+  let userId;
+  // fetch userId from the cookie
+  if (typeof sessionStorage !== "undefined") {
+    userId = sessionStorage.getItem("userID");
+  } else {
+    console.error("sessionStorage is not supported in this environment.");
+  }
 
-    if (!email) {
-      setErrEmail("Enter your email");
-    } else {
-      if (!EmailValidation(email)) {
-        setErrEmail("Enter a Valid email");
+  const convertImageToBase64 = (image) => {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const base64Image = event.target.result;
+      return base64Image;
+    };
+  
+    reader.readAsDataURL(image);
+  };
+  
+
+  const handleNextAuth = async () => {
+    try {
+      const apiUrl = "http://localhost:8080/api/designer/request";
+      const apiKey = "token";
+
+      const formData = new FormData();
+      formData.append('file', CoverPhoto);
+
+      const requestData = {
+        userId,
+        fullname: clientName,
+        artistName: artistName,
+        portfolioLinks,
+        cvLinks,
+        address_line1: addressLine1,
+        address_line2: addressLine2,
+        city,
+        phone,
+        postal_code: postalCode,
+        country,
+        address_type: addressType,
+        state,
+        description: clientdescription,
+        panCardNumber,
+        image: formData, 
+      };
+      const boundary = formData.getBoundary();
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "content-type":  `multipart/form-data; boundary=${boundary}`,
+          "x-api-key": apiKey,
+        },
+        body: JSON.stringify(requestData),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log("Request submitted successfully:", result);
+      } else {
+        console.error("Request failed with status:", response.status);
       }
-    }
-    if (!phone) {
-      setErrPhone("Enter your phone number");
-    }
-    if (!age) {
-      setErrage("Enter your Age");
-    } else {
-      const currentDate = new Date();
-      const [year, month, day] = age.split("-").map(Number);
-      const ageObject = new Date(year, month - 1, day);
-
-      const Age = currentDate - ageObject;
-      const ageInYears = Age / (1000 * 60 * 60 * 24 * 365.25);
-
-      console.log(ageInYears);
-      if (ageInYears < 18) {
-        setErrage("Age should be greater than 18");
-      }
-    }
-    if (!address) {
-      setErrAddress("Enter your address");
-    }
-    if (!city) {
-      setErrCity("Enter your city name");
-    }
-    if (!country) {
-      setErrCountry("Enter the country you are residing");
-    }
-    if (!zip) {
-      setErrZip("Enter the zip code of your area");
-    }
-    if (
-      clientName &&
-      email &&
-      EmailValidation(email) &&
-      age &&
-      address &&
-      city &&
-      country &&
-      zip &&
-      artistName &&
-      clientBio
-    ) {
-      setNext(!next);
-    }
+    } catch (error) {}
   };
 
-  const handleBankName = (e) => {
-    setBankName(e.target.value);
-    setErrBankName("");
-  };
-
-  const handleBankAccountNumber = (e) => {
-    setBankAccountNumber(e.target.value);
-    setErrBankAccountNumber("");
-  };
-
-  const handleIfscCode = (e) => {
-    setIfscCode(e.target.value);
-    setErrIfscCode("");
-  };
-
-  const handlePaypalId = (e) => {
-    setPaypalId(e.target.value);
-    setErrPaypalId("");
-  };
-
-  const handleUserAgreement = () => {
-    setUserAgreement(!userAgreement);
-  };
 
   return (
     <Wrapper>
       <div className="w-full h-screen flex items-center justify-start my-5">
+        {/*  this is the black section */}
         <div className="w-1/2  lgl:inline-flex h-full text-white bg-black">
           <div className="w-[450px] h-full bg-primeColor px-10 flex flex-col gap-6 justify-center">
             <Link href={"/"}>
@@ -276,442 +263,368 @@ const Designer = () => {
             </div>
           </div>
         </div>
+        {/* black section ends here */}
+
+        {/* this is the begin of the first part of design section */}
+
         <div className="w-full lgl:w-[500px] h-full flex flex-col justify-center">
           <div className=" border-2 border-black w-full  h-screen flex items-center justify-center">
             <div className="px-6 py-4 w-[500px] h-[96%] flex flex-col justify-start overflow-y-scroll scrollbar-thin scrollbar-thumb-primeColor">
               <h1 className="font-titleFont underline underline-offset-4 decoration-[1px] font-semibold text-2xl mdl:text-3xl mb-4">
                 Register as Designer
               </h1>
-              {next ? (
-                <div className="flex flex-col gap-3 border-2 border-red-400">
-                  {/* client name */}
-                  <div className="flex flex-col gap-.5">
-                    <p className="font-titleFont text-base font-semibold text-gray-600">
-                      Full Name
-                    </p>
-                    <input
-                      onChange={handleName}
-                      value={clientName}
-                      className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
-                      type="text"
-                      placeholder="eg. John Doe"
-                    />
-                    {errClientName && (
-                      <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                        <span className="font-bold italic mr-1">!</span>
-                        {errClientName}
-                      </p>
-                    )}
-                  </div>
 
-                  {/* {Artist} */}
-                  <div className="flex flex-col gap-.5">
-                    <p className="font-titleFont text-base font-semibold text-gray-600">
-                      Artist Name
-                    </p>
-                    <input
-                      onChange={handleArtist}
-                      value={artistName}
-                      className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
-                      type="text"
-                      placeholder="eg. John Doe"
-                    />
-                    {errArtistName && (
-                      <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                        <span className="font-bold italic mr-1">!</span>
-                        {errArtistName}
-                      </p>
-                    )}
-                  </div>
-                  {/* {Bio} */}
+              {/* { true ? ( */}
+              <div className="flex flex-col gap-3 ">
+                {/* User ID (assuming it's not editable by the user) */}
+                <div className="flex flex-col gap-.5">
+                  <p className="font-titleFont text-base font-semibold text-gray-600">
+                    UserId
+                  </p>
+                  <input
+                    value={userId}
+                    className="w-full h-8 px-4 text-base font-medium rounded-md border-[1px] border-gray-400 outline-none"
+                    type="text"
+                    readOnly
+                    placeholder="User ID"
+                  />
+                </div>
 
-                  <div className="flex flex-col gap-.5">
-                    <p className="font-titleFont text-base font-semibold text-gray-600">
-                      Bio
+                {/* Full Name */}
+                <div className="flex flex-col gap-.5">
+                  <p className="font-titleFont text-base font-semibold text-gray-600">
+                    Full Name
+                  </p>
+                  <input
+                    onChange={handleName}
+                    value={clientName}
+                    className="w-full h-8 px-4 text-base font-medium rounded-md border-[1px] border-gray-400 outline-none"
+                    type="text"
+                    placeholder="e.g., John Doe"
+                  />
+                  {errClientName && (
+                    <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
+                      <span className="font-bold italic mr-1">!</span>
+                      {errClientName}
                     </p>
-                    <input
-                      onChange={handleBio}
-                      value={clientBio}
-                      className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
-                      type="text"
-                      placeholder="eg. John Doe"
-                    />
-                    {errBio && (
-                      <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                        <span className="font-bold italic mr-1">!</span>
-                        {errBio}
-                      </p>
-                    )}
-                  </div>
-                  {/* Email */}
-                  <div className="flex flex-col gap-.5">
-                    <p className="font-titleFont text-base font-semibold text-gray-600">
-                      Work Email
-                    </p>
-                    <input
-                      onChange={handleEmail}
-                      value={email}
-                      className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
-                      type="email"
-                      placeholder="john@workemail.com"
-                    />
-                    {errEmail && (
-                      <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                        <span className="font-bold italic mr-1">!</span>
-                        {errEmail}
-                      </p>
-                    )}
-                  </div>
-                  {/* Phone Number */}
-                  <div className="flex flex-col gap-.5">
-                    <p className="font-titleFont text-base font-semibold text-gray-600">
-                      Phone Number
-                    </p>
-                    <input
-                      onChange={handlePhone}
-                      value={phone}
-                      className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
-                      type="text"
-                      placeholder="008801234567891"
-                    />
-                    {errPhone && (
-                      <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                        <span className="font-bold italic mr-1">!</span>
-                        {errPhone}
-                      </p>
-                    )}
-                  </div>
-                  {/* age */}
-                  <div className="flex flex-col gap-.5">
-                    <p className="font-titleFont text-base font-semibold text-gray-600">
-                      Date of Birth
-                    </p>
-                    <input
-                      onChange={handleage}
-                      value={age}
-                      className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none text-gray-600 font-titleFont"
-                      type="date"
-                      placeholder="Create age"
-                    />
-                    {errage && (
-                      <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                        <span className="font-bold italic mr-1">!</span>
-                        {errage}
-                      </p>
-                    )}
-                  </div>
-                  {/* Address */}
-                  <div className="flex flex-col gap-.5">
-                    <p className="font-titleFont text-base font-semibold text-gray-600">
-                      Address
-                    </p>
-                    <input
-                      onChange={handleAddress}
-                      value={address}
-                      className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
-                      type="text"
-                      placeholder="road-001, house-115, example area"
-                    />
-                    {errAddress && (
-                      <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                        <span className="font-bold italic mr-1">!</span>
-                        {errAddress}
-                      </p>
-                    )}
-                  </div>
-                  {/* City */}
-                  <div className="flex flex-col gap-.5">
-                    <p className="font-titleFont text-base font-semibold text-gray-600">
-                      City
-                    </p>
-                    <input
-                      onChange={handleCity}
-                      value={city}
-                      className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
-                      type="text"
-                      placeholder="Your city"
-                    />
-                    {errCity && (
-                      <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                        <span className="font-bold italic mr-1">!</span>
-                        {errCity}
-                      </p>
-                    )}
-                  </div>
-                  {/* Country */}
-                  <div className="flex flex-col gap-.5">
-                    <p className="font-titleFont text-base font-semibold text-gray-600">
-                      Country
-                    </p>
-                    <input
-                      onChange={handleCountry}
-                      value={country}
-                      className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
-                      type="text"
-                      placeholder="Your country"
-                    />
-                    {errCountry && (
-                      <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                        <span className="font-bold italic mr-1">!</span>
-                        {errCountry}
-                      </p>
-                    )}
-                  </div>
-                  {/* Zip code */}
-                  <div className="flex flex-col gap-.5">
-                    <p className="font-titleFont text-base font-semibold text-gray-600">
-                      Zip/Postal code
-                    </p>
-                    <input
-                      onChange={handleZip}
-                      value={zip}
-                      className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
-                      type="text"
-                      placeholder="Your country"
-                    />
-                    {errZip && (
-                      <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                        <span className="font-bold italic mr-1">!</span>
-                        {errZip}
-                      </p>
-                    )}
-                  </div>
+                  )}
+                </div>
 
-                  <div className="flex justify-center items-center w-full">
-                    <button
-                      onClick={handleNext}
-                      className={`
+                {/* Artist Name */}
+                <div className="flex flex-col gap-.5">
+                  <p className="font-titleFont text-base font-semibold text-gray-600">
+                    Artist Name
+                  </p>
+                  <input
+                    onChange={handleArtist}
+                    value={artistName}
+                    className="w-full h-8 px-4 text-base font-medium rounded-md border-[1px] border-gray-400 outline-none"
+                    type="text"
+                    placeholder="e.g., John Doe"
+                  />
+                  {errArtistName && (
+                    <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
+                      <span className="font-bold italic mr-1">!</span>
+                      {errArtistName}
+                    </p>
+                  )}
+                </div>
+
+                {/* description */}
+                <div className="flex flex-col gap-.5">
+                  <p className="font-titleFont text-base font-semibold text-gray-600">
+                    description
+                  </p>
+                  <input
+                    onChange={handledescription}
+                    value={clientdescription}
+                    className="w-full h-8 px-4 text-base font-medium rounded-md border-[1px] border-gray-400 outline-none"
+                    type="text"
+                    placeholder="e.g., Artist description"
+                  />
+                  {errdescription && (
+                    <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
+                      <span className="font-bold italic mr-1">!</span>
+                      {errdescription}
+                    </p>
+                  )}
+                </div>
+
+                {/* Phone Number */}
+                <div className="flex flex-col gap-.5">
+                  <p className="font-titleFont text-base font-semibold text-gray-600">
+                    Phone Number
+                  </p>
+                  <input
+                    onChange={handlePhone}
+                    value={phone}
+                    className="w-full h-8 px-4 text-base font-medium rounded-md border-[1px] border-gray-400 outline-none"
+                    type="number"
+                    placeholder="e.g., 008801234567891"
+                  />
+                  {errPhone && (
+                    <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
+                      <span className="font-bold italic mr-1">!</span>
+                      {errPhone}
+                    </p>
+                  )}
+                </div>
+
+                {/* {address_type} */}
+                <div className="flex flex-col gap-.5">
+                  <p className="font-titleFont text-base font-semibold text-gray-600">
+                    addressType
+                  </p>
+                  <input
+                    onChange={handleaddressType}
+                    value={addressType}
+                    className="w-full h-8 px-4 text-base font-medium rounded-md border-[1px] border-gray-400 outline-none"
+                    type="text"
+                    placeholder="Your addressType"
+                  />
+                  {errAddressType && (
+                    <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
+                      <span className="font-bold italic mr-1">!</span>
+                      {errAddressType}
+                    </p>
+                  )}
+                </div>
+
+                {/* Address Line 1 */}
+                <div className="flex flex-col gap-.5">
+                  <p className="font-titleFont text-base font-semibold text-gray-600">
+                    Address Line 1
+                  </p>
+                  <input
+                    onChange={handleAddressLine1}
+                    value={addressLine1}
+                    className="w-full h-8 px-4 text-base font-medium rounded-md border-[1px] border-gray-400 outline-none"
+                    type="text"
+                    placeholder="e.g., road-001, house-115, example area"
+                  />
+                  {errAddressLine1 && (
+                    <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
+                      <span className="font-bold italic mr-1">!</span>
+                      {errAddressLine1}
+                    </p>
+                  )}
+                </div>
+
+                {/* Address Line 2 */}
+                <div className="flex flex-col gap-.5">
+                  <p className="font-titleFont text-base font-semibold text-gray-600">
+                    Address Line 2
+                  </p>
+                  <input
+                    onChange={handleAddressLine2}
+                    value={addressLine2}
+                    className="w-full h-8 px-4 text-base font-medium rounded-md border-[1px] border-gray-400 outline-none"
+                    type="text"
+                    placeholder="e.g., Apartment, Floor, etc."
+                  />
+                  {errAddressLine2 && (
+                    <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
+                      <span className="font-bold italic mr-1">!</span>
+                      {errAddressLine2}
+                    </p>
+                  )}
+                </div>
+
+                {/* City */}
+                <div className="flex flex-col gap-.5">
+                  <p className="font-titleFont text-base font-semibold text-gray-600">
+                    City
+                  </p>
+                  <input
+                    onChange={handleCity}
+                    value={city}
+                    className="w-full h-8 px-4 text-base font-medium rounded-md border-[1px] border-gray-400 outline-none"
+                    type="text"
+                    placeholder="Your city"
+                  />
+                  {errCity && (
+                    <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
+                      <span className="font-bold italic mr-1">!</span>
+                      {errCity}
+                    </p>
+                  )}
+                </div>
+
+                {/* Postal Code */}
+                <div className="flex flex-col gap-.5">
+                  <p className="font-titleFont text-base font-semibold text-gray-600">
+                    Postal Code
+                  </p>
+                  <input
+                    onChange={handlePostalCode}
+                    value={postalCode}
+                    className="w-full h-8 px-4 text-base font-medium rounded-md border-[1px] border-gray-400 outline-none"
+                    type="number"
+                    placeholder="Your postal code"
+                  />
+                  {errPostalCode && (
+                    <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
+                      <span className="font-bold italic mr-1">!</span>
+                      {errPostalCode}
+                    </p>
+                  )}
+                </div>
+
+                {/* Country */}
+                <div className="flex flex-col gap-.5">
+                  <p className="font-titleFont text-base font-semibold text-gray-600">
+                    Country
+                  </p>
+                  <input
+                    onChange={handleCountry}
+                    value={country}
+                    className="w-full h-8 px-4 text-base font-medium rounded-md border-[1px] border-gray-400 outline-none"
+                    type="text"
+                    placeholder="Your country"
+                  />
+                  {errCountry && (
+                    <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
+                      <span className="font-bold italic mr-1">!</span>
+                      {errCountry}
+                    </p>
+                  )}
+                </div>
+
+                {/* State  */}
+                <div className="flex flex-col gap-.5">
+                  <p className="font-titleFont text-base font-semibold text-gray-600">
+                    State
+                  </p>
+                  <input
+                    onChange={handleState}
+                    value={state}
+                    className="w-full h-8 px-4 text-base font-medium rounded-md border-[1px] border-gray-400 outline-none"
+                    type="text"
+                    placeholder="Your State"
+                  />
+                  {errState && (
+                    <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
+                      <span className="font-bold italic mr-1">!</span>
+                      {errState}
+                    </p>
+                  )}
+                </div>
+
+                {/* Pan Card Number */}
+
+                <div className="flex flex-col gap-.5">
+                  <p className="font-titleFont text-base font-semibold text-gray-600">
+                    PanCardNumber
+                  </p>
+                  <input
+                    onChange={handlePanCardNumber}
+                    value={panCardNumber}
+                    className="w-full h-8 px-4 text-base font-medium rounded-md border-[1px] border-gray-400 outline-none"
+                    type="number"
+                    placeholder="Your PanCardNumber"
+                  />
+                  {errPanCardNumber && (
+                    <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
+                      <span className="font-bold italic mr-1">!</span>
+                      {errPanCardNumber}
+                    </p>
+                  )}
+                </div>
+
+                {/* {Portfoliolinks} */}
+                <div className="flex flex-col gap-.5">
+                  <p className="font-titleFont text-base font-semibold text-gray-600">
+                    PortfolioLinks
+                  </p>
+                  <input
+                    onChange={handlePortfolioLinks}
+                    value={portfolioLinks}
+                    className="w-full h-8 px-4 text-base font-medium rounded-md border-[1px] border-gray-400 outline-none"
+                    type="text"
+                    placeholder="Your PortfolioLinks"
+                  />
+                  {errPortfolioLinks && (
+                    <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
+                      <span className="font-bold italic mr-1">!</span>
+                      {errPortfolioLinks}
+                    </p>
+                  )}
+                </div>
+
+                {/* {cvLinks} */}
+                <div className="flex flex-col gap-.5">
+                  <p className="font-titleFont text-base font-semibold text-gray-600">
+                    cvLinks
+                  </p>
+                  <input
+                    onChange={handlecvLinks}
+                    value={cvLinks}
+                    className="w-full h-8 px-4 text-base font-medium rounded-md border-[1px] border-gray-400 outline-none"
+                    type="text"
+                    placeholder="Your cvLinks"
+                  />
+                  {errCvLinks && (
+                    <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
+                      <span className="font-bold italic mr-1">!</span>
+                      {errcvLinks}
+                    </p>
+                  )}
+                </div>
+
+                {/* CoverPhoto */}
+                <div className="flex flex-col gap-.5">
+                  <p className="font-titleFont text-base font-semibold text-gray-600">
+                    CoverPhoto
+                  </p>
+                  <input
+                    onChange={handleCoverPhoto}
+                    value={CoverPhoto.name}
+                    className="w-full h-8 px-4 text-base font-medium rounded-md border-[1px] border-gray-400 outline-none"
+                    type="file"
+                    placeholder="Your CoverPhoto"
+                  />
+                  {errCoverPhoto && (
+                    <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
+                      <span className="font-bold italic mr-1">!</span>
+                      {"d"}
+                    </p>
+                  )}
+                </div>
+
+                {/* ProfilePhoto */}
+                <div className="flex flex-col gap-.5">
+                  <p className="font-titleFont text-base font-semibold text-gray-600">
+                    ProfilePhoto
+                  </p>
+                  <input
+                    onChange={handleProfilePhoto}
+                    value={ProfilePhoto.name}
+                    className="w-full h-8 px-4 text-base font-medium rounded-md border-[1px] border-gray-400 outline-none"
+                    type="file"
+                    placeholder="Your ProfilePhoto"
+                  />
+                  {errProfilePhoto && (
+                    <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
+                      <span className="font-bold italic mr-1">!</span>
+                      {errProfilePhoto}
+                    </p>
+                  )}
+                </div>
+
+                <div className="flex justify-center items-center w-full">
+                  <button
+                    onClick={handleNextAuth}
+                    className={`
                          "bg-primeColor hover:bg-black hover:text-white text-black cursor-pointer"
                       w-[59%] text-black  text-base font-medium h-10 border-2 border-black   rounded-full hover:text-white hover:bg-black duration-300`}
-                    >
-                      Next
-                    </button>
-                  </div>
+                  >
+                    Next
+                  </button>
                 </div>
-              ) : (
-                <div className=" ">
-                  <div className="  flex flex-col gap-.5">
-                    <p className="font-titleFont text-base font-semibold text-gray-600">
-                      Identification Number
-                    </p>
-                    <select
-                      onChange={(e) =>
-                        setSelectedIdentification(e.target.value)
-                      }
-                      value={selectedIdentification}
-                      className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
-                    >
-                      <option value="Pan">PAN</option>
-                      <option value="Aadhaar">Aadhaar</option>
-                      <option value="DriversLicense">Driver's License</option>
-                      <option value="TaxId">
-                        Government Identification Number or Tax ID
-                      </option>
-                    </select>
-                    {errIdentification && (
-                      <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                        <span className="font-bold italic mr-1">!</span>
-                        {errIdentification}
-                      </p>
-                    )}
-                  </div>
 
-                  <div className="  flex flex-col ">
-                    <p className="font-titleFont text-base font-semibold text-gray-600">
-                      {selectedIdentification} Number
-                    </p>
-                    <input
-                      onChange={handleIdentificationInput}
-                      value={identification}
-                      className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
-                      type="text"
-                      placeholder={`Your ${selectedIdentification} number`}
-                    />
-                    {errIdentification && (
-                      <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                        <span className="font-bold italic mr-1">!</span>
-                        {errIdentification}
-                      </p>
-                    )}
-                  </div>
-
-                  <div>
-                    <p className="font-titleFont text-base font-semibold text-gray-600">
-                      Bank Name
-                    </p>
-                    <input
-                      onChange={handleBankName}
-                      value={bankName}
-                      className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
-                      type="text"
-                      placeholder="Bank Name"
-                    />
-                    {errBankName && (
-                      <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                        <span className="font-bold italic mr-1">!</span>
-                        {errBankName}
-                      </p>
-                    )}
-                    <p className="font-titleFont text-base font-semibold text-gray-600">
-                      Bank Account Number
-                    </p>
-                    <input
-                      onChange={handleBankAccountNumber}
-                      value={bankAccountNumber}
-                      className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
-                      type="text"
-                      placeholder="Bank Account Number"
-                    />
-
-                    {errBankAccountNumber && (
-                      <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                        <span className="font-bold italic mr-1">!</span>
-                        {errBankAccountNumber}
-                      </p>
-                    )}
-
-                    <p className="font-titleFont text-base font-semibold text-gray-600">
-                      IFSC Code
-                    </p>
-
-                    <input
-                      onChange={handleIfscCode}
-                      value={ifscCode}
-                      className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
-                      type="text"
-                      placeholder="IFSC Code"
-                    />
-                    {errIfscCode && (
-                      <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                        <span className="font-bold italic mr-1">!</span>
-                        {errIfscCode}
-                      </p>
-                    )}
-
-                    <p className="font-titleFont text-base font-semibold text-gray-600">
-                      UPI Id
-                    </p>
-
-                    <input
-                      onChange={handleIfscCode}
-                      value={ifscCode}
-                      className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
-                      type="text"
-                      placeholder="UPI Id"
-                    />
-                    {errIfscCode && (
-                      <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                        <span className="font-bold italic mr-1">!</span>
-                        {errIfscCode}
-                      </p>
-                    )}
-
-                    <p className="font-titleFont text-base font-semibold text-gray-600">
-                      Resume Drive Link
-                    </p>
-
-                    <input
-                      onChange={handleIfscCode}
-                      value={ifscCode}
-                      className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
-                      type="text"
-                      placeholder="Resume Drive Link"
-                    />
-                    {errIfscCode && (
-                      <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                        <span className="font-bold italic mr-1">!</span>
-                        {errIfscCode}
-                      </p>
-                    )}
-
-                    <p className="font-titleFont text-base font-semibold text-gray-600">
-                      Portfolio Link
-                    </p>
-
-                    <input
-                      onChange={handleIfscCode}
-                      value={ifscCode}
-                      className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
-                      type="text"
-                      placeholder="Resume Drive Link"
-                    />
-                    {errIfscCode && (
-                      <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                        <span className="font-bold italic mr-1">!</span>
-                        {errIfscCode}
-                      </p>
-                    )}
-
-                    <p className="font-titleFont text-base font-semibold text-gray-600">
-                      Choose Your Profile Photo
-                    </p>
-
-                    <input
-                      onChange={handleIfscCode}
-                      value={ifscCode}
-                      className=" flex  items-center  justify-center w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
-                      type="file"
-                      placeholder="Resume Drive Link"
-                    />
-                    {errIfscCode && (
-                      <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                        <span className="font-bold italic mr-1">!</span>
-                        {errIfscCode}
-                      </p>
-                    )}
-
-                    <p className="font-titleFont text-base font-semibold text-gray-600">
-                      Choose Your Cover Photo
-                    </p>
-
-                    <input
-                      onChange={handleIfscCode}
-                      value={ifscCode}
-                      className=" flex  items-center  justify-center w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
-                      type="file"
-                      placeholder="Resume Drive Link"
-                    />
-                    {errIfscCode && (
-                      <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                        <span className="font-bold italic mr-1">!</span>
-                        {errIfscCode}
-                      </p>
-                    )}
-
-                    {/* Checkbox */}
-
-                    <div className="flex items-start mdl:items-center gap-2 my-2">
-                      <input
-                        onChange={() => setChecked(!checked)}
-                        className="w-4 h-4 mt-1 mdl:mt-0 cursor-pointer"
-                        type="checkbox"
-                      />
-                      <p className="text-sm text-primeColor">
-                        I agree to the Eye Tee{" "}
-                        <span className="text-blue-500">Terms of Service </span>
-                        and{" "}
-                        <span className="text-blue-500">Privacy Policy</span>.
-                      </p>
-                    </div>
-
-                    <div className="flex justify-center items-center w-full my-2">
-                      <button
-                        // onClick={handleSignUp}
-                        className={`${
-                          checked
-                            ? "bg-primeColor hover:bg-black hover:text-white text-black cursor-pointer"
-                            : "   cursor-none"
-                        } w-[59%] text-black  text-base font-medium h-10 border-2 border-black   rounded-full hover:text-white hover:bg-black duration-300`}
-                      >
-                        Next
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              )}
+                {/* ) : ( */}
+              </div>
             </div>
-
-            <></>
           </div>
         </div>
       </div>
@@ -719,4 +632,4 @@ const Designer = () => {
   );
 };
 
-export default Designer;
+export default designer;
