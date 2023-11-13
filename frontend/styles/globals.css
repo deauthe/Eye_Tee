@@ -345,3 +345,8 @@
     border-radius: 5px;
   }
   
+
+
+  .image-pattern{
+    background: url("/pattern.png");
+  }

@@ -9,6 +9,8 @@ import {
 import { Button } from "@mui/material";
 
 function ImageEditor({ mainImageSrc, overlayImageSrc }) {
+
+
   const canvasRef = useRef(null);
   const [overlayPosition, setOverlayPosition] = useState({ x: 80, y: 50 });
   const [overlayScale, setOverlayScale] = useState(0.5);
@@ -18,8 +20,8 @@ function ImageEditor({ mainImageSrc, overlayImageSrc }) {
   const [resizeHandle, setResizeHandle] = useState(null);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [resizeStart, setResizeStart] = useState({ x: 0, y: 0 });
-  const [mainImage, setMainImage] = useState(new Image());
-  const [overlayImage, setOverlayImage] = useState(new Image());
+  const [mainImage, setMainImage] = useState({src:mainImageSrc});
+  const [overlayImage, setOverlayImage] = useState({src:overlayImageSrc});
 
   const drawImages = useCallback(() => {
     const canvas = canvasRef.current;
