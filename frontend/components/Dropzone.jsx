@@ -8,7 +8,8 @@ import check from "../public/double-check.gif";
 
 const DropzoneComponent = () => {
   const [droppedImage, setDroppedImage] = useState(null);
-const [isdropped, setIsDropped] = useState(false);
+  const [isDropped, setIsDropped] = useState(false);
+
   const toastify = (a) => {
     if (a) {
       toast.success("File accepted successfully!");
@@ -21,9 +22,9 @@ const [isdropped, setIsDropped] = useState(false);
     const droppedFile = acceptedFiles[0];
     console.log(droppedFile);
     setDroppedImage(URL.createObjectURL(droppedFile));
-    setIsDropped(!isdropped);
-    toastify(isdropped);
-  }, []);
+    setIsDropped(isDropped);
+    toastify(isDropped);
+  }, [isDropped]);
 
   const {
     getRootProps,
@@ -33,7 +34,7 @@ const [isdropped, setIsDropped] = useState(false);
     isDragReject,
   } = useDropzone({
     onDrop,
-    accept: ["image/jpeg", "image/png"],
+    accept: [".jpeg", ".jpg", ".png", ".gif"], // Accept all image formats
   });
 
   let borderColor = "#E2E8F0"; // Default border color
@@ -41,6 +42,12 @@ const [isdropped, setIsDropped] = useState(false);
   if (isDragActive) {
     borderColor = isDragAccept ? "#48BB78" : "#F56565";
   }
+
+  const handleButtonClick = () => {
+    // Trigger click on the hidden input to select images
+    const input = document.getElementById("fileInput");
+    input.click();
+  };
 
   return (
     <div
@@ -66,14 +73,23 @@ const [isdropped, setIsDropped] = useState(false);
           </p>
         </div>
 
-        <div className=" flex justify-center items-center  grid-rows-2 row-span-3">
-          <button className="border-3 border-black px-10 py-3 rounded-full hover:bg-black hover:text-white transition-all duration-250 ">
+        <div className="flex justify-center items-center grid-rows-2 row-span-3">
+          <button
+            className="border-3 border-black px-10 py-3 rounded-full hover:bg-black hover:text-white transition-all duration-250 "
+            onClick={handleButtonClick}
+          >
             <span className={`font-[600]`}>Upload Design</span>
           </button>
+          {/* Hidden input for selecting images */}
+          <input
+            {...getInputProps()}
+            id="fileInput"
+            style={{ display: "none" }}
+          />
         </div>
       </div>
 
-      <div className="border-2 border-gray-500 border-dashed rounded-md overflow-hidden object-fit ">
+      <div className="border-2 border-gray-500 border-dashed rounded-md overflow-hidden object-fit">
         {droppedImage && (
           <img
             src={droppedImage}

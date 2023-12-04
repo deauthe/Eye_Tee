@@ -8,6 +8,7 @@ import Wrapper from "@/components/Wrapper";
 import { FcGoogle } from "react-icons/fc";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 const Login = () => {
   const toastify = (messge, res) => {
     if (res) {
@@ -86,54 +87,73 @@ const Login = () => {
   const handleGoogleAuth = async () => {
     const apiUrl = "http://localhost:8080/api/auth/google";
   
-    const popup = window.open(apiUrl, "Google OAuth", "width=600 , height=600");
+    // window.open(apiUrl, "_self");
   
-    const checkPopupClosed = setInterval(() => {
-      if (popup.closed) {
-        clearInterval(checkPopupClosed);
+    // const checkPopupClosed = setInterval(() => {
+    //   if (popup.closed) {
+    //     clearInterval(checkPopupClosed);
   
-        // Fetch data from http://localhost:8080/api/success
-        fetch("http://localhost:8080/api/auth/google/callback")
-          .then((response) => {
-            if (response.ok) {
-              return response.json();
-            } else {
-              throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-          })
-          .then((data) => {
-            const { _id, email } = data;
-            console.log("Google authentication data:", _id, email);
+    //     // Fetch data from http://localhost:8080/api/auth/google/callback
+    //     fetch("http://localhost:8080/api/auth/google/callback")
+    //       .then((response) => {
+    //         if (response.ok) {
+    //           return response.json();
+    //         } else {
+    //           throw new Error(`HTTP error! Status: ${response.status}`);
+    //         }
+    //       })
+    //       .then((data) => {
+    //         const { _id, isDesigner } = data;
+    //         console.log("Google authentication data:", _id, isDesigner);
   
-            // Optionally, store Google authentication data in the session
-            storeUserSession(email, _id);
-          })
-          .catch((error) => {
-            console.error("Error fetching Google authentication data", error);
-          });
-  
-        // Fetch data from http://localhost:8080/api/success
-        fetch("http://localhost:8080/api/success")
-          .then((successResponse) => {
-            if (successResponse.ok) {
-              return successResponse.json();
-            } else {
-              throw new Error(`HTTP error! Status: ${successResponse.status}`);
-            }
-          })
-          .then((successData) => {
-            // Assuming successData contains the data you want to store in the session
-            console.log("Success data:", successData);
-  
-            // Store additional success data in the session
-            sessionStorage.setItem("additionalData", JSON.stringify(successData));
-          })
-          .catch((error) => {
-            console.error("Error fetching success data", error);
-          });
-      }
-    }, 1000);
+    //         // Store Google authentication data in the session
+    //         sessionStorage.setItem("_id", _id);
+    //         sessionStorage.setItem("isDesigner", isDesigner);
+    //       })
+    //       .catch((error) => {
+    //         console.error("Error fetching Google authentication data", error);
+    //       });
+    //       popup.close();
+    //   }
+    // }, 1000);
+
+    let timer = null;
+
+   const newWindow= window.open(
+      apiUrl,
+      "_self"
+    )
+
+    console.log(newWindow);
+
+    if(newWindow){
+      timer = setInterval(()=>{
+        if(newWindow.closed){
+          console.log("we are authneticated");
+          fetchUser();
+          if(timer) clearInterval(timer);
+        }
+      },500)
+    }
+
+
+
   };
+
+  const fetchUser =async()=>{
+    const response = await axios
+    .get(`${process.env.API_URL}/api/user/data`, {withCredentials:true})
+    .catch((err)=>{
+      console.log("Not properly authenticated");
+    })
+
+    if(response && response.data){
+      console.log("this is response data", response);
+    }
+
+
+  }
+  
   
 
   return (

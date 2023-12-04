@@ -350,3 +350,8 @@
   .image-pattern{
     background: url("/pattern.png");
   }
+
+
+  .user-pattern{
+    background: url("/UserProfile/pattern.jpg");
+  }

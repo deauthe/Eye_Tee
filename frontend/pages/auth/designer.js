@@ -268,7 +268,7 @@ console.log(CoverPhoto, ProfilePhoto);
         {/* this is the begin of the first part of design section */}
 
         <div className="w-full lgl:w-[500px] h-full flex flex-col justify-center">
-          <div className=" border-2 border-black w-full  h-screen flex items-center justify-center">
+          <div className=" w-full  h-screen flex items-center justify-center">
             <div className="px-6 py-4 w-[500px] h-[96%] flex flex-col justify-start overflow-y-scroll scrollbar-thin scrollbar-thumb-primeColor">
               <h1 className="font-titleFont underline underline-offset-4 decoration-[1px] font-semibold text-2xl mdl:text-3xl mb-4">
                 Register as Designer
@@ -276,8 +276,7 @@ console.log(CoverPhoto, ProfilePhoto);
 
               {/* { true ? ( */}
               <div className="flex flex-col gap-3 ">
-                {/* User ID (assuming it's not editable by the user) */}
-                <div className="flex flex-col gap-.5">
+                {/* <div className="flex flex-col gap-.5">
                   <p className="font-titleFont text-base font-semibold text-gray-600">
                     UserId
                   </p>
@@ -288,7 +287,7 @@ console.log(CoverPhoto, ProfilePhoto);
                     readOnly
                     placeholder="User ID"
                   />
-                </div>
+                </div> */}
 
                 {/* Full Name */}
                 <div className="flex flex-col gap-.5">

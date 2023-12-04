@@ -13,7 +13,9 @@ import { VscChromeClose } from "react-icons/vsc";
 // import { fetchDataFromApi } from "@/utils/api";
 import { useSelector } from "react-redux";
 import logo from "../public/logo.png";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Router, { useRouter } from "next/router";
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -22,6 +24,9 @@ const Header = () => {
   const [show, setShow] = useState("translate-y-0");
   const [lastScrollY, setLastScrollY] = useState(0);
   // const [categories, setCategories] = useState(null);
+
+  const router = useRouter();
+
   const categories = [
     { id: 1, name: "T-Shirts", url: "/" },
     { id: 2, name: "Hoodies", url: "/about" },
@@ -32,9 +37,9 @@ const Header = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleMouseEvents =()=>{
+  const handleMouseEvents = () => {
     setIsHovered(!isHovered);
-  }
+  };
 
   const controlNavbar = () => {
     if (window.scrollY > 200) {
@@ -60,6 +65,28 @@ const Header = () => {
   //     const { data } = await fetchDataFromApi("/api/categories?populate=*");
   //     setCategories(data);
   // };
+
+  // handle function for sell your art
+
+  const handleSellArtButton = async () => {
+    if (typeof sessionStorage != "undefined") {
+     const userId= sessionStorage.getItem("userID");
+     if(userId){ 
+      router.push({
+        pathname: '/auth/designer',
+      });
+
+     }else{
+      toast.error("First Login or Create Account to Sell Designer");
+
+      router.push({
+        pathname:'auth/login',
+      })
+     }
+    } else {
+        console.log("hello");
+    }
+  };
 
   return (
     <header
@@ -149,13 +176,14 @@ const Header = () => {
 
         <div className="flex items-center gap-2 text-black">
           {/* {Button } */}
-
-          <a class="fancy " href="#">
-            <span class="top-key"></span>
-            <span class="text">Sell Your Art</span>
-            <span class="bottom-key-1"></span>
-            <span class="bottom-key-2"></span>
-          </a>
+          <button onClick={handleSellArtButton}>
+            <a class="fancy " href="#">
+              <span class="top-key"></span>
+              <span class="text">Sell Your Art</span>
+              <span class="bottom-key-1"></span>
+              <span class="bottom-key-2"></span>
+            </a>
+          </button>
 
           {/* Icon start */}
           <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative">
@@ -198,8 +226,8 @@ const Header = () => {
                 </li>
                 <li>
                   <Link href="/auth/designer">
-                    < p className="block px-4 py-2 text-gray-800 hover:bg-gray-200">
-                     Designer login
+                    <p className="block px-4 py-2 text-gray-800 hover:bg-gray-200">
+                      Designer login
                     </p>
                   </Link>
                 </li>
@@ -232,6 +260,8 @@ const Header = () => {
           </div>
           {/* Mobile icon end */}
         </div>
+
+        <ToastContainer />
       </Wrapper>
     </header>
   );
