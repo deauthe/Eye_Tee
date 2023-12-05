@@ -86,36 +86,7 @@ const Login = () => {
   };
   const handleGoogleAuth = async () => {
     const apiUrl = "http://localhost:8080/api/auth/google";
-  
-    // window.open(apiUrl, "_self");
-  
-    // const checkPopupClosed = setInterval(() => {
-    //   if (popup.closed) {
-    //     clearInterval(checkPopupClosed);
-  
-    //     // Fetch data from http://localhost:8080/api/auth/google/callback
-    //     fetch("http://localhost:8080/api/auth/google/callback")
-    //       .then((response) => {
-    //         if (response.ok) {
-    //           return response.json();
-    //         } else {
-    //           throw new Error(`HTTP error! Status: ${response.status}`);
-    //         }
-    //       })
-    //       .then((data) => {
-    //         const { _id, isDesigner } = data;
-    //         console.log("Google authentication data:", _id, isDesigner);
-  
-    //         // Store Google authentication data in the session
-    //         sessionStorage.setItem("_id", _id);
-    //         sessionStorage.setItem("isDesigner", isDesigner);
-    //       })
-    //       .catch((error) => {
-    //         console.error("Error fetching Google authentication data", error);
-    //       });
-    //       popup.close();
-    //   }
-    // }, 1000);
+  ;
 
     let timer = null;
 
