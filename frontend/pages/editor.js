@@ -39,7 +39,7 @@ const editor = () => {
           <div>
             <div className=" shadow-none image-pattern flex gap-[90px] justify-center items-center  h-[500px] bg-gray-100/75 my-6 rounded-md ">
               <div className="flex flex-col  items-center ">
-               <div className="border-2 border-dashed border-black rounded-md shadow-sm p-2 ">
+               <div className="border-2 border-dashed border-black rounded-md shadow-sm p-2 h-[400px] flex justify-center items-center ">
                <img
                   src={userDesign || "logo_e.png"}
                   alt="User Design"

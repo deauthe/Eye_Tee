@@ -3,6 +3,7 @@ import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import ProductCard from "./ProductCard";
+import DesignerCard from "./DesignerCard";
 
 const DesignCarousel = () => {
   const responsive = {
@@ -12,7 +13,7 @@ const DesignCarousel = () => {
     },
     tablet: {
       breakpoint: { max: 1023, min: 464 },
-      items: 2,
+      items: 3,
     },
     mobile: {
       breakpoint: { max: 767, min: 0 },
@@ -29,7 +30,7 @@ const DesignCarousel = () => {
       >
         {[0, 1, 2, 3, 4].map((product, index) => (
           <div className="bg-white rounded-md shadow">
-            <ProductCard key={index} />
+            <DesignerCard key={index} cardNo={index}/>
           </div>
         ))}
       </Carousel>
