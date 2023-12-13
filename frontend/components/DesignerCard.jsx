@@ -22,6 +22,10 @@ const DesignerCard = (props) => {
       setFade(false);
     }, 500); // Adjust the timeout duration to match your transition duration
   };
+
+  const handleRoute=()=>{
+console.log("hello");
+  }
   return (
     <div>
       <div className="relative">
@@ -92,7 +96,7 @@ const DesignerCard = (props) => {
       </div>
 
       <div className="flex justify-center p-3">
-        <button className="p-1.5 px-4 border-black border-2 hover:bg-black hover:text-white transition-all duration-500 rounded-full">
+        <button onClick={handleRoute} className="p-1.5 px-4 border-black border-2 hover:bg-black hover:text-white transition-all duration-500 rounded-full">
           Create Product
         </button>
       </div>

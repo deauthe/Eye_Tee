@@ -6,7 +6,7 @@ import ImageOverlay from "@/components/Editor/image";
 import Image from "next/image";
 import illus from "../public/design.svg";
 import ip from "../public/upload.png";
-const editor = () => {
+const Editor = () => {
   const router = useRouter();
   const [selectedImage, setSelectedImage] = useState(null);
   const [userDesign, setUserDesign] = useState(null);
@@ -34,13 +34,13 @@ const editor = () => {
   return (
     <>
       <Wrapper>
-        <div>
+        <div className="">
           <div>
-            <div className=" shadow-none image-pattern flex gap-[90px] justify-center items-center  h-[500px] bg-gray-100/75 my-6 rounded-md ">
+            <div className=" shadow-none image-pattern flex gap-[90px] justify-center items-center  h-[400px] bg-gray-100/75 my-6 rounded-md ">
               <div className="flex flex-col  items-center ">
-                <div className="border-2 border-dashed border-black rounded-md shadow-sm p-2 h-[400px] flex justify-center items-center ">
+                <div className="border-2 border-dashed border-black rounded-md shadow-sm p-2 h-[300px] flex justify-center items-center ">
                   <img
-                    src={userDesign || "logo_e.png"}
+                    src={userDesign || "/logo_e.png"}
                     alt="User Design"
                     width={300}
                   />
@@ -71,47 +71,47 @@ const editor = () => {
               </div>
             </div>
 
-            <div>
-              <div>
-                <p className="text-2xl font-bold mb-5">
-                  Your Design on T-shirts
+            <p className="text-2xl font-bold mb-5">
+                 Check Out Products of Your Designs
                 </p>
+
+            <div className="flex">
+              <div>
+               
                 <div className="flex flex-col justify-center items-center bg-white/95 shadow-sm rounded-md inline-block w-[230px] p-5">
                   <ImageOverlay
-                    mainImage="t_shirt2.png"
-                    overlayImage={userDesign || "logo_e.png"}
+                    mainImage="/t_shirt2.png"
+                    overlayImage={userDesign || "/logo_e.png"}
                     overlayPosition="10,20"
                     width={200}
                     height={200}
                   />
-                  <Button
+                  <button
                     variant="outlined"
                     className="text-black border border-black  rounded-full p-1 px-[20px] bg-transparent shadow-md hover:bg-black hover:text-white mt-3"
                     onClick={() => handleEditImage(selectedImage || userDesign)}
                   >
                     Edit
-                  </Button>
+                  </button>
                 </div>
               </div>
 
-              <div>
-                <p className="text-2xl font-bold mb-5 mt-2">
-                  Your Design on Hoodies
-                </p>
+              <div className="flex flex-col justify-center items-center bg-white/95 shadow-sm rounded-md inline-block w-[230px] p-5">
+               
                 <ImageOverlay
-                  mainImage="t_hoodie.png"
-                  overlayImage={userDesign || "logo_e.png"}
+                  mainImage="/t_hoodie.png"
+                  overlayImage={userDesign || "/logo_e.png"}
                   overlayPosition="10,20"
-                  width={300}
-                  height={400}
+                  width={200}
+                  height={200}
                 />
-                <Button
+                <button
                   variant="outlined"
-                  className="edit-button"
                   onClick={() => handleEditImage(selectedImage || userDesign)}
+                  className="text-black border border-black  rounded-full p-1 px-[20px] bg-transparent shadow-md hover:bg-black hover:text-white mt-3"
                 >
                   Edit
-                </Button>
+                </button>
               </div>
             </div>
           </div>
@@ -121,4 +121,4 @@ const editor = () => {
   );
 };
 
-export default editor;
+export default Editor;

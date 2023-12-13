@@ -20,10 +20,10 @@ const designer = () => {
   const [panCardNumber, setPanCardNumber] = useState(null);
   const [portfolioLinks, setPortfolioLinks] = useState("");
   const [cvLinks, setCvLinks] = useState("");
-  const [CoverPhoto, setCoverPhoto] = useState({});
-  const [ProfilePhoto, setProfilePhoto] = useState({});
+  const [CoverPhoto, setCoverPhoto] = useState(null);
+  const [ProfilePhoto, setProfilePhoto] = useState(null);
   const [country, setCountry] = useState("");
-console.log(CoverPhoto, ProfilePhoto);
+  console.log(CoverPhoto, ProfilePhoto);
   // react state => errors
   const [errClientName, setErrClientName] = useState("");
   const [errArtistName, setErrArtistName] = useState("");
@@ -99,99 +99,135 @@ console.log(CoverPhoto, ProfilePhoto);
     setCvLinks(e.target.value);
     setErrCvLinks("");
   };
-  const handleCountry =(e)=>{
+  const handleCountry = (e) => {
     setCountry(e.target.value);
     setErrCountry();
-  }
+  };
   const handleCoverPhoto = (e) => {
     e.preventDefault();
     const file = e.target.files[0];
-    if (CoverPhoto && CoverPhoto.objectURL) {
-      URL.revokeObjectURL(CoverPhoto.objectURL);
+
+    if (file) {
+      setCoverPhoto(file);
+      // You can also display the file name or other information if needed
+      console.log("Selected file:", file.name);
     }
-    const objectURL = URL.createObjectURL(file);
-    setCoverPhoto({
-      file
-    });
     setErrCoverPhoto("");
   };
   const handleProfilePhoto = (e) => {
     e.preventDefault();
     const file = e.target.files[0];
-    if (ProfilePhoto && ProfilePhoto.objectURL) {
-      URL.revokeObjectURL(ProfilePhoto.objectURL);
+
+    if (file) {
+      setProfilePhoto(file);
+      // You can also display the file name or other information if needed
+      console.log("Selected file:", file.name);
     }
-    const profileURL = URL.createObjectURL(file);
-    setProfilePhoto({
-      file
-    });
     setErrProfilePhoto("");
   };
 
-  let userId;
   // fetch userId from the cookie
+  let userId;
   if (typeof sessionStorage !== "undefined") {
     userId = sessionStorage.getItem("userID");
   } else {
     console.error("sessionStorage is not supported in this environment.");
   }
 
+  console.log(userId);
+  // userId = "6547654e223885e9662b8259";
   const convertImageToBase64 = (image) => {
     const reader = new FileReader();
     reader.onload = (event) => {
       const base64Image = event.target.result;
       return base64Image;
     };
-  
+
     reader.readAsDataURL(image);
   };
-  
+
+
+  const toastify = (messge, res) => {
+    if (res) {
+      toast.success(messge);
+    } else {
+      toast.error(messge);
+    }
+  };
 
   const handleNextAuth = async () => {
+    console.log("next auth");
     try {
       const apiUrl = "http://localhost:8080/api/designer/request";
       const apiKey = "token";
 
       const formData = new FormData();
-      formData.append('file', CoverPhoto);
+      formData.append("userId", userId);
+      formData.append("fullname", clientName);
+      formData.append("artistName", artistName);
+      formData.append("description", clientdescription); // Add other fields as needed
 
-      const requestData = {
-        userId,
-        fullname: clientName,
-        artistName: artistName,
-        portfolioLinks,
-        cvLinks,
-        address_line1: addressLine1,
-        address_line2: addressLine2,
-        city,
-        phone,
-        postal_code: postalCode,
-        country,
-        address_type: addressType,
-        state,
-        description: clientdescription,
-        panCardNumber,
-        image: formData, 
-      };
-      const boundary = formData.getBoundary();
+      formData.append("phone", phone);
+      formData.append("address_line1", addressLine1);
+      formData.append("address_line2", addressLine2);
+      formData.append("city", city);
+      formData.append("postal_code", postalCode);
+      formData.append("address_type", addressType);
+      formData.append("state", state);
+      formData.append("panCardNumber", panCardNumber);
+      formData.append("portfolioLinks", portfolioLinks);
+      formData.append("cvLinks", cvLinks);
+      formData.append("country", country);
+
+      // Create FormData for files
+      // Create FormData for files
+      if (CoverPhoto) {
+        formData.append("image", CoverPhoto);
+      }
+      if (ProfilePhoto) {
+        formData.append("image", ProfilePhoto);
+      }
+      console.log("form----->", formData, "cover----->", CoverPhoto);
+      // const requestData = {
+      //   userId,
+      //   fullname: clientName,
+      //   artistName: artistName,
+      //   portfolioLinks,
+      //   cvLinks,
+      //   address_line1: addressLine1,
+      //   address_line2: addressLine2,
+      //   city,
+      //   phone,
+      //   postal_code: postalCode,
+      //   country,
+      //   address_type: addressType,
+      //   state,
+      //   description: clientdescription,
+      //   panCardNumber,
+      //   image: formData,
+      // };
+
+      //console.log(requestData, formData);
+      //const boundary = formData.getBoundary();
       const response = await fetch(apiUrl, {
         method: "POST",
         headers: {
-          "content-type":  `multipart/form-data; boundary=${boundary}`,
           "x-api-key": apiKey,
         },
-        body: JSON.stringify(requestData),
+        body: formData,
       });
 
       if (response.ok) {
         const result = await response.json();
+        // toastify
         console.log("Request submitted successfully:", result);
       } else {
         console.error("Request failed with status:", response.status);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log("error", error);
+    }
   };
-
 
   return (
     <Wrapper>
@@ -268,7 +304,7 @@ console.log(CoverPhoto, ProfilePhoto);
         {/* this is the begin of the first part of design section */}
 
         <div className="w-full lgl:w-[500px] h-full flex flex-col justify-center">
-          <div className=" w-full  h-screen flex items-center justify-center">
+          <div className=" border-2 border-black w-full  h-screen flex items-center justify-center">
             <div className="px-6 py-4 w-[500px] h-[96%] flex flex-col justify-start overflow-y-scroll scrollbar-thin scrollbar-thumb-primeColor">
               <h1 className="font-titleFont underline underline-offset-4 decoration-[1px] font-semibold text-2xl mdl:text-3xl mb-4">
                 Register as Designer
@@ -276,7 +312,8 @@ console.log(CoverPhoto, ProfilePhoto);
 
               {/* { true ? ( */}
               <div className="flex flex-col gap-3 ">
-                {/* <div className="flex flex-col gap-.5">
+                {/* User ID (assuming it's not editable by the user) */}
+                <div className="flex flex-col gap-.5 hidden">
                   <p className="font-titleFont text-base font-semibold text-gray-600">
                     UserId
                   </p>
@@ -287,7 +324,7 @@ console.log(CoverPhoto, ProfilePhoto);
                     readOnly
                     placeholder="User ID"
                   />
-                </div> */}
+                </div>
 
                 {/* Full Name */}
                 <div className="flex flex-col gap-.5">
@@ -577,7 +614,6 @@ console.log(CoverPhoto, ProfilePhoto);
                   </p>
                   <input
                     onChange={handleCoverPhoto}
-                    value={CoverPhoto.name}
                     className="w-full h-8 px-4 text-base font-medium rounded-md border-[1px] border-gray-400 outline-none"
                     type="file"
                     placeholder="Your CoverPhoto"
@@ -597,7 +633,6 @@ console.log(CoverPhoto, ProfilePhoto);
                   </p>
                   <input
                     onChange={handleProfilePhoto}
-                    value={ProfilePhoto.name}
                     className="w-full h-8 px-4 text-base font-medium rounded-md border-[1px] border-gray-400 outline-none"
                     type="file"
                     placeholder="Your ProfilePhoto"

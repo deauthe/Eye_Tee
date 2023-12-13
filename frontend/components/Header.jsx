@@ -5,7 +5,8 @@ import Link from "next/link";
 import Menu from "./Menu";
 import MenuMobile from "./MenuMobile";
 import { CgProfile } from "react-icons/cg";
-
+import { MdLabelImportant, MdLogout } from "react-icons/md";
+import { MdOutlineLogin } from "react-icons/md";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { BsCart } from "react-icons/bs";
 import { BiMenuAltRight } from "react-icons/bi";
@@ -16,6 +17,7 @@ import logo from "../public/logo.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Router, { useRouter } from "next/router";
+import designer from "@/pages/auth/designer";
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -87,6 +89,29 @@ const Header = () => {
         console.log("hello");
     }
   };
+
+  const handleLogOut = async()=>{
+    // sessionStorage.setItem("idDesigner", designer);
+    // sessionStorage.setItem("userID", userID);
+
+    // if(!designer || !userID){
+    //   alert("You are alredy logout")
+    // }
+
+
+    try {
+      const response = await axios.get("http://localhost:8080/api/logout");
+      if(response.ok){
+        alert("You are succesfully logged out");
+      }else{
+        alert("Error , Try Again");
+      }
+    } catch (error) {
+      
+    }
+
+
+  }
 
   return (
     <header
@@ -219,17 +244,19 @@ const Header = () => {
               <ul className="absolute z-10 right-0 mt-2 w-36 bg-white border rounded-lg shadow-lg">
                 <li>
                   <Link href="/auth/login">
-                    <p className="block px-4 py-2 text-gray-800 hover:bg-gray-200">
-                      login
+                    <p className=" flex gap-2 items-center block px-4 py-2 text-gray-800 hover:bg-gray-200">
+                      login <MdOutlineLogin/>
                     </p>
                   </Link>
                 </li>
                 <li>
-                  <Link href="/auth/designer">
-                    <p className="block px-4 py-2 text-gray-800 hover:bg-gray-200">
-                      Designer login
+                  
+                   <button onClick={handleLogOut}>
+                   <p className="block  flex gap-2 items-center px-4 py-2 text-gray-800 hover:bg-gray-200">
+                      logout <MdLogout/>
                     </p>
-                  </Link>
+                 
+                   </button>
                 </li>
                 {/* <li>
                   <Link href="/">

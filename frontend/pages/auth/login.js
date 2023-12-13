@@ -86,46 +86,50 @@ const Login = () => {
   };
   const handleGoogleAuth = async () => {
     const apiUrl = "http://localhost:8080/api/auth/google";
-  ;
 
-    let timer = null;
+    window.open(apiUrl, "_self");
 
-   const newWindow= window.open(
-      apiUrl,
-      "_self"
-    )
+    // if (authWindow) {
+    //   // Polling to check if the window is closed
+    //   const checkClosed = async () => {
+    //     if (authWindow.closed) {
+    //       console.log("Authentication window closed");
+    //       // After the window is closed, fetch user data
+    //       await fetchUser();
+    //     } else {
+    //       // Continue polling until the window is closed
+    //       setTimeout(checkClosed, 1000);
+    //     }
+    //   };
 
-    console.log(newWindow);
+    //   // Start polling
+    //   checkClosed();
+    // }
 
-    if(newWindow){
-      timer = setInterval(()=>{
-        if(newWindow.closed){
-          console.log("we are authneticated");
-          fetchUser();
-          if(timer) clearInterval(timer);
-        }
-      },500)
-    }
+    // console.log("hereWindow", newWindow);
 
-
-
+    // if (newWindow) {
+    //   timer = setInterval(async () => {
+    //     if (newWindow.closed) {
+    //       console.log("we are authenticated");
+    //       await fetchUser();
+    //       if (timer) clearInterval(timer);
+    //     }
+    //   }, 2500);
+    // }
   };
 
-  const fetchUser =async()=>{
-    const response = await axios
-    .get(`${process.env.API_URL}/api/user/data`, {withCredentials:true})
-    .catch((err)=>{
-      console.log("Not properly authenticated");
-    })
+  // const fetchUser = async () => {
+  //   const response = await axios
+  //     .get(`http://localhost:8080/api/user/data`, { withCredentials: true })
+  //     .catch((err) => {
+  //       console.log("Not properly authenticated");
+  //     });
 
-    if(response && response.data){
-      console.log("this is response data", response);
-    }
-
-
-  }
-  
-  
+  //   if (response && response.data) {
+  //     console.log("this is response data", response);
+  //   }
+  // };
 
   return (
     <Wrapper>

@@ -7,10 +7,9 @@ import {
   faSave,
 } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "@mui/material";
+import { transform } from "next/dist/build/swc";
 
 function ImageEditor({ mainImageSrc, overlayImageSrc }) {
-
-
   const canvasRef = useRef(null);
   const [overlayPosition, setOverlayPosition] = useState({ x: 80, y: 50 });
   const [overlayScale, setOverlayScale] = useState(0.5);
@@ -20,23 +19,21 @@ function ImageEditor({ mainImageSrc, overlayImageSrc }) {
   const [resizeHandle, setResizeHandle] = useState(null);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [resizeStart, setResizeStart] = useState({ x: 0, y: 0 });
-  const [mainImage, setMainImage] = useState({src:mainImageSrc});
-  const [overlayImage, setOverlayImage] = useState({src:overlayImageSrc});
+  const [mainImage, setMainImage] = useState(new Image());
+  const [overlayImage, setOverlayImage] = useState(new Image());
 
   const drawImages = useCallback(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Draw the main image
     ctx.drawImage(mainImage, 0, 0, canvas.width, canvas.height);
 
     const { x, y } = overlayPosition;
     const width = overlayImage.width * overlayScale;
     const height = overlayImage.height * overlayScale;
 
-    // Reset blending mode and opacity
+   
     ctx.globalCompositeOperation = "source-over";
     ctx.globalAlpha = 0.8;
 
@@ -46,10 +43,10 @@ function ImageEditor({ mainImageSrc, overlayImageSrc }) {
     ctx.drawImage(overlayImage, -width / 2, -height / 2, width, height);
     ctx.restore();
 
-    // Reset globalAlpha
+
     ctx.globalAlpha = 1;
 
-    // Draw bounding box
+
     ctx.setLineDash([2, 3]);
     ctx.lineWidth = 2;
     ctx.strokeStyle = "red";
@@ -313,6 +310,8 @@ function ImageEditor({ mainImageSrc, overlayImageSrc }) {
           cursor: isDragging ? "grabbing" : isResizing ? "se-resize" : "grab",
         }}
       />
+
+      <div className="flex gap-7">
       <Button
         variant="contained"
         style={{
@@ -334,12 +333,15 @@ function ImageEditor({ mainImageSrc, overlayImageSrc }) {
           paddingLeft: "10%",
           paddingRight: "10%",
           borderRadius: "5px 0 0 5px",
+          // textTransform:"lowercase"
         }}
         onClick={handlePreview}
       >
         PREVIEW PRODUCT <br />
         <FontAwesomeIcon icon={faSave} />
       </Button>
+      </div>
+      
 
       {renderScaleButtons()}
     </div>

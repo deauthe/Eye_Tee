@@ -7,7 +7,7 @@ const ProductCard = () => {
   return (
     <Link
       href="/"
-      className="transform overflow-hidden bg-white/[0.85] duration-200 hover:scale-[1.02] cursor-pointer rounded-lg shadow-md"
+      className="transform overflow-hidden bg-white/[0.85] duration-200 hover:scale-[1.02] cursor-pointer rounded-[20px] shadow-md"
     >
       <div className="relative">
         <div className="absolute right-4 top-3 ">
