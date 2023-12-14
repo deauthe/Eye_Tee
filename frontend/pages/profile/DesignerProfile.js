@@ -32,9 +32,9 @@ const UserProfile = () => {
           <Image src={profile} alt="profile" width={170} height={170} />
         </div>
         <div>
-          <button className=" text-white font-[500] flex items-center justify-center gap-1 rounded-full  absolute right-[200px] bottom-[-15px]">
+          <div className=" text-white font-[500] flex items-center justify-center gap-1 rounded-full  absolute right-[200px] bottom-[-15px]">
             <CreateProduct />
-          </button>
+          </div>
         </div>
 
         <div className="text-white font-[500] flex items-center justify-center gap-1 bg-blue-400 rounded-full p-1 px-3 absolute right-[40px] bottom-[-15px]">
