@@ -100,15 +100,24 @@ const Header = () => {
 
 
     try {
-      const response = await axios.get("http://localhost:8080/api/logout");
-      if(response.ok){
-        alert("You are succesfully logged out");
-      }else{
-        alert("Error , Try Again");
+      const response = await fetch("http://localhost:8080/api/logout", {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': 'token', 
+        },
+      });
+    
+      if (response.ok) {
+        alert("You are successfully logged out");
+      } else {
+        alert("Error, Try Again");
       }
     } catch (error) {
-      
+      // Handle error if necessary
+      console.error("An error occurred:", error);
     }
+    
 
 
   }

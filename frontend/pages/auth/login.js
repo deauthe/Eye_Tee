@@ -9,11 +9,15 @@ import { FcGoogle } from "react-icons/fc";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import Router from "next/router";
 const Login = () => {
+  // const router = Router();
   const toastify = (messge, res) => {
     if (res) {
       toast.success(messge);
       toast.info("You can login as a Designer");
+      Router.push('./designer')
+      
     } else {
       toast.error(messge);
     }
