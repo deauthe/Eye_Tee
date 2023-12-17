@@ -71,7 +71,7 @@ const NextArrow = (props) => {
 const CategorySection = () => {
   var settings = {
     dots: true,
-    infinite: false,
+    infinite: true,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 4,
@@ -94,6 +94,8 @@ const CategorySection = () => {
           slidesToShow: 2,
           slidesToScroll: 2,
           initialSlide: 2,
+          infinite: true,
+          dots: true,
         },
       },
       {
@@ -101,6 +103,8 @@ const CategorySection = () => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          infinite: true,
+          dots: true,
         },
       },
     ],

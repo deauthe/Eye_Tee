@@ -1,6 +1,6 @@
 import DesignPattern from "@/components/DesignPattern";
 import Wrapper from "@/components/Wrapper";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import profile from "../../public/lady.jpg";
 import NextModel from "@/components/NextModel";
@@ -16,7 +16,37 @@ import hoodie from "../../public/C_hoodie.png";
 import shirt from "../../public/C_shirt.png";
 import mug from "../../public/C_mug.png";
 import CreateProduct from "@/components/CreateProduct";
+import Products from "../../utils/Products.json";
+const items = [
+  { item: "Hoodie", color: "red" },
+  { item: "T-Shirts", color: "blue" },
+  { item: "Z-Hoodies", color: "red" },
+  { item: "Mugs", color: "purple" },
+  { item: "Z-Shirts", color: "blue" },
+  { item: "Bottles", color: "" },
+  { item: "Stickers", color: "" },
+  { item: "Tote Bags", color: "" },
+  { item: "Phone Covers", color: "" },
+];
+
 const UserProfile = () => {
+  const [selectedItem, setSelectedItem] = useState("all");
+  const [filteredProducts, setFilteredProducts] = useState(Products);
+
+  const handleItemChange = (event) => {
+    const selectedCategory = event.target.value;
+    setSelectedItem(selectedCategory);
+
+    if (selectedCategory === "all") {
+      setFilteredProducts(Products);
+    } else {
+      const filteredItems = Products.filter(
+        (product) => product.category.toLowerCase() === selectedCategory
+      );
+      setFilteredProducts(filteredItems);
+    }
+  };  
+
   return (
     <Wrapper>
       <div className="bg-[#f7d59c] h-[11em] relative mb-[60px]">
@@ -26,7 +56,6 @@ const UserProfile = () => {
             alt="Banner"
             className="w-full h-full object-cover -z-10"
           ></Image>
-
         </div>
         <div className="overflow-hidden rounded-full inline-block absolute bottom-[-40px] left-[20px]">
           <Image src={profile} alt="profile" width={170} height={170} />
@@ -38,7 +67,7 @@ const UserProfile = () => {
         </div>
 
         <div className="text-white font-[500] flex items-center justify-center gap-1 bg-blue-400 rounded-full p-1 px-3 absolute right-[40px] bottom-[-15px]">
-         <EditProfile/>
+          <EditProfile />
         </div>
         <div className="absolute left-[200px] top-[70px] text-[#ebd9bb]">
           <h3 className="font-[600] text-3xl"> Samanvay Arya</h3>
@@ -54,16 +83,7 @@ const UserProfile = () => {
           <p>@asamanvay</p>
         </div>
       </div>
-      <div>
-        <DropzoneComponent />
-      </div>
-      {/* <div className="flex  gap-4 mb-4 ">
-        {[0, 1, 2, 4].map((e) => (
-          <div className="design cursor-pointer border-2 border-black shadow-md rounded-lg ">
-            <Image src={Design} alt="" width={200} />
-          </div>
-        ))}
-      </div> */}
+
       <div>
         <div className="text-[28px] md:text-[34px] my-4  font-semibold leading-tight">
           Your Designs
@@ -74,11 +94,36 @@ const UserProfile = () => {
         </div>
       </div>
 
-      <div className="bg-white rounded-md flex mb-6  ">
-        {/* <div className=" border-gray-300 border-dashed border-2 rounded-md m-5">
-        <Image src={Design} alt="design" width={270} />
-          
-        </div> */}
+      <div className="flex items-center justify-between">
+        <p className="text-[28px] md:text-[34px] my-4  font-semibold leading-tight">
+          Your Products
+        </p>
+
+        <div>
+          {/* <label htmlFor="itemDropdown">Select an item:</label> */}
+          <select
+            id="itemDropdown"
+            value={selectedItem}
+            onChange={handleItemChange}
+            className="p-2 text-xl bg-transparent border border-black rounded-xl"
+          >
+            <option value="all">All</option>
+            {items.map((item, index) => (
+              <option
+                key={index}
+                value={item.item.toLowerCase().replace(" ", "")}
+              >
+                {item.item}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      <div>
+        {filteredProducts.map((e, index) => (
+          <div>{e.name}</div>
+        ))}
       </div>
     </Wrapper>
   );
