@@ -29,7 +29,7 @@ const DesignCarousel = () => {
         itemClass="px-[10px]"
       >
         {[0, 1, 2, 3, 4].map((product, index) => (
-          <div className="bg-white rounded-md shadow">
+          <div className="bg-gray-400 border-[6px] border-white rounded-full p-2  shadow">
             <DesignerCard key={index} cardNo={index}/>
           </div>
         ))}
