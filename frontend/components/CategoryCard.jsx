@@ -1,15 +1,15 @@
 import Image from "next/image";
 import React from "react";
 // import hoddie from '../public/C_hoodie.png'
-const CategoryCard = () => {
+import hoodie from "../public/hoodie_category.png";
+const CategoryCard = (props) => {
   return (
-   <div className="flex flex-col items-center ">
-    <div className="border w-[130px] h-[130px] border-black rounded-full flex justify-center items-center bg-slate-50">
-         <Image src='/C_hoodie.png' alt="none" width={95} height={95}></Image>
+    <div
+      className={` border-5 border-white rounded-[50px] w-[180px] h-[200px] bg-${props.color}-400  flex flex-col gap-3 justify-center items-center  shadow-md`}
+    >
+      <p className="text-2xl font-bold text-white">{props.name}</p>
+      <Image src={hoodie} alt="none" width={95} height={95}></Image>
     </div>
-    <p className="text-lg">Hoodie</p>
-   </div>
-
   );
 };
 
