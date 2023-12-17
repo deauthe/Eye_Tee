@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import CategoryCard from "./CategoryCard";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -17,45 +17,56 @@ const categoriesData = [
   { item: "Phone Covers", color: "" },
 ];
 
-const PrevArrow = ({ onClick }) => {
-    const [isClicked, setIsClicked] = useState(false);
-  
-    const handleClick = () => {
-      setIsClicked(true);
-      setTimeout(() => {
-        setIsClicked(false);
-      }, 300); // Adjust the timeout duration based on your preference
-      onClick();
-    };
-  
-    return (
-      <div className={`absolute right-[70px] -top-[50px] ${isClicked ? 'scale-90' : ''}`} onClick={handleClick}>
-        <div className="border-2 border-white rounded-full shadow-md text-2xl h-[50px] w-[50px] grid place-items-center cursor-pointer focus:scale-75">
-          <FaArrowLeft />
-        </div>
-      </div>
-    );
+const PrevArrow = (props) => {
+  const [isClicked, setIsClicked] = useState(false);
+  const {onClick} = props;
+  const handleClick = () => {
+    setIsClicked(true);
+    setTimeout(() => {
+      setIsClicked(false);
+    }, 300); // Adjust the timeout duration based on your preference
+    onClick();
   };
-  
-  const NextArrow = ({ onClick }) => {
-    const [isClicked, setIsClicked] = useState(false);
-  
-    const handleClick = () => {
-      setIsClicked(true);
-      setTimeout(() => {
-        setIsClicked(false);
-      }, 300); // Adjust the timeout duration based on your preference
-      onClick();
-    };
-  
-    return (
-      <div className={`absolute right-[5px] -top-[50px] ${isClicked ? 'scale-90' : ''}`} onClick={handleClick}>
-        <div className="border-2 border-white rounded-full shadow-md text-2xl h-[50px] w-[50px] grid place-items-center cursor-pointer">
-          <FaArrowRight />
-        </div>
+
+  return (
+    <div
+      className={`absolute right-[70px] -top-[50px] ${
+        isClicked ? "scale-90" : ""
+      }`}
+      onClick={handleClick}
+    >
+      <div className="border-2 border-white rounded-full shadow-md text-2xl h-[50px] w-[50px] grid place-items-center cursor-pointer focus:scale-75">
+        <FaArrowLeft />
       </div>
-    );
+    </div>
+  );
+};
+
+const NextArrow = (props) => {
+  const [isClicked, setIsClicked] = useState(false);
+  const {onClick}= props;
+
+  const handleClick = () => {
+    setIsClicked(true);
+    setTimeout(() => {
+      setIsClicked(false);
+    }, 300); // Adjust the timeout duration based on your preference
+    onClick();
   };
+
+  return (
+    <div
+      className={`absolute right-[5px] -top-[50px] ${
+        isClicked ? "scale-90" : ""
+      }`}
+      onClick={handleClick}
+    >
+      <div className="border-2 border-white rounded-full shadow-md text-2xl h-[50px] w-[50px] grid place-items-center cursor-pointer">
+        <FaArrowRight />
+      </div>
+    </div>
+  );
+};
 
 const CategorySection = () => {
   var settings = {
@@ -65,7 +76,7 @@ const CategorySection = () => {
     slidesToShow: 4,
     slidesToScroll: 4,
     initialSlide: 0,
-    nextArrow: <PrevArrow/>,
+    nextArrow: <PrevArrow />,
     prevArrow: <NextArrow />,
     responsive: [
       {
@@ -116,7 +127,6 @@ const CategorySection = () => {
             </div>
           ))}
         </Slider>
-
       </div>
     </>
   );
