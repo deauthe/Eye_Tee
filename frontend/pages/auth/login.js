@@ -24,7 +24,7 @@ const Login = () => {
   };
 
   const storeUserSession = (designer, userID, designerId) => {
-    sessionStorage.setItem("idDesigner", designer);
+    sessionStorage.setItem("isDesigner", designer);
     sessionStorage.setItem("userID", userID);
     sessionStorage.setItem("designerID",designerId)
   };

@@ -10,6 +10,7 @@ const Editor = () => {
   const router = useRouter();
   const [selectedImage, setSelectedImage] = useState(null);
   const [userDesign, setUserDesign] = useState(null);
+  const [isDesignUploaded, setIsDesignUploaded] = useState(false);
   // const handleDesignChange = (e) => {
   //   const file = e.target.files[0];
   //   if (file) {
@@ -42,7 +43,6 @@ const Editor = () => {
     }
 
     const headers = {
-      "Content-Type": "application/json",
       "x-api-key": "token",
     };
 

@@ -82,7 +82,7 @@ const Header = () => {
       toast.error("First Login or Create Account to Sell Designer");
 
       router.push({
-        pathname:'auth/login',
+        pathname:'./login',
       })
      }
     } else {
