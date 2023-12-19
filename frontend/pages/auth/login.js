@@ -23,9 +23,10 @@ const Login = () => {
     }
   };
 
-  const storeUserSession = (designer, userID) => {
+  const storeUserSession = (designer, userID, designerId) => {
     sessionStorage.setItem("idDesigner", designer);
     sessionStorage.setItem("userID", userID);
+    sessionStorage.setItem("designerID",designerId)
   };
 
   const [output, setOutput] = useState("");
@@ -75,7 +76,7 @@ const Login = () => {
       const responseData = await response.json();
       console.log(responseData);
 
-      storeUserSession(responseData.data.isDesigner, responseData.data._id);
+      storeUserSession(responseData.data.isDesigner, responseData.data._id,responseData.data.designerId);
 
       if (response.ok) {
         toastify(responseData.message, response.ok);
