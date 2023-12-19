@@ -32,7 +32,7 @@ const Editor = () => {
   };
 
   const handleCreateDesign = async (e) => {
-    const designerId = sessionStorage.getItem("designerID");
+    const designerId = sessionStorage.getItem("idDesigner");
     const apiUrl = "http://localhost:8080/api/designer/createDesign";
     const file = e.target.files.item(0);
 
@@ -40,11 +40,6 @@ const Editor = () => {
       console.error("No file selected");
       return;
     }
-
-    const headers = {
-      "Content-Type": "application/json",
-      "x-api-key": "token",
-    };
 
     const reader = new FileReader();
     reader.onload = async (e) => {
@@ -58,7 +53,9 @@ const Editor = () => {
       try {
         const response = await fetch(apiUrl, {
           method: "POST",
-          headers: headers,
+          headers: {
+            "x-api-key": "token",
+          },
           body: formData,
         });
 
