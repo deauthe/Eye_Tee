@@ -71,13 +71,11 @@ const Header = () => {
   // handle function for sell your art
 
   const handleSellArtButton = async () => {
-    if (typeof sessionStorage != "undefined") {
-     const userId= sessionStorage.getItem("userID");
-     if(userId){ 
-      router.push({
-        pathname: '/auth/designer',
-      });
+    if (typeof sessionStorage !== "undefined") {
+      const userId = sessionStorage.getItem("userID");
+      const isDesigner = sessionStorage.getItem("isDesigner");
 
+<<<<<<< HEAD
      }else{
       toast.error("First Login or Create Account to Sell Designer");
 
@@ -85,12 +83,31 @@ const Header = () => {
         pathname:'./login',
       })
      }
+=======
+      if (userId && isDesigner) {
+        // User is logged in and is a designer
+        router.push({
+          pathname: "/profile/DesignerProfile",
+        });
+      } else if (userId) {
+        // User is logged in but not a designer
+        toast.error("Register as a Designer First");
+        router.push({
+          pathname: "/auth/designer",
+        });
+      } else {
+        // User is not logged in
+        toast.error("Please login to sell your art");
+        router.push({
+          pathname: "/auth/login",
+        });
+      }
+>>>>>>> 887675ba4cf74d936cf7edf193a729a58af7c190
     } else {
-        console.log("hello");
+      console.log("Session storage not supported");
     }
   };
-
-  const handleLogOut = async()=>{
+  const handleLogOut = async () => {
     // sessionStorage.setItem("idDesigner", designer);
     // sessionStorage.setItem("userID", userID);
 
@@ -98,16 +115,15 @@ const Header = () => {
     //   alert("You are alredy logout")
     // }
 
-
     try {
       const response = await fetch("http://localhost:8080/api/logout", {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': 'token', 
+          "Content-Type": "application/json",
+          "x-api-key": "token",
         },
       });
-    
+
       if (response.ok) {
         alert("You are successfully logged out");
       } else {
@@ -117,10 +133,7 @@ const Header = () => {
       // Handle error if necessary
       console.error("An error occurred:", error);
     }
-    
-
-
-  }
+  };
 
   return (
     <header
@@ -254,18 +267,16 @@ const Header = () => {
                 <li>
                   <Link href="/auth/login">
                     <p className=" flex gap-2 items-center block px-4 py-2 text-gray-800 hover:bg-gray-200">
-                      login <MdOutlineLogin/>
+                      login <MdOutlineLogin />
                     </p>
                   </Link>
                 </li>
                 <li>
-                  
-                   <button onClick={handleLogOut}>
-                   <p className="block  flex gap-2 items-center px-4 py-2 text-gray-800 hover:bg-gray-200">
-                      logout <MdLogout/>
+                  <button onClick={handleLogOut}>
+                    <p className="block  flex gap-2 items-center px-4 py-2 text-gray-800 hover:bg-gray-200">
+                      logout <MdLogout />
                     </p>
-                 
-                   </button>
+                  </button>
                 </li>
                 {/* <li>
                   <Link href="/">

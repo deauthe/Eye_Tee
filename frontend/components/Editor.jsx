@@ -45,7 +45,7 @@ const Editor = () => {
     }
   };
 
-  const handleCreateDesign = async () => {
+  const handleCreateDesign = async (e) => {
     const designerId = sessionStorage.getItem("designerID");
     const apiUrl = "http://localhost:8080/api/designer/createDesign";
 
@@ -55,6 +55,7 @@ const Editor = () => {
     }
 
     const headers = {
+      "Content-Type": "application/json",
       "x-api-key": "token",
     };
 
@@ -63,12 +64,12 @@ const Editor = () => {
     formData.append("image", userDesign);
     // console.log(formData);
 
-    try {
-      const response = await fetch(apiUrl, {
-        method: "POST",
-        headers: headers,
-        body: formData,
-      });
+      try {
+        const response = await fetch(apiUrl, {
+          method: "POST",
+          headers: headers,
+          body: formData,
+        });
 
       const responseData = await response.json();
       console.log(responseData);

@@ -3,23 +3,30 @@ import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+<<<<<<< HEAD
 const storeUserSession = (designer, userID,) => {
   sessionStorage.setItem("isDesigner", designer);
   sessionStorage.setItem("userID", userID);
   
+=======
+const storeUserSession = (designer, userID, designerId) => {
+  sessionStorage.setItem("isDesigner", designer);
+  sessionStorage.setItem("userID", userID);
+  sessionStorage.setItem("designerID", designerId);
+>>>>>>> 887675ba4cf74d936cf7edf193a729a58af7c190
 };
 
 const AuthenticationCompleted = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const { designerId, userId } = router.query;
+    const { designerId, userId, isDesigner } = router.query;
 
     if (designerId && userId) {
       // Call your storeUserSession function with the extracted values
-      storeUserSession(designerId, userId);
+      storeUserSession(isDesigner, userId, designerId);
 
-      // Show a toast notification
+      // Show a toast notifications
       toast.success("Authentication completed!");
     } else {
       console.error("Invalid URL parameters");
