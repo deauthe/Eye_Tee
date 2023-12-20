@@ -4,9 +4,9 @@ import Wrapper from "@/components/Wrapper";
 import { Button } from "@mui/material";
 import ImageOverlay from "@/components/Editor/image";
 import Image from "next/image";
-import illus from "../public/design.svg";
 import ip from "../public/upload.png";
 import { userAgent } from "next/server";
+import CustomTextComponent from "./CustomTextComponent";
 
 const Editor = () => {
   const router = useRouter();
@@ -64,12 +64,12 @@ const Editor = () => {
     formData.append("image", userDesign);
     // console.log(formData);
 
-      try {
-        const response = await fetch(apiUrl, {
-          method: "POST",
-          headers: headers,
-          body: formData,
-        });
+    try {
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: headers,
+        body: formData,
+      });
 
       const responseData = await response.json();
       console.log(responseData);
@@ -125,7 +125,7 @@ const Editor = () => {
                       onChange={handleUploadDesign}
                     />
                     <button
-                      className="text-black border border-black rounded-full p-2 px-4 bg-transparent shadow-md hover:bg-black hover:text-white mt-3"
+                      className= " font-bold text-black border-2 border-black rounded-full p-2 px-4 bg-transparent shadow-md hover:bg-black hover:text-white mt-3"
                       style={{
                         border: "1px solid black",
                         textDecoration: "none",
@@ -142,27 +142,27 @@ const Editor = () => {
 
                 {isDesignUploaded && (
                   <>
-                     <label>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      style={{ display: "none" }}
-                      onChange={handleUploadAgain}
-                    />
-                    <button
-                      className="text-black border border-black rounded-full p-2 px-4 bg-transparent shadow-md hover:bg-black hover:text-white mt-3"
-                      style={{
-                        border: "1px solid black",
-                        textDecoration: "none",
-                        cursor: "pointer",
-                      }}
-                      onClick={() =>
-                        document.querySelector("input[type=file]").click()
-                      }
-                    >
-                      Upload Design
-                    </button>
-                  </label>
+                    <label>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        style={{ display: "none" }}
+                        onChange={handleUploadAgain}
+                      />
+                      <button
+                        className=" font-bold text-black border-2 border-black rounded-full p-2 px-4 bg-transparent shadow-md hover:bg-black hover:text-white mt-3"
+                        style={{
+                          border: "1px solid black",
+                          textDecoration: "none",
+                          cursor: "pointer",
+                        }}
+                        onClick={() =>
+                          document.querySelector("input[type=file]").click()
+                        }
+                      >
+                        Upload Again
+                      </button>
+                    </label>
 
                     {/* <Button
                       variant="contained"
@@ -212,21 +212,23 @@ const Editor = () => {
               </div>
             </div>
 
-            <p className="text-2xl font-bold mb-5">
-              Check Out Products of Your Designs
-            </p>
+            <CustomTextComponent fontSize="29px">
+              Check Your Design on the Products
+            </CustomTextComponent>
 
-            <div className="flex">
-              <div>
-                <div className="flex flex-col justify-center items-center bg-white/95 shadow-sm rounded-md inline-block w-[230px] p-5">
-                  <ImageOverlay
-                    mainImage="/t_shirt2.png"
-                    overlayImage={userDesign || "/logo_e.png"}
-                    overlayPosition="10,20"
-                    width={200}
-                    height={200}
-                  />
-                </div>
+            <div className="">
+              <div className="flex gap-4">
+                {[0, 1, 2].map((e, index) => (
+                  <div className="flex flex-col justify-center items-center bg-white/95 shadow-sm rounded-[30px] inline-block w-[230px] p-5 bg-red-300 border-3 border-zinc-600">
+                    <ImageOverlay
+                      mainImage="/t_shirt2.png"
+                      overlayImage={userDesign || "/logo_e.png"}
+                      overlayPosition="10,20"
+                      width={200}
+                      height={200}
+                    />
+                  </div>
+                ))}
               </div>
             </div>
           </div>
