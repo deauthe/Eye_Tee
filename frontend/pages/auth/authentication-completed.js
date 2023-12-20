@@ -3,17 +3,10 @@ import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-<<<<<<< HEAD
-const storeUserSession = (designer, userID,) => {
-  sessionStorage.setItem("isDesigner", designer);
-  sessionStorage.setItem("userID", userID);
-  
-=======
 const storeUserSession = (designer, userID, designerId) => {
   sessionStorage.setItem("isDesigner", designer);
   sessionStorage.setItem("userID", userID);
   sessionStorage.setItem("designerID", designerId);
->>>>>>> 887675ba4cf74d936cf7edf193a729a58af7c190
 };
 
 const AuthenticationCompleted = () => {

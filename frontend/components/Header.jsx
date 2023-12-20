@@ -75,15 +75,6 @@ const Header = () => {
       const userId = sessionStorage.getItem("userID");
       const isDesigner = sessionStorage.getItem("isDesigner");
 
-<<<<<<< HEAD
-     }else{
-      toast.error("First Login or Create Account to Sell Designer");
-
-      router.push({
-        pathname:'./login',
-      })
-     }
-=======
       if (userId && isDesigner) {
         // User is logged in and is a designer
         router.push({
@@ -102,7 +93,6 @@ const Header = () => {
           pathname: "/auth/login",
         });
       }
->>>>>>> 887675ba4cf74d936cf7edf193a729a58af7c190
     } else {
       console.log("Session storage not supported");
     }
