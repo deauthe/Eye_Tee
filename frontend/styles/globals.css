@@ -369,3 +369,16 @@
   .slick-list{
     margin-right: -30;
   }
+
+
+
+  /* glassmorphism */
+
+  .glass {
+    background: rgba(76, 71, 71, 0.595);
+    box-shadow: 0 8px 32px 0 rgba(95, 95, 105, 0.37);
+    backdrop-filter: blur( 50.5px );
+    -webkit-backdrop-filter: blur( 50.5px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+  }

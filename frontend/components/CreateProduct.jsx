@@ -92,12 +92,12 @@ export default function CreateProduct() {
                 </div>
               </ModalBody>
               <ModalFooter>
-                <Button color="primary" variant="light" onPress={onClose}>
+                {/* <Button color="primary" variant="light" onPress={onClose}>
                   Close
-                </Button>
-                {/* <Button color="primary" onPress={onClose}>
-                  Action
                 </Button> */}
+                <Button color="primary"  variant="ghost" onPress={onClose}>
+                Next
+                </Button>
               </ModalFooter>
             </>
           )}
