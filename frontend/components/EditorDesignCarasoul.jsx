@@ -66,20 +66,21 @@ const EditorDesignCarasoul = () => {
         className="productCarousel"
       >
         {images.map((imageUrl, index) => (
-          <img
-            key={index}
-            src={imageUrl}
-            alt={`Product ${index + 1}`}
-            onClick={() => handleImageSelect(imageUrl)}
-          />
+          <>
+            <img
+              key={index}
+              src={imageUrl}
+              alt={`Product ${index + 1}`}
+              onClick={() => handleImageSelect(imageUrl)}
+            />
+            {/* Pass selectedMainImage to ImageEditor */}
+            <ImageEditor
+              mainImageSrc={imageUrl}
+              overlayImageSrc={overlayImageSrc}
+            />
+          </>
         ))}
       </Carousel>
-
-      {/* Pass selectedMainImage to ImageEditor */}
-      <ImageEditor
-        mainImageSrc={selectedMainImage}
-        overlayImageSrc={overlayImageSrc}
-      />
     </div>
   );
 };
