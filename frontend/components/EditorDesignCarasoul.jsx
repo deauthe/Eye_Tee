@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
 import { Switch } from "@nextui-org/react";
+import ImageEditor from "@/components/Editor/index2";
 
-const EditorDesignCarasoul = ({ selectedMainImage }) => {
+const EditorDesignCarasoul = () => {
   const [isSelected, setIsSelected] = useState(true);
+  const [selectedMainImage, setSelectedMainImage] = useState("");
   const [images, setImages] = useState([]);
+  const router = useRouter();
+  const overlayImageSrc = router.query.url || "";
   useEffect(() => {
     // Fetch images based on color and category
     const fetchData = async () => {
       try {
-        const color = "black"; // Set your color dynamically
-        const category = "shirt"; // Set your category dynamically
+        const color = "blue"; // Set your color dynamically
+        const category = "hoodie"; // Set your category dynamically
 
         const response = await fetch(
           `http://localhost:8080/api/product/images?color=${color}&category=${category}`,
@@ -26,6 +31,7 @@ const EditorDesignCarasoul = ({ selectedMainImage }) => {
           const data = await response.json();
           console.log(data[0].imageUrls);
           setImages(data[0].imageUrls); // Assuming the API response has an 'images' property
+          setSelectedMainImage(data[0].imageUrls[0]);
         } else {
           console.error("Failed to fetch images");
         }
@@ -36,6 +42,10 @@ const EditorDesignCarasoul = ({ selectedMainImage }) => {
 
     fetchData();
   }, []);
+
+  const handleImageSelect = (imageSrc) => {
+    setSelectedMainImage(imageSrc);
+  };
 
   return (
     <div className=" text-white text-[20px] w-full max-w-[1360px] mx-auto sticky top-[50px]">
@@ -56,9 +66,20 @@ const EditorDesignCarasoul = ({ selectedMainImage }) => {
         className="productCarousel"
       >
         {images.map((imageUrl, index) => (
-          <img key={index} src={imageUrl} alt={`Product ${index + 1}`} />
+          <img
+            key={index}
+            src={imageUrl}
+            alt={`Product ${index + 1}`}
+            onClick={() => handleImageSelect(imageUrl)}
+          />
         ))}
       </Carousel>
+
+      {/* Pass selectedMainImage to ImageEditor */}
+      <ImageEditor
+        mainImageSrc={selectedMainImage}
+        overlayImageSrc={overlayImageSrc}
+      />
     </div>
   );
 };

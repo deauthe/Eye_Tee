@@ -133,6 +133,7 @@ const Editor = () => {
         method: "POST",
         headers: {
           "x-api-key": apiKey,
+          
         },
         body: formData,
       });

@@ -23,30 +23,12 @@ function ImageEditor({ mainImageSrc, overlayImageSrc }) {
   const [mainImage, setMainImage] = useState(null);
   const [overlayImage, setOverlayImage] = useState(null);
 
-  // useEffect(() => {
-  //   console.log("1");
-  //   setMainImage(new Image());
-  //   mainImage.src = mainImageSrc;
-  //   setOverlayImage(new Image());
-  //   overlayImage.src = overlayImageSrc;
-  // }, []);
   useEffect(() => {
-    console.log("4", mainImageSrc, overlayImageSrc);
-    const mainImg = new Image();
-    mainImg.onload = () => {
-      setMainImage(mainImg);
-    };
-    mainImg.src = mainImageSrc;
-
-    const overlayImg = new Image();
-    overlayImg.onload = () => {
-      setOverlayImage(overlayImg);
-    };
-    overlayImg.src = overlayImageSrc;
-  }, [mainImageSrc, overlayImageSrc]);
+    setMainImage(new Image());
+    setOverlayImage(new Image());
+  }, []);
 
   const drawImages = useCallback(() => {
-    console.log("3");
     if (mainImage && overlayImage) {
       console.log("Error her", mainImage, overlayImage);
       const canvas = canvasRef.current;
@@ -80,9 +62,9 @@ function ImageEditor({ mainImageSrc, overlayImageSrc }) {
   }, [mainImage, overlayImage, overlayPosition, overlayScale, rotationAngle]);
 
   useEffect(() => {
-    console.log("2");
     if (mainImage && overlayImage) {
       const canvas = canvasRef.current;
+      const ctx = canvas.getContext("2d");
 
       mainImage.src = mainImageSrc;
       mainImage.onload = () => {
