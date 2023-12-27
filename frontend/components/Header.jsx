@@ -108,20 +108,19 @@ const Header = () => {
     try {
       const response = await fetch("http://localhost:8080/api/logout", {
         method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": "token",
-        },
+        headers: { "Content-Type": "application/json" },
       });
 
       if (response.ok) {
-        alert("You are successfully logged out");
+        sessionStorage.clear();
+        toast.error("You are successfully logged out");
       } else {
-        alert("Error, Try Again");
+        toast.error("Error Logging Out");
       }
     } catch (error) {
       // Handle error if necessary
       console.error("An error occurred:", error);
+      toast.error("Server Error");
     }
   };
 

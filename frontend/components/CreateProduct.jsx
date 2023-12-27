@@ -71,32 +71,36 @@ export default function CreateProduct() {
           onPress={() => handleOpen()}
           className="flex items-center gap-1 bg-black hover:bg-black text-white hover:text-white transition-all duration-300 px-5 py-2 rounded-full"
         >
-           Create a Product
-           <span>
-        <MdOutlineProductionQuantityLimits/>
-
-           </span>
+          Create a Product
+          <span>
+            <MdOutlineProductionQuantityLimits />
+          </span>
         </Button>
-        
       </div>
-      <Modal  size="5xl"  backdrop={backdrop} isOpen={isOpen} onClose={onClose} className="w-[800px]">
+      <Modal
+        size="5xl"
+        backdrop={backdrop}
+        isOpen={isOpen}
+        onClose={onClose}
+        className="w-[800px]"
+      >
         <ModalContent>
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-               Edit Your Profile
+                Edit Your Profile
               </ModalHeader>
-              <ModalBody >
+              <ModalBody>
                 <div className="">
-                    <Editor/>
+                  <Editor />
                 </div>
               </ModalBody>
               <ModalFooter>
                 {/* <Button color="primary" variant="light" onPress={onClose}>
                   Close
                 </Button> */}
-                <Button color="primary"  variant="ghost" onPress={onClose}>
-                Next
+                <Button color="primary" variant="ghost" onPress={onClose}>
+                  Next
                 </Button>
               </ModalFooter>
             </>

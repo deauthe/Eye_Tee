@@ -7,6 +7,7 @@ import Image from "next/image";
 import ip from "../public/upload.png";
 import { userAgent } from "next/server";
 import CustomTextComponent from "./CustomTextComponent";
+import { toast } from "react-toastify";
 
 const Editor = () => {
   const router = useRouter();
@@ -22,11 +23,15 @@ const Editor = () => {
   const handleUploadDesign = (e) => {
     const file = e.target.files[0];
     if (file) {
+      setSelectedImage(file);
+      console.log(selectedImage);
       const reader = new FileReader();
       reader.onload = (e) => {
+        console.log("uploaded", e.target, e);
         setUserDesign(e.target.result);
+
         setIsDesignUploaded(true);
-        console.log(userDesign);
+        // console.log(userDesign);
       };
       reader.readAsDataURL(file);
     }
@@ -35,48 +40,51 @@ const Editor = () => {
   const handleUploadAgain = (e) => {
     const file = e.target.files[0];
     if (file) {
+      setSelectedImage(file);
+      console.log(selectedImage);
       const reader = new FileReader();
       reader.onload = (e) => {
+        console.log("uploaded again", e.target, e);
         setUserDesign(e.target.result);
         setIsDesignUploaded(true);
-        console.log("a", userDesign);
+        // console.log("a", userDesign, selectedImage);
       };
       reader.readAsDataURL(file);
     }
   };
 
-  const handleCreateDesign = async (e) => {
-    const designerId = sessionStorage.getItem("designerID");
-    const apiUrl = "http://localhost:8080/api/designer/createDesign";
+  // const handleCreateDesign = async (e) => {
+  //   const designerId = sessionStorage.getItem("designerID");
+  //   const apiUrl = "http://localhost:8080/api/designer/createDesign";
 
-    if (!isDesignUploaded) {
-      console.error("No design uploaded");
-      return;
-    }
+  //   if (!isDesignUploaded) {
+  //     console.error("No design uploaded");
+  //     return;
+  //   }
 
-    const headers = {
-      "Content-Type": "application/json",
-      "x-api-key": "token",
-    };
+  //   const headers = {
+  //     "Content-Type": "application/json",
+  //     "x-api-key": "token",
+  //   };
 
-    const formData = new FormData();
-    formData.append("designerId", designerId);
-    formData.append("image", userDesign);
-    // console.log(formData);
+  //   const formData = new FormData();
+  //   formData.append("designerId", designerId);
+  //   formData.append("image", selectedImage);
+  //   // console.log(formData);
 
-    try {
-      const response = await fetch(apiUrl, {
-        method: "POST",
-        headers: headers,
-        body: formData,
-      });
+  //   try {
+  //     const response = await fetch(apiUrl, {
+  //       method: "POST",
+  //       headers: headers,
+  //       body: formData,
+  //     });
 
-      const responseData = await response.json();
-      console.log(responseData);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  //     const responseData = await response.json();
+  //     console.log(responseData);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -86,7 +94,11 @@ const Editor = () => {
     setDescription(event.target.value);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    const apiUrl = "http://localhost:8080/api/designer/createDesign";
+    const apiKey = "token";
+    const formData = new FormData();
+
     if (name === "") {
       setNameError("Name cannot be empty");
       return;
@@ -97,8 +109,46 @@ const Editor = () => {
       return;
     }
 
+    if (!userDesign) {
+      toast.error("Add design first");
+    }
+
+    if (selectedImage) {
+      formData.append("image", selectedImage);
+    }
+    const designerId = sessionStorage.getItem("designerID");
+    formData.append("designerId", designerId);
     console.log("Name:", name);
     console.log("Description:", description);
+    console.log("designer :", designerId);
+    console.log("design :", userDesign);
+
+    formData.append("title", name);
+    formData.append("description", description);
+
+    console.log(formData, "selected image", selectedImage);
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "x-api-key": apiKey,
+        },
+        body: formData,
+      });
+
+      const responseData = await response.json();
+      console.log(responseData);
+      // Check if the response contains designImage[0].url
+      if (responseData.designImage && responseData.designImage.length > 0) {
+        const imageUrl = responseData.designImage[0].url;
+
+        // Navigate to the /image-design route
+        router.push(`/image-editor?url=${imageUrl}`);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -125,7 +175,7 @@ const Editor = () => {
                       onChange={handleUploadDesign}
                     />
                     <button
-                      className= " font-bold text-black border-2 border-black rounded-full p-2 px-4 bg-transparent shadow-md hover:bg-black hover:text-white mt-3"
+                      className=" font-bold text-black border-2 border-black rounded-full p-2 px-4 bg-transparent shadow-md hover:bg-black hover:text-white mt-3"
                       style={{
                         border: "1px solid black",
                         textDecoration: "none",
@@ -146,6 +196,7 @@ const Editor = () => {
                       <input
                         type="file"
                         accept="image/*"
+                        name="image"
                         style={{ display: "none" }}
                         onChange={handleUploadAgain}
                       />
@@ -202,7 +253,7 @@ const Editor = () => {
                     )}
 
                     <button
-                      // onClick={handleSubmit}
+                      onClick={handleSubmit}
                       className="bg-blue-500 text-white font-bold text-xl p-3 px-6 rounded-full hover:bg-transparent hover:border-5 hover:border-blue-400 transitions-all duration-100 "
                     >
                       Create Design
