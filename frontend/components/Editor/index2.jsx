@@ -6,7 +6,7 @@ import {
   faSearchMinus,
   faSave,
 } from "@fortawesome/free-solid-svg-icons";
-import { Button } from "@mui/material";
+import { Button } from "@nextui-org/react";
 // import dynamic from "next/dynamic";
 // const Image = dynamic(() => import("next/image"), { ssr: false });
 
@@ -338,33 +338,23 @@ function ImageEditor({ mainImageSrc, overlayImageSrc }) {
           cursor: isDragging ? "grabbing" : isResizing ? "se-resize" : "grab",
         }}
       />
-      <Button
-        variant="contained"
-        style={{
-          backgroundColor: "#A24D50",
-          paddingLeft: "10%",
-          paddingRight: "10%",
-          borderRadius: "5px 0 0 5px",
-        }}
+     <div className="mt-[-26px] flex gap-2 mx-9 w-full ">
+     <Button
+        
         onClick={handleSave}
       >
-        SAVE PRODUCT <br />
+        Save Product <br />
         <FontAwesomeIcon icon={faSave} />
       </Button>
 
       <Button
-        variant="contained"
-        style={{
-          backgroundColor: "#A24D50",
-          paddingLeft: "10%",
-          paddingRight: "10%",
-          borderRadius: "5px 0 0 5px",
-        }}
+       
         onClick={handlePreview}
       >
-        PREVIEW PRODUCT <br />
+        Preview Product<br />
         <FontAwesomeIcon icon={faSave} />
       </Button>
+     </div>
 
       {renderScaleButtons()}
     </div>

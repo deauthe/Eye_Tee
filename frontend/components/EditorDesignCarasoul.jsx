@@ -1,16 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from "react-responsive-carousel";
 import ImageEditor from "@/components/Editor/index2";
 import Image from "next/image";
 import { Switch } from "antd";
 
-const colors = ["red", "blue", "gray", "yellow"];
+const colors = [
+  "bg-[#3498db]", // Dodger Blue
+  "bg-[#2ecc71]", // Emerald Green
+  "bg-[#e74c3c]", // Alizarin Red
+  "bg-[#f39c12]", // Sunflower Yellow
+  "bg-[#9b59b6]"  // Amethyst Purple
+];
+
+
 
 const ColorSelection = () => {
   const [selectedColors, setSelectedColors] = useState([]);
+  console.log("this is selected color",selectedColors)
   const handleColorChange = (value) => {
+    console.log("this is value", value);
     const isColorSelected = selectedColors.includes(value);
 
     if (!isColorSelected) {
@@ -23,7 +31,7 @@ const ColorSelection = () => {
       {colors.map((color) => (
         <div
           key={color}
-          className={`w-8 h-8 cursor-pointer rounded-full bg-${color}-500`}
+          className={`w-[5em] h-[2em] cursor-pointer rounded-full ${color}`}
           onClick={() => handleColorChange(color)}
         ></div>
       ))}
@@ -86,7 +94,7 @@ const EditorDesignCarasoul = () => {
 
   return (
     <>
-      <div className=" border-2 border-green-500 flex gap-4 text-white text-[20px] w-full max-w-[1360px] mx-auto sticky top-[50px] object-contain  ">
+      <div className="  border-2 border-green-500 flex gap-4 text-white text-[20px] w-full max-w-[1360px] mx-auto top-[50px] object-contain  ">
         <div className="absolute right-[80px] top-2 z-40 gap-2 flex mr-4 items-center border-2 border-black p-1 px-2 rounded-full bg-zinc-700">
           <Switch
             checkedChildren="Back"
