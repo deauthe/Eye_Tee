@@ -4,13 +4,25 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from "react-responsive-carousel";
 import { Switch } from "@nextui-org/react";
 import ImageEditor from "@/components/Editor/index2";
+import Image from "next/image";
 
 const EditorDesignCarasoul = () => {
   const [isSelected, setIsSelected] = useState(true);
   const [selectedMainImage, setSelectedMainImage] = useState("");
   const [images, setImages] = useState([]);
+  const [backImage, setBackImage] = useState(
+    images.length > 0 ? images[0] : ""
+  );
+  console.log(backImage);
+  console.log(typeof images[0]);
   const router = useRouter();
   const overlayImageSrc = router.query.url || "";
+
+  // handle funcitons
+  const handleImageClick= (img) => {
+    setBackImage(img);
+  };
+
   useEffect(() => {
     // Fetch images based on color and category
     const fetchData = async () => {
@@ -58,29 +70,19 @@ const EditorDesignCarasoul = () => {
         ></Switch>
         <span className="text-black text-sm ml-[-7px]">Back</span>
       </div>
-      <Carousel
-        infiniteLoop={true}
-        showIndicators={false}
-        showStatus={false}
-        thumbWidth={60}
-        className="productCarousel"
-      >
-        {images.map((imageUrl, index) => (
-          <>
-            <img
-              key={index}
-              src={imageUrl}
-              alt={`Product ${index + 1}`}
-              onClick={() => handleImageSelect(imageUrl)}
-            />
-            {/* Pass selectedMainImage to ImageEditor */}
-            <ImageEditor
-              mainImageSrc={imageUrl}
-              overlayImageSrc={overlayImageSrc}
-            />
-          </>
-        ))}
-      </Carousel>
+
+      {images.map((imageUrl, index) => (
+        <div key={index} onClick={() => handleImageClick(imageUrl)}>
+          <Image src={imageUrl} alt="mockup" width={200} height={200}></Image>
+        </div>
+      ))}
+
+      {backImage && (
+        <ImageEditor
+        mainImageSrc={backImage}
+        overlayImageSrc={overlayImageSrc}
+      /> 
+      )}
     </div>
   );
 };
