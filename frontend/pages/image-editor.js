@@ -8,7 +8,7 @@ const ImageEditor = () => {
   const router = useRouter();
   const designImg = router.query.url || "";
   return (
-    <div className="w-full max-w-[1200px] px-5 md:px-3 mx-auto">
+    <div className="w-full max-w-[1300px] px-5 md:px-3 mx-auto">
       <div className="flex  justify-between mx-8 mt-10  mb-5 ">
         <div className="grid grid-row-9 bg-zinc-300 w-[26em] rounded-[30px]">
           <div className="row-span-6 flex justify-center items-center object-contain">

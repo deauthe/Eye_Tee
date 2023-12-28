@@ -10,14 +10,12 @@ const colors = ["red", "blue", "gray", "yellow"];
 
 const ColorSelection = () => {
   const [selectedColors, setSelectedColors] = useState([]);
-  console.log(selectedColors);
   const handleColorChange = (value) => {
-    console.log("this is my value", value);
     const isColorSelected = selectedColors.includes(value);
 
     if (!isColorSelected) {
       setSelectedColors((prevSelectedColors) => prevSelectedColors.push(value));
-    } 
+    }
   };
 
   return (
@@ -88,7 +86,7 @@ const EditorDesignCarasoul = () => {
 
   return (
     <>
-      <div className=" flex gap-4 text-white text-[20px] w-full max-w-[1360px] mx-auto sticky top-[50px]">
+      <div className=" border-2 border-green-500 flex gap-4 text-white text-[20px] w-full max-w-[1360px] mx-auto sticky top-[50px] object-contain  ">
         <div className="absolute right-[80px] top-2 z-40 gap-2 flex mr-4 items-center border-2 border-black p-1 px-2 rounded-full bg-zinc-700">
           <Switch
             checkedChildren="Back"
@@ -97,20 +95,21 @@ const EditorDesignCarasoul = () => {
           />
         </div>
 
-        <div className="flex">
-          <div className="">
-            {backImage && (
-              <ImageEditor
-                mainImageSrc={backImage}
-                overlayImageSrc={overlayImageSrc}
-              />
-            )}
-          </div>
+        <div className=" border-2 border-red-500 h-[500px] object-contain w-full ">
+          {backImage && (
+            <ImageEditor
+              mainImageSrc={backImage}
+              overlayImageSrc={overlayImageSrc}
+            />
+          )}
         </div>
-        <div className="flex flex-col  gap-2 ">
+       
+      </div>
+
+      <div className="flex  h-[80px] overflow-hidden my-3  gap-2 z-2 border-5 border-black ">
           {images.map((imageUrl, index) => (
             <div
-              className="cursor-pointer border-2 border-black rounded-md"
+              className=" flex items-center justify-center w-[80px] cursor-pointer border-2 border-black rounded-md "
               key={index}
               onClick={() => handleImageClick(imageUrl)}
             >
@@ -118,7 +117,6 @@ const EditorDesignCarasoul = () => {
             </div>
           ))}
         </div>
-      </div>
 
       <div>
         <ColorSelection />
