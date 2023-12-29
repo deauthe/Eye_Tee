@@ -3,26 +3,23 @@ import { useRouter } from "next/router";
 import ImageEditor from "@/components/Editor/index2";
 import Image from "next/image";
 import { Switch } from "antd";
+import { toast } from "react-toastify";
 
 const colors = [
-  "bg-[#3498db]", // Dodger Blue
-  "bg-[#2ecc71]", // Emerald Green
-  "bg-[#e74c3c]", // Alizarin Red
-  "bg-[#f39c12]", // Sunflower Yellow
-  "bg-[#9b59b6]"  // Amethyst Purple
+  { name: "red", value: "bg-[#e74c3c]" },
+  { name: "black", value: "bg-[#000000]" },
 ];
 
-
-
-const ColorSelection = () => {
+const ColorSelection = ({ onColorChange }) => {
   const [selectedColors, setSelectedColors] = useState([]);
-  console.log("this is selected color",selectedColors)
-  const handleColorChange = (value) => {
-    console.log("this is value", value);
-    const isColorSelected = selectedColors.includes(value);
 
+  const handleColorChange = (color) => {
+    const isColorSelected = selectedColors.includes(color);
+    console.log("colors", color);
     if (!isColorSelected) {
-      setSelectedColors((prevSelectedColors) => prevSelectedColors.push(value));
+      setSelectedColors((prevSelectedColors) => [...prevSelectedColors, color]);
+      toast.success("Fetching color");
+      onColorChange(color);
     }
   };
 
@@ -30,9 +27,9 @@ const ColorSelection = () => {
     <div className="flex items-center space-x-4">
       {colors.map((color) => (
         <div
-          key={color}
-          className={`w-[5em] h-[2em] cursor-pointer rounded-full ${color}`}
-          onClick={() => handleColorChange(color)}
+          key={color.value}
+          className={`w-[5em] h-[2em] cursor-pointer rounded-full ${color.value}`}
+          onClick={() => handleColorChange(color.name)}
         ></div>
       ))}
     </div>
@@ -54,12 +51,39 @@ const EditorDesignCarasoul = () => {
     setBackImage(img);
   };
 
+  const handleColorChange = async (color) => {
+    console.log("in api", color);
+    try {
+      const category = "shirt"; // Set your category dynamically
+
+      const response = await fetch(
+        `http://localhost:8080/api/product/images?color=${color}&category=${category}`,
+        {
+          headers: {
+            "x-api-key": "token",
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        setImages(data[0].imageUrls);
+        setSelectedMainImage(data[0].imageUrls[0]);
+        setBackImage(data[0].imageUrls[0]);
+      } else {
+        console.error("Failed to fetch images");
+      }
+    } catch (error) {
+      console.error("Error fetching images:", error);
+    }
+  };
+
   useEffect(() => {
     // Fetch images based on color and category
     const fetchData = async () => {
       try {
-        const color = "blue"; // Set your color dynamically
-        const category = "hoodie"; // Set your category dynamically
+        const color = "red"; // Set your color dynamically
+        const category = "shirt"; // Set your category dynamically
 
         const response = await fetch(
           `http://localhost:8080/api/product/images?color=${color}&category=${category}`,
@@ -111,23 +135,22 @@ const EditorDesignCarasoul = () => {
             />
           )}
         </div>
-       
       </div>
 
       <div className="flex  h-[80px] overflow-hidden my-3  gap-2 z-2 border-5 border-black ">
-          {images.map((imageUrl, index) => (
-            <div
-              className=" flex items-center justify-center w-[80px] cursor-pointer border-2 border-black rounded-md "
-              key={index}
-              onClick={() => handleImageClick(imageUrl)}
-            >
-              <Image src={imageUrl} alt="mockup" width={50} height={50}></Image>
-            </div>
-          ))}
-        </div>
+        {images.slice(0, 2).map((imageUrl, index) => (
+          <div
+            className="flex items-center justify-center w-[80px] cursor-pointer border-2 border-black rounded-md"
+            key={index}
+            onClick={() => handleImageClick(imageUrl)}
+          >
+            <Image src={imageUrl} alt="mockup" width={50} height={50} />
+          </div>
+        ))}
+      </div>
 
       <div>
-        <ColorSelection />
+        <ColorSelection onColorChange={handleColorChange} />
       </div>
     </>
   );

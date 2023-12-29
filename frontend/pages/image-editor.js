@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import EditorDesignCarasoul from "@/components/EditorDesignCarasoul.jsx";
@@ -7,6 +7,7 @@ import CategoryCard from "@/components/CategoryCard";
 const ImageEditor = () => {
   const router = useRouter();
   const designImg = router.query.url || "";
+
   return (
     <div className="w-full max-w-[1300px] px-5 md:px-3 mx-auto">
       <div className="flex  justify-between mx-8 mt-10  mb-5 ">
@@ -43,9 +44,12 @@ const ImageEditor = () => {
 
       <div className="mx-8 mb-9">
         <div className="flex gap-4">
-          {[0, 1, 2, 3].map((e, index) => (
-            <div className="flex flex-col justify-center items-center bg-white/95 shadow-sm rounded-[30px] inline-block w-[230px] p-5 bg-red-300 border-3 border-zinc-600">
-              <CategoryCard />
+          {["hoodie", "shirt", "tshirt", "cup"].map((category, index) => (
+            <div
+              key={index}
+              className="flex flex-col justify-center items-center bg-white/95 shadow-sm rounded-[30px] inline-block w-[230px] p-5 bg-red-300 border-3 border-zinc-600"
+            >
+              <CategoryCard category={category} />
             </div>
           ))}
         </div>

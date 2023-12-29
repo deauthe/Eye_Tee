@@ -65,7 +65,7 @@ function ImageEditor({ mainImageSrc, overlayImageSrc }) {
       ctx.save();
       ctx.translate(x + width / 2, y + height / 2);
       ctx.rotate((rotationAngle * Math.PI) / 180);
-      ctx.drawImage(overlayImage, -width / 2, -height / 2, width, height);
+      ctx.drawImage(overlayImage, -width / 3, -height / 3, width, height);
       ctx.restore();
 
       ctx.globalAlpha = 1;
@@ -338,23 +338,18 @@ function ImageEditor({ mainImageSrc, overlayImageSrc }) {
           cursor: isDragging ? "grabbing" : isResizing ? "se-resize" : "grab",
         }}
       />
-     <div className="mt-[-26px] flex gap-2 mx-9 w-full ">
-     <Button
-        
-        onClick={handleSave}
-      >
-        Save Product <br />
-        <FontAwesomeIcon icon={faSave} />
-      </Button>
+      <div className="mt-[-26px] flex gap-2 mx-9 w-full ">
+        <Button onClick={handleSave}>
+          Save Product <br />
+          <FontAwesomeIcon icon={faSave} />
+        </Button>
 
-      <Button
-       
-        onClick={handlePreview}
-      >
-        Preview Product<br />
-        <FontAwesomeIcon icon={faSave} />
-      </Button>
-     </div>
+        <Button onClick={handlePreview}>
+          Preview Product
+          <br />
+          <FontAwesomeIcon icon={faSave} />
+        </Button>
+      </div>
 
       {renderScaleButtons()}
     </div>

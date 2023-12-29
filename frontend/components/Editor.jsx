@@ -143,11 +143,12 @@ const Editor = () => {
       // Check if the response contains designImage[0].url
       if (responseData.designImage && responseData.designImage.length > 0) {
         const imageUrl = responseData.designImage[0].url;
-
+        toast.success("Added Design Successfully")
         // Navigate to the /image-design route
         router.push(`/image-editor?url=${imageUrl}`);
       }
     } catch (err) {
+      toast.error("Error in adding design")
       console.log(err);
     }
   };
