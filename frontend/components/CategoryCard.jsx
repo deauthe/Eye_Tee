@@ -1,16 +1,12 @@
-import Image from "next/image";
 import React from "react";
+import Image from "next/image";
 import { useRouter } from "next/router";
-import hoodieImage from "../public/hoodie_category.png";
-import tshirtImage from "../components/Editor/t_shirt.png";
-import mugImage from "../public/C_mug.png";
-import shirtImage from "../public/C_shirt.png";
 
 const categoryImages = {
-  hoodie: hoodieImage,
-  tshirt: tshirtImage,
-  mug: mugImage,
-  shirt: shirtImage,
+  hoodie: "/hoodie_category.png",
+  tshirt: "/t_shirt.png",
+  cup: "/C_mug.png",
+  shirt: "/C_shirt.png",
   // Add other categories and their images as needed
 };
 

@@ -4,6 +4,7 @@ import Image from "next/image";
 import EditorDesignCarasoul from "@/components/EditorDesignCarasoul.jsx";
 import CustomTextComponent from "@/components/CustomTextComponent";
 import CategoryCard from "@/components/CategoryCard";
+
 const ImageEditor = () => {
   const router = useRouter();
   const designImg = router.query.url || "";
