@@ -10,9 +10,14 @@ import { Button } from "@nextui-org/react";
 // import dynamic from "next/dynamic";
 // const Image = dynamic(() => import("next/image"), { ssr: false });
 
-function ImageEditor({ mainImageSrc, overlayImageSrc }) {
+function ImageEditor({
+  mainImageSrc,
+  overlayImageSrc,
+  imageSize = 1,
+  showBoundingBox = true,
+}) {
   const canvasRef = useRef(null);
-  const [overlayPosition, setOverlayPosition] = useState({ x: 80, y: 50 });
+  const [overlayPosition, setOverlayPosition] = useState({ x: 40, y: 100 });
   const [overlayScale, setOverlayScale] = useState(0.5);
   const [rotationAngle, setRotationAngle] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
@@ -53,11 +58,15 @@ function ImageEditor({ mainImageSrc, overlayImageSrc }) {
       const ctx = canvas.getContext("2d");
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      // Scale the canvas size based on imageSize
+      canvas.width = mainImage.width * imageSize;
+      canvas.height = mainImage.height * imageSize;
+
       ctx.drawImage(mainImage, 0, 0, canvas.width, canvas.height);
 
       const { x, y } = overlayPosition;
-      const width = overlayImage.width * overlayScale;
-      const height = overlayImage.height * overlayScale;
+      const width = overlayImage.width * overlayScale * imageSize;
+      const height = overlayImage.height * overlayScale * imageSize;
 
       ctx.globalCompositeOperation = "source-over";
       ctx.globalAlpha = 0.8;
@@ -65,19 +74,27 @@ function ImageEditor({ mainImageSrc, overlayImageSrc }) {
       ctx.save();
       ctx.translate(x + width / 2, y + height / 2);
       ctx.rotate((rotationAngle * Math.PI) / 180);
-      ctx.drawImage(overlayImage, -width / 3, -height / 3, width, height);
+      ctx.drawImage(overlayImage, -width / 4, -height / 4, width, height);
       ctx.restore();
 
       ctx.globalAlpha = 1;
-
-      ctx.setLineDash([2, 3]);
-      ctx.lineWidth = 2;
-      ctx.strokeStyle = "red";
-      const boundingBoxWidth = overlayImage.width * overlayScale;
-      const boundingBoxHeight = overlayImage.height * overlayScale;
-      ctx.strokeRect(x, y, boundingBoxWidth, boundingBoxHeight);
+      if (showBoundingBox) {
+        ctx.setLineDash([2, 3]);
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = "red";
+        const boundingBoxWidth = overlayImage.width * overlayScale;
+        const boundingBoxHeight = overlayImage.height * overlayScale;
+        ctx.strokeRect(x, y, boundingBoxWidth, boundingBoxHeight);
+      }
     }
-  }, [mainImage, overlayImage, overlayPosition, overlayScale, rotationAngle]);
+  }, [
+    mainImage,
+    overlayImage,
+    overlayPosition,
+    overlayScale,
+    rotationAngle,
+    showBoundingBox,
+  ]);
 
   useEffect(() => {
     console.log("2");
@@ -228,16 +245,21 @@ function ImageEditor({ mainImageSrc, overlayImageSrc }) {
   const handlePreview = () => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
-
+    // Scale the canvas size based on imageSize
+    canvas.width = mainImage.width * imageSize;
+    canvas.height = mainImage.height * imageSize;
     // Clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+    // Scale the canvas size based on imageSize
+    canvas.width = mainImage.width * imageSize;
+    canvas.height = mainImage.height * imageSize;
     // Draw the main image
     ctx.drawImage(mainImage, 0, 0, canvas.width, canvas.height);
 
     const { x, y } = overlayPosition;
-    const width = overlayImage.width * overlayScale;
-    const height = overlayImage.height * overlayScale;
+    const width = overlayImage.width * overlayScale * imageSize;
+    const height = overlayImage.height * overlayScale * imageSize;
     // Reset blending mode and opacity
     ctx.globalCompositeOperation = "source-over";
     ctx.globalAlpha = 0.8;
@@ -245,7 +267,7 @@ function ImageEditor({ mainImageSrc, overlayImageSrc }) {
     ctx.save();
     ctx.translate(x + width / 2, y + height / 2);
     ctx.rotate((rotationAngle * Math.PI) / 180);
-    ctx.drawImage(overlayImage, -width / 2, -height / 2, width, height);
+    ctx.drawImage(overlayImage, -width / 4, -height / 4, width, height);
 
     ctx.restore();
   };
@@ -338,20 +360,23 @@ function ImageEditor({ mainImageSrc, overlayImageSrc }) {
           cursor: isDragging ? "grabbing" : isResizing ? "se-resize" : "grab",
         }}
       />
-      <div className="mt-[-26px] flex gap-2 mx-9 w-full ">
-        <Button onClick={handleSave}>
-          Save Product <br />
-          <FontAwesomeIcon icon={faSave} />
-        </Button>
 
-        <Button onClick={handlePreview}>
-          Preview Product
-          <br />
-          <FontAwesomeIcon icon={faSave} />
-        </Button>
-      </div>
+      {showBoundingBox && (
+        <div className="mt-[-26px] flex gap-2 mx-9 w-full ">
+          <Button onClick={handleSave}>
+            Save Product <br />
+            <FontAwesomeIcon icon={faSave} />
+          </Button>
 
-      {renderScaleButtons()}
+          <Button onClick={handlePreview}>
+            Preview Product
+            <br />
+            <FontAwesomeIcon icon={faSave} />
+          </Button>
+        </div>
+      )}
+
+      {showBoundingBox && renderScaleButtons()}
     </div>
   );
 }

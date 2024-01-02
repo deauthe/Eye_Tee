@@ -185,24 +185,33 @@ const EditorDesignCarasoul = () => {
           /> */}
         </div>
 
-        <div className=" border-2 border-red-500 h-[500px] object-contain w-full  ">
+        <div className=" border-2 border-red-500 h-[600px] object-contain w-full  ">
           {backImage && (
             <ImageEditor
               mainImageSrc={backImage}
               overlayImageSrc={overlayImageSrc}
+              showBoundingBox={true}
+              imageSize={1}
             />
           )}
         </div>
       </div>
 
-      <div className="flex  h-[80px] overflow-hidden my-3  gap-2 z-2 border-5 border-black ">
+      <div className="flex  h-[100px] overflow-hidden my-3  gap-2 z-2 border-5 border-black ">
         {images.slice(0, 2).map((imageUrl, index) => (
           <div
-            className="flex items-center justify-center w-[80px] cursor-pointer border-2 border-black rounded-md"
+            className="flex items-center justify-center w-[80px]  cursor-pointer border-2 border-black rounded-md"
             key={index}
             onClick={() => handleImageClick(imageUrl)}
           >
-            <Image src={imageUrl} alt="mockup" width={50} height={50} />
+            {/* <Image src={imageUrl} alt="mockup" width={50} height={50} /> */}
+
+            <ImageEditor
+              mainImageSrc={imageUrl}
+              overlayImageSrc={overlayImageSrc}
+              showBoundingBox={false}
+              imageSize={0.2}
+            />
           </div>
         ))}
       </div>
