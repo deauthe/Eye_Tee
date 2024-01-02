@@ -15,6 +15,7 @@ function ImageEditor({
   overlayImageSrc,
   imageSize = 1,
   showBoundingBox = true,
+  onCapturePropsChange,
 }) {
   const canvasRef = useRef(null);
   const [overlayPosition, setOverlayPosition] = useState({ x: 4, y: 0 });
@@ -157,6 +158,13 @@ function ImageEditor({
 
       setDragStart({ x: e.clientX, y: e.clientY });
       drawImages();
+
+      // Notify the parent component about the changes
+      onCapturePropsChange({
+        overlayPosition,
+        overlayScale,
+        rotationAngle,
+      });
     } else if (isResizing) {
       const dx = e.clientX - resizeStart.x;
       const dy = e.clientY - resizeStart.y;
@@ -171,6 +179,13 @@ function ImageEditor({
 
       setResizeStart({ x: e.clientX, y: e.clientY });
       drawImages();
+
+      // Notify the parent component about the changes
+      onCapturePropsChange({
+        overlayPosition,
+        overlayScale,
+        rotationAngle,
+      });
     }
   };
 
@@ -188,6 +203,13 @@ function ImageEditor({
 
       setOverlayScale(newScale);
       drawImages();
+
+      // Notify the parent component about the changes
+      onCapturePropsChange({
+        overlayPosition,
+        overlayScale,
+        rotationAngle,
+      });
     }
   };
 
@@ -195,12 +217,26 @@ function ImageEditor({
     // Rotate the overlay image left (counter-clockwise)
     setRotationAngle(rotationAngle - 90);
     drawImages();
+
+    // Notify the parent component about the changes
+    onCapturePropsChange({
+      overlayPosition,
+      overlayScale,
+      rotationAngle,
+    });
   };
 
   const handleRotateRight = () => {
     // Rotate the overlay image right (clockwise)
     setRotationAngle(rotationAngle + 90);
     drawImages();
+
+    // Notify the parent component about the changes
+    onCapturePropsChange({
+      overlayPosition,
+      overlayScale,
+      rotationAngle,
+    });
   };
 
   const handleSave = () => {
@@ -297,7 +333,7 @@ function ImageEditor({
       return buttons
         .map((button, index) => (
           <button
-            key={index}
+            key={`scaleButton-${index}`}
             onClick={() => handleScale(0.1 * (index < 2 ? 1 : -1), index < 2)}
             style={{
               position: "absolute",
@@ -321,7 +357,7 @@ function ImageEditor({
         .concat(
           rotationButtons.map((button, index) => (
             <button
-              key={index}
+              key={`rotationButton-${index}`}
               onClick={index === 0 ? handleRotateLeft : handleRotateRight}
               style={{
                 position: "absolute",

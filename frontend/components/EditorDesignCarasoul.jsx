@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import ImageEditor from "@/components/Editor/index2";
+import CanvasCapture from "@/components/CanvasCapture";
 import Image from "next/image";
 // import { Switch } from "antd";
 import { toast } from "react-toastify";
@@ -82,6 +83,11 @@ const EditorDesignCarasoul = () => {
   const [selectedMainImage, setSelectedMainImage] = useState("");
   const [images, setImages] = useState([]);
   const [backImage, setBackImage] = useState("");
+  const [canvasCaptureProps, setCanvasCaptureProps] = useState({
+    overlayScale: 1,
+    overlayPosition: { x: 0, y: 0 },
+    rotationAngle: 0,
+  });
   // console.log("this is ", backImage);
   // console.log(typeof images[0]);
   const router = useRouter();
@@ -93,6 +99,13 @@ const EditorDesignCarasoul = () => {
   // handle funcitons
   const handleImageClick = (img) => {
     setBackImage(img);
+    const canvasCaptureProps = {
+      overlayPosition: { x: 4, y: 0 },
+      overlayScale: 0.5,
+      rotationAngle: 0,
+      // Customize these values based on your requirements
+    };
+    setCanvasCaptureProps(canvasCaptureProps);
   };
 
   const handleColorChange = async (color) => {
@@ -148,6 +161,7 @@ const EditorDesignCarasoul = () => {
             const newImages = data[0].imageUrls;
             setSelectedMainImage(newImages[0]);
             setBackImage(newImages[0]);
+
             return newImages;
           });
         } else {
@@ -174,6 +188,16 @@ const EditorDesignCarasoul = () => {
     setSelectedMainImage(imageSrc);
   };
 
+  const handleCanvasCapturePropsChange = (newProps) => {
+    // Update the canvasCaptureProps state
+    setCanvasCaptureProps((prevProps) => ({
+      ...prevProps,
+      ...newProps,
+    }));
+
+    console.log("editor state", newProps);
+  };
+
   return (
     <>
       <div className="  border-2 border-green-500 flex gap-4 text-white text-[20px] w-full max-w-[1360px] mx-auto top-[50px] object-contain  ">
@@ -192,6 +216,7 @@ const EditorDesignCarasoul = () => {
               overlayImageSrc={overlayImageSrc}
               showBoundingBox={true}
               imageSize={1}
+              onCapturePropsChange={handleCanvasCapturePropsChange}
             />
           )}
         </div>
@@ -204,14 +229,18 @@ const EditorDesignCarasoul = () => {
             key={index}
             onClick={() => handleImageClick(imageUrl)}
           >
-            {/* <Image src={imageUrl} alt="mockup" width={50} height={50} /> */}
-
-            <ImageEditor
+            {/* Render the image using CanvasCapture */}
+            <CanvasCapture
+              mainImageSrc={imageUrl}
+              overlayImageSrc={overlayImageSrc}
+              canvasCaptureProps={canvasCaptureProps}
+            />
+            {/* <ImageEditor
               mainImageSrc={imageUrl}
               overlayImageSrc={overlayImageSrc}
               showBoundingBox={false}
               imageSize={0.2}
-            />
+            /> */}
           </div>
         ))}
       </div>

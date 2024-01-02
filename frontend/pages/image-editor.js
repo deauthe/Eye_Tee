@@ -4,10 +4,18 @@ import Image from "next/image";
 import EditorDesignCarasoul from "@/components/EditorDesignCarasoul.jsx";
 import CustomTextComponent from "@/components/CustomTextComponent";
 import CategoryCard from "@/components/CategoryCard";
+import CanvasCapture from "@/components/CanvasCapture";
 
 const ImageEditor = () => {
   const router = useRouter();
   const designImg = router.query.url || "";
+  const [canvasCaptureProps, setCanvasCaptureProps] = useState({
+    mainImage: null,
+    overlayImage: null,
+    overlayScale: 1,
+    overlayPosition: { x: 0, y: 0 },
+    rotationAngle: 0,
+  });
 
   return (
     <div className="w-full max-w-[1300px] px-5 md:px-3 mx-auto">
@@ -31,6 +39,7 @@ const ImageEditor = () => {
           <div className="row-span-2 mx-4">
             <p>Description</p>
           </div>
+          <CanvasCapture {...canvasCaptureProps} />
         </div>
 
         <div className="editor w-[25em]  mr-[5em]">
