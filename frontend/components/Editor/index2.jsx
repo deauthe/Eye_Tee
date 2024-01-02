@@ -28,6 +28,7 @@ function ImageEditor({
   const [resizeStart, setResizeStart] = useState({ x: 0, y: 0 });
   const [mainImage, setMainImage] = useState(null);
   const [overlayImage, setOverlayImage] = useState(null);
+  const [scaleButtonsVisible, setScaleButtonsVisible] = useState(true);
 
   // useEffect(() => {
   //   console.log("1");
@@ -310,8 +311,12 @@ function ImageEditor({
 
   const scaleButtonSize = 30; // Set the size of scale buttons
 
+  const hideButtons = () => {
+    setScaleButtonsVisible(!scaleButtonsVisible);
+  };
+
   const renderScaleButtons = () => {
-    if (mainImage && overlayImage) {
+    if (mainImage && overlayImage && scaleButtonsVisible) {
       const { x, y } = overlayPosition;
       const width = overlayImage.width * overlayScale;
       const height = overlayImage.height * overlayScale;
@@ -399,13 +404,14 @@ function ImageEditor({
 
       {showBoundingBox && (
         <div className="mt-[-26px] flex gap-2 mx-9 w-full ">
-          <Button onClick={handleSave}>
-            Save Product <br />
+          <Button onClick={hideButtons}>
+            {scaleButtonsVisible ? <b>Hide Buttons</b> : <b>Show Buttons</b>}
+            <br />
             <FontAwesomeIcon icon={faSave} />
           </Button>
 
           <Button onClick={handlePreview}>
-            Preview Product
+            <b>Preview Product</b>
             <br />
             <FontAwesomeIcon icon={faSave} />
           </Button>

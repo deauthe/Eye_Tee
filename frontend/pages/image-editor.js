@@ -9,6 +9,7 @@ import CanvasCapture from "@/components/CanvasCapture";
 const ImageEditor = () => {
   const router = useRouter();
   const designImg = router.query.url || "";
+  const category = router.query.category || "";
   const [canvasCaptureProps, setCanvasCaptureProps] = useState({
     mainImage: null,
     overlayImage: null,
@@ -33,13 +34,10 @@ const ImageEditor = () => {
           </div>
           <div className="border-b border-zinc-400 w-full my-1"></div>
           <div className="row-span-1 mx-4 ">
-            <p>Name</p>
+            <p>Current Category</p>
+            <b>{category}</b>
           </div>
           <div className="border-b border-zinc-400 w-full"></div>
-          <div className="row-span-2 mx-4">
-            <p>Description</p>
-          </div>
-          <CanvasCapture {...canvasCaptureProps} />
         </div>
 
         <div className="editor w-[25em]  mr-[5em]">

@@ -1,6 +1,11 @@
 import React, { useRef, useEffect } from "react";
 
-function CanvasCapture({ mainImageSrc, overlayImageSrc, canvasCaptureProps }) {
+function CanvasCapture({
+  mainImageSrc,
+  overlayImageSrc,
+  canvasCaptureProps,
+  scale,
+}) {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -15,6 +20,9 @@ function CanvasCapture({ mainImageSrc, overlayImageSrc, canvasCaptureProps }) {
       overlayImage.onload = () => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+        canvas.width = mainImage.width * scale;
+        canvas.height = mainImage.height * scale;
+
         // Draw the main image
         ctx.drawImage(mainImage, 0, 0, canvas.width, canvas.height);
         console.log(
@@ -27,8 +35,10 @@ function CanvasCapture({ mainImageSrc, overlayImageSrc, canvasCaptureProps }) {
         );
         // Apply transformations and draw the overlay image
         const { x, y } = canvasCaptureProps.overlayPosition;
-        const width = overlayImage.width * canvasCaptureProps.overlayScale;
-        const height = overlayImage.height * canvasCaptureProps.overlayScale;
+        const width =
+          overlayImage.width * canvasCaptureProps.overlayScale * scale;
+        const height =
+          overlayImage.height * canvasCaptureProps.overlayScale * scale;
 
         ctx.globalCompositeOperation = "source-over";
         ctx.globalAlpha = 0.8;

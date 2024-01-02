@@ -4,6 +4,7 @@ import ImageEditor from "@/components/Editor/index2";
 import CanvasCapture from "@/components/CanvasCapture";
 import Image from "next/image";
 // import { Switch } from "antd";
+import EditorModal from "./editorModal";
 import { toast } from "react-toastify";
 
 const ColorSelection = ({ onColorChange }) => {
@@ -234,6 +235,7 @@ const EditorDesignCarasoul = () => {
               mainImageSrc={imageUrl}
               overlayImageSrc={overlayImageSrc}
               canvasCaptureProps={canvasCaptureProps}
+              scale={0.2}
             />
             {/* <ImageEditor
               mainImageSrc={imageUrl}
@@ -248,6 +250,8 @@ const EditorDesignCarasoul = () => {
       <div>
         <ColorSelection onColorChange={handleColorChange} />
       </div>
+      <br />
+      <EditorModal />
     </>
   );
 };
