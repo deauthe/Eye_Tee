@@ -253,7 +253,14 @@ const EditorDesignCarasoul = () => {
         <ColorSelection onColorChange={handleColorChange} />
       </div>
       <br />
-      <EditorModal category={category} selectedColor={selectedColor} />
+      {overlayImageSrc && (
+        <EditorModal
+          category={category}
+          selectedColor={selectedColor}
+          overlayImg={overlayImageSrc}
+          canvasCaptureProps={canvasCaptureProps}
+        />
+      )}
     </>
   );
 };

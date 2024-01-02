@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Modal,
   ModalContent,
@@ -14,14 +14,56 @@ import { AiFillInstagram } from "react-icons/ai";
 import { RiTwitterXFill } from "react-icons/ri";
 import CanvasCapture from "@/components/CanvasCapture";
 
-export default function EditorModal({ selectedColor, category }) {
+export default function EditorModal({
+  selectedColor,
+  category,
+  overlayImg,
+  canvasCaptureProps,
+}) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [backdrop, setBackdrop] = React.useState("opaque");
+  const [backdrop, setBackdrop] = useState("opaque");
+  const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const handleOpen = () => {
     setBackdrop("opaque");
     onOpen();
   };
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:8080/api/product/images?category=${category}`,
+          {
+            headers: {
+              "x-api-key": "token",
+            },
+          }
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          setImages(data[0].imageUrls);
+          console.log(
+            "modalImg",
+            category,
+            overlayImg,
+            images,
+            canvasCaptureProps
+          );
+        } else {
+          console.error("Failed to fetch images");
+        }
+      } catch (error) {
+        console.error("Error fetching images:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchImages();
+  }, [category]);
 
   return (
     <>
@@ -41,22 +83,32 @@ export default function EditorModal({ selectedColor, category }) {
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                {selectedColor} {category}
+                {category}
               </ModalHeader>
               <ModalBody>
-                <div className="flex  text-5xl gap-5 justify-center items-center">
-                  <RiTwitterXFill />
-                  <AiFillInstagram />
-                  <BsFacebook />
+                <div className="flex mt-5">
+                  {loading ? (
+                    <div>Loading images...</div>
+                  ) : (
+                    images.map((imageUrl, index) => (
+                      <div
+                        className="flex items-center justify-center w-[80px]  cursor-pointer border-2 border-black rounded-md"
+                        key={index}
+                      >
+                        <CanvasCapture
+                          mainImageSrc={imageUrl}
+                          overlayImageSrc={overlayImg}
+                          canvasCaptureProps={canvasCaptureProps}
+                        />
+                      </div>
+                    ))
+                  )}
                 </div>
               </ModalBody>
               <ModalFooter>
                 <Button color="primary" variant="light" onPress={onClose}>
                   Close
                 </Button>
-                {/* <Button color="primary" onPress={onClose}>
-                  Action
-                </Button> */}
               </ModalFooter>
             </>
           )}
