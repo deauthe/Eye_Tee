@@ -17,7 +17,7 @@ function ImageEditor({
   showBoundingBox = true,
 }) {
   const canvasRef = useRef(null);
-  const [overlayPosition, setOverlayPosition] = useState({ x: 40, y: 100 });
+  const [overlayPosition, setOverlayPosition] = useState({ x: 4, y: 0 });
   const [overlayScale, setOverlayScale] = useState(0.5);
   const [rotationAngle, setRotationAngle] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
