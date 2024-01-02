@@ -9,7 +9,8 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import { MdSave } from "react-icons/md";
-import CanvasCapture from "@/components/CanvasCapture";
+import FinalImage from "@/components/finalImage";
+import CanvasCapture from "./CanvasCapture";
 
 export default function EditorModal({
   selectedColor,
@@ -115,7 +116,7 @@ export default function EditorModal({
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                {category}
+                Create your products for <b>{category}</b> category
               </ModalHeader>
               <ModalBody>
                 <div className="flex overflow-x-auto gap-3">
@@ -134,6 +135,12 @@ export default function EditorModal({
                             key={index}
                             onClick={() => handleImageSelect(imageUrl)}
                           >
+                            {/* <FinalImage
+                              mainImageSrc={imageUrl}
+                              overlayImageSrc={overlayImg}
+                              canvasCaptureProps={canvasCaptureProps}
+                              scale={1}
+                            /> */}
                             <CanvasCapture
                               mainImageSrc={imageUrl}
                               overlayImageSrc={overlayImg}
@@ -141,8 +148,7 @@ export default function EditorModal({
                               scale={1}
                             />
                             {selectedImages.includes(imageUrl) && (
-                              <div className="absolute top-2 right-2 text-green-500">
-                                {/* You can replace this with your tick mark icon */}
+                              <div className="absolute top-2 right-2 text-green-500 w-[30px] h-[30px]">
                                 ✓
                               </div>
                             )}
@@ -161,7 +167,7 @@ export default function EditorModal({
                   onPress={handleSaveImages}
                   disabled={selectedImages.length === 0}
                 >
-                  Save Selected
+                  Save Product
                 </Button>
               </ModalFooter>
             </>
