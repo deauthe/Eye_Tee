@@ -135,18 +135,18 @@ export default function EditorModal({
                             key={index}
                             onClick={() => handleImageSelect(imageUrl)}
                           >
-                            {/* <FinalImage
-                              mainImageSrc={imageUrl}
-                              overlayImageSrc={overlayImg}
-                              canvasCaptureProps={canvasCaptureProps}
-                              scale={1}
-                            /> */}
-                            <CanvasCapture
+                            <FinalImage
                               mainImageSrc={imageUrl}
                               overlayImageSrc={overlayImg}
                               canvasCaptureProps={canvasCaptureProps}
                               scale={1}
                             />
+                            {/* <CanvasCapture
+                              mainImageSrc={imageUrl}
+                              overlayImageSrc={overlayImg}
+                              canvasCaptureProps={canvasCaptureProps}
+                              scale={1}
+                            /> */}
                             {selectedImages.includes(imageUrl) && (
                               <div className="absolute top-2 right-2 text-green-500 w-[30px] h-[30px]">
                                 ✓

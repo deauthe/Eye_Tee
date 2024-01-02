@@ -14,9 +14,11 @@ function FinalImage({
     const ctx = canvas.getContext("2d");
 
     const mainImage = new Image();
+    mainImage.setAttribute("crossOrigin", "anonymous");
     mainImage.src = mainImageSrc;
     mainImage.onload = () => {
       const overlayImage = new Image();
+      overlayImage.setAttribute("crossOrigin", "anonymous");
       overlayImage.src = overlayImageSrc;
       overlayImage.onload = () => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
