@@ -80,6 +80,7 @@ const ColorSelection = ({ onColorChange }) => {
 };
 
 const EditorDesignCarasoul = () => {
+  const [selectedColor, setSelectedColor] = useState("");
   const [isSelected, setIsSelected] = useState(true);
   const [selectedMainImage, setSelectedMainImage] = useState("");
   const [images, setImages] = useState([]);
@@ -111,6 +112,7 @@ const EditorDesignCarasoul = () => {
 
   const handleColorChange = async (color) => {
     console.log("in api handlecolor", color);
+    setSelectedColor(color); // Update the selected color state
     try {
       console.log(
         "getting new color",
@@ -251,7 +253,7 @@ const EditorDesignCarasoul = () => {
         <ColorSelection onColorChange={handleColorChange} />
       </div>
       <br />
-      <EditorModal />
+      <EditorModal category={category} selectedColor={selectedColor} />
     </>
   );
 };

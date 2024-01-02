@@ -12,8 +12,9 @@ import { MdSave } from "react-icons/md";
 import { BsFacebook } from "react-icons/bs";
 import { AiFillInstagram } from "react-icons/ai";
 import { RiTwitterXFill } from "react-icons/ri";
+import CanvasCapture from "@/components/CanvasCapture";
 
-export default function EditorModal() {
+export default function EditorModal({ selectedColor, category }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [backdrop, setBackdrop] = React.useState("opaque");
 
@@ -40,7 +41,7 @@ export default function EditorModal() {
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                Connect Through
+                {selectedColor} {category}
               </ModalHeader>
               <ModalBody>
                 <div className="flex  text-5xl gap-5 justify-center items-center">
