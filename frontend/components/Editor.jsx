@@ -20,6 +20,7 @@ const Editor = () => {
   const [nameError, setNameError] = useState("");
   const [descriptionError, setDescriptionError] = useState("");
 
+
   const handleUploadDesign = (e) => {
     const file = e.target.files[0];
     if (file) {

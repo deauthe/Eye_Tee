@@ -48,7 +48,7 @@ function FinalImage({
         // Capture the canvas content as an image
         const capturedImageData = canvas.toDataURL("image/png");
         setCapturedImage(capturedImageData);
-        console.log("finalImage", capturedImageData);
+        // console.log("finalImage", capturedImageData);
       };
     };
   }, [mainImageSrc, overlayImageSrc, canvasCaptureProps, scale]);

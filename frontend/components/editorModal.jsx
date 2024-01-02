@@ -22,6 +22,7 @@ export default function EditorModal({
   const [backdrop, setBackdrop] = useState("opaque");
   const [images, setImages] = useState([]);
   const [selectedImages, setSelectedImages] = useState([]);
+  const [selectedIds, setSelectedIds] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const handleOpen = () => {
@@ -29,46 +30,72 @@ export default function EditorModal({
     onOpen();
   };
 
-  const handleImageSelect = (imageUrl) => {
+  const handleImageSelect = (imageUrl, productId) => {
+    const selectedImage = { imageUrl, productId };
+    console.log(selectedImages);
     setSelectedImages((prevSelected) =>
-      prevSelected.includes(imageUrl)
-        ? prevSelected.filter((img) => img !== imageUrl)
-        : [...prevSelected, imageUrl]
+      prevSelected.some((img) => img.imageUrl === imageUrl)
+        ? prevSelected.filter((img) => img.imageUrl !== imageUrl)
+        : [...prevSelected, selectedImage]
     );
   };
 
+  // function dataURLtoBlob(dataurl) {
+  //   var arr = dataurl.split(","),
+  //     mime = arr[0].match(/:(.*?);/)[1],
+  //     bstr = atob(arr[1]),
+  //     n = bstr.length,
+  //     u8arr = new Uint8Array(n);
+  //   while (n--) {
+  //     u8arr[n] = bstr.charCodeAt(n);
+  //   }
+  //   return new Blob([u8arr], { type: mime });
+  // }
   const handleSaveImages = async () => {
-    // You can now use selectedImages to send the chosen images to your API using FormData
-    console.log(selectedImages);
-    const formData = new FormData();
-    selectedImages.forEach((imageUrl) => {
-      // Append each image URL to FormData
-      formData.append("selectedImages[]", imageUrl);
+    // Convert each data URL to a Blob and create a File
+    const files = selectedImages.map(async (dataUrl, index) => {
+      const res = await fetch(dataUrl);
+      const blob = await res.blob();
+
+      const file = new File([blob], "image_${index + 1}.png", {
+        type: "image/jpeg",
+        lastModified: new Date(),
+      });
+      return file;
     });
 
-    // Now, you can perform a POST request to your API with the formData
+    // Create FormData and append files
+    const formData = new FormData();
+    files.forEach((file, index) => {
+      formData.append("image", file);
+    });
+
+    console.log("SAVED IMAGES", files, selectedImages);
+
+    const apiUrl = "http://localhost:8080/api/designer/createDesign";
+    const apiKey = "token";
+
     try {
-      const response = await fetch("YOUR_API_ENDPOINT", {
+      const response = await fetch(apiUrl, {
         method: "POST",
         headers: {
-          // Add any headers needed, e.g., authorization
-          "Content-Type": "multipart/form-data",
+          "x-api-key": apiKey,
         },
         body: formData,
       });
 
+      const responseData = await response.json();
+      console.log(responseData);
+
       if (response.ok) {
-        // Handle success, maybe show a success message
-        console.log("Images uploaded successfully");
-      } else {
-        // Handle error, maybe show an error message
-        console.error("Failed to upload images");
+        toast.success("Added Product Successfully");
       }
-    } catch (error) {
-      // Handle network error
-      console.error("Error uploading images:", error);
+    } catch (err) {
+      toast.error("Error in adding Product");
+      console.log(err);
     }
   };
+
   useEffect(() => {
     const fetchImages = async () => {
       try {
@@ -84,7 +111,9 @@ export default function EditorModal({
         if (response.ok) {
           const data = await response.json();
           const mergedImages = data.flatMap((item) => item.imageUrls);
+          const mergedIds = data.flatMap((item) => item.productId);
           setImages(mergedImages);
+          setSelectedIds(mergedIds);
         } else {
           console.error("Failed to fetch images");
         }
@@ -128,12 +157,19 @@ export default function EditorModal({
                         (index + 1) % 3 !== 0 && (
                           <div
                             className={`relative flex-shrink-0 w-[390px] h-[550px] cursor-pointer border-2 border-black rounded-md ${
-                              selectedImages.includes(imageUrl)
+                              selectedImages.some(
+                                (img) => img.imageUrl === imageUrl
+                              )
                                 ? "selected"
                                 : ""
                             }`}
                             key={index}
-                            onClick={() => handleImageSelect(imageUrl)}
+                            onClick={() =>
+                              handleImageSelect(
+                                imageUrl,
+                                selectedIds[Math.floor(index / 3)]
+                              )
+                            }
                           >
                             <FinalImage
                               mainImageSrc={imageUrl}
@@ -141,13 +177,9 @@ export default function EditorModal({
                               canvasCaptureProps={canvasCaptureProps}
                               scale={1}
                             />
-                            {/* <CanvasCapture
-                              mainImageSrc={imageUrl}
-                              overlayImageSrc={overlayImg}
-                              canvasCaptureProps={canvasCaptureProps}
-                              scale={1}
-                            /> */}
-                            {selectedImages.includes(imageUrl) && (
+                            {selectedImages.some(
+                              (img) => img.imageUrl === imageUrl
+                            ) && (
                               <div className="absolute top-2 right-2 text-green-500 w-[30px] h-[30px]">
                                 ✓
                               </div>
