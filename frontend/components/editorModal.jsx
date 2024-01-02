@@ -20,6 +20,7 @@ export default function EditorModal({
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [backdrop, setBackdrop] = useState("opaque");
   const [images, setImages] = useState([]);
+  const [selectedImages, setSelectedImages] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const handleOpen = () => {
@@ -27,6 +28,46 @@ export default function EditorModal({
     onOpen();
   };
 
+  const handleImageSelect = (imageUrl) => {
+    setSelectedImages((prevSelected) =>
+      prevSelected.includes(imageUrl)
+        ? prevSelected.filter((img) => img !== imageUrl)
+        : [...prevSelected, imageUrl]
+    );
+  };
+
+  const handleSaveImages = async () => {
+    // You can now use selectedImages to send the chosen images to your API using FormData
+    console.log(selectedImages);
+    const formData = new FormData();
+    selectedImages.forEach((imageUrl) => {
+      // Append each image URL to FormData
+      formData.append("selectedImages[]", imageUrl);
+    });
+
+    // Now, you can perform a POST request to your API with the formData
+    try {
+      const response = await fetch("YOUR_API_ENDPOINT", {
+        method: "POST",
+        headers: {
+          // Add any headers needed, e.g., authorization
+          "Content-Type": "multipart/form-data",
+        },
+        body: formData,
+      });
+
+      if (response.ok) {
+        // Handle success, maybe show a success message
+        console.log("Images uploaded successfully");
+      } else {
+        // Handle error, maybe show an error message
+        console.error("Failed to upload images");
+      }
+    } catch (error) {
+      // Handle network error
+      console.error("Error uploading images:", error);
+    }
+  };
   useEffect(() => {
     const fetchImages = async () => {
       try {
@@ -85,8 +126,13 @@ export default function EditorModal({
                       (imageUrl, index) =>
                         (index + 1) % 3 !== 0 && (
                           <div
-                            className="flex-shrink-0 w-[390px] h-[550px] cursor-pointer border-2 border-black rounded-md"
+                            className={`relative flex-shrink-0 w-[390px] h-[550px] cursor-pointer border-2 border-black rounded-md ${
+                              selectedImages.includes(imageUrl)
+                                ? "selected"
+                                : ""
+                            }`}
                             key={index}
+                            onClick={() => handleImageSelect(imageUrl)}
                           >
                             <CanvasCapture
                               mainImageSrc={imageUrl}
@@ -94,6 +140,12 @@ export default function EditorModal({
                               canvasCaptureProps={canvasCaptureProps}
                               scale={1}
                             />
+                            {selectedImages.includes(imageUrl) && (
+                              <div className="absolute top-2 right-2 text-green-500">
+                                {/* You can replace this with your tick mark icon */}
+                                ✓
+                              </div>
+                            )}
                           </div>
                         )
                     )
@@ -103,6 +155,13 @@ export default function EditorModal({
               <ModalFooter>
                 <Button color="primary" variant="light" onPress={onClose}>
                   Close
+                </Button>
+                <Button
+                  color="success"
+                  onPress={handleSaveImages}
+                  disabled={selectedImages.length === 0}
+                >
+                  Save Selected
                 </Button>
               </ModalFooter>
             </>
