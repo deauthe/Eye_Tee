@@ -5,8 +5,17 @@ import EditorDesignCarasoul from "@/components/EditorDesignCarasoul.jsx";
 import CustomTextComponent from "@/components/CustomTextComponent";
 import CategoryCard from "@/components/CategoryCard";
 
+const DesignInfo = [
+  {
+    designName: "Abstract Waves",
+    description:
+      "A mesmerizing design inspired by ocean waves and abstract patterns.",
+    designerName: "John Doe",
+    tags: ["abstract", "waves", "ocean", "art"],
+  },
+];
 
-const ImageEditor = () => {
+function ImageEditor() {
   const router = useRouter();
   const designImg = router.query.url || "";
   const category = router.query.category || "";
@@ -19,11 +28,11 @@ const ImageEditor = () => {
   });
 
   return (
-    <div className="w-full max-w-[1300px] px-5 md:px-3 mx-auto">
+    <div className="w-full max-w-[1100px] px-5 md:px-3 mx-auto">
       <div className="flex  justify-between mx-8 mt-10  mb-5 ">
-        <div className="grid grid-row-9 bg-zinc-300 w-[26em] rounded-[30px]">
-          <div className="row-span-6 flex justify-center items-center object-contain">
-            <div>
+        <div className="grid grid-row-7 bg-zinc-300 w-[26em] rounded-[30px]">
+          <div className="row-span-4 flex justify-center items-center object-contain">
+            <div className=" bg-gray-200 w-[90%] flex items-center justify-center h-[90%] rounded-lg shadow-none">
               <Image
                 src={designImg}
                 width={200}
@@ -32,15 +41,29 @@ const ImageEditor = () => {
               />
             </div>
           </div>
-          <div className="border-b border-zinc-400 w-full my-1"></div>
-          <div className="row-span-1 mx-4 ">
-            <p>Current Category</p>
-            <b>{category}</b>
+        
+          <div className="row-span-3">
+            {DesignInfo.map((e) => (
+              <div className="mx-7 flex flex-col gap-3">
+                <p className="text-2xl font-bold text-slate-700" >{e.designName}</p>
+                <p className="text-slate-600">{e.description}</p>
+                <p className=" text-slate-600 font-bold">Created By {e.designerName}</p>
+                <div className=" text-sm flex gap-3 flex-wrap font-bold">
+                  {
+                    e.tags.map((c)=>(
+                      <p>#{c}</p>
+                    ))
+                  }
+                </div>
+              </div>
+            ))}
+            {/* <div className="flex items-center justify-center text-4xl">
+              <p>Eye Eye Tee</p>
+            </div> */}
           </div>
-          <div className="border-b border-zinc-400 w-full"></div>
         </div>
 
-        <div className="editor w-[25em]  mr-[5em]">
+        <div className="editor  flex flex-col  mr-[5em]">
           <EditorDesignCarasoul />
         </div>
       </div>
@@ -64,6 +87,6 @@ const ImageEditor = () => {
       </div>
     </div>
   );
-};
+}
 
 export default ImageEditor;

@@ -6,6 +6,16 @@ import Image from "next/image";
 // import { Switch } from "antd";
 import EditorModal from "./editorModal";
 import { toast } from "react-toastify";
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  useDisclosure,
+} from "@nextui-org/react";
+import { HashLoader } from "react-spinners";
 
 const ColorSelection = ({ onColorChange }) => {
   const [colors, setColors] = useState([]);
@@ -54,16 +64,21 @@ const ColorSelection = ({ onColorChange }) => {
 
   const handleColorChange = (color) => {
     const isColorSelected = selectedColors.includes(color);
-
     setSelectedColors((prevSelectedColors) => [...prevSelectedColors, color]);
     toast.success("Fetching color");
     onColorChange(color);
   };
 
   // Add a loading state check
-  if (loading) {
-    return <div>Loading colors...</div>;
-  }
+
+    if (loading) {
+      return (
+        <div className="flex items-center justify-center">
+          <HashLoader color="#36d7b7" />
+        </div>
+      );
+    }
+  
 
   return (
     <div className="flex items-center space-x-4">
@@ -85,6 +100,8 @@ const EditorDesignCarasoul = () => {
   const [selectedMainImage, setSelectedMainImage] = useState("");
   const [images, setImages] = useState([]);
   const [backImage, setBackImage] = useState("");
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
   const [canvasCaptureProps, setCanvasCaptureProps] = useState({
     overlayScale: 1,
     overlayPosition: { x: 0, y: 0 },
@@ -125,7 +142,9 @@ const EditorDesignCarasoul = () => {
             "x-api-key": "token",
           },
         }
+        
       );
+      console.log( "this is color response",response)
 
       if (response.ok) {
         const data = await response.json();
@@ -202,17 +221,9 @@ const EditorDesignCarasoul = () => {
   };
 
   return (
-    <>
-      <div className="  border-2 border-green-500 flex gap-4 text-white text-[20px] w-full max-w-[1360px] mx-auto top-[50px] object-contain  ">
-        <div className="absolute right-[80px] top-2 z-40 gap-2 flex mr-4 items-center border-2 border-black p-1 px-2 rounded-full bg-zinc-700">
-          {/* <Switch
-            checkedChildren="Back"
-            unCheckedChildren="Front"
-            defaultChecked
-          /> */}
-        </div>
-
-        <div className=" border-2 border-red-500 h-[600px] object-contain w-full  ">
+    <div className="relative">
+      <div className="  flex gap-4 text-white text-[20px] w-full max-w-[1360px] mx-auto top-[50px] object-contain  ">
+        <div className=" h-[550px] object-contain w-full bg-[#f5f5f5] rounded-[30px]  ">
           {backImage && (
             <ImageEditor
               mainImageSrc={backImage}
@@ -222,46 +233,40 @@ const EditorDesignCarasoul = () => {
               onCapturePropsChange={handleCanvasCapturePropsChange}
             />
           )}
+          <div className="absolute top-2 right-2 ">
+            {overlayImageSrc && (
+              <EditorModal
+                category={category}
+                selectedColor={selectedColor}
+                overlayImg={overlayImageSrc}
+                canvasCaptureProps={canvasCaptureProps}
+              />
+            )}
+          </div>
         </div>
       </div>
 
-      <div className="flex  h-[100px] overflow-hidden my-3  gap-2 z-2 border-5 border-black ">
+      <div className=" absolute top-[-2em] right-[-6.5em] flex flex-col items-center justify-center  h-[300px] overflow-hidden    z-2  ">
         {images.slice(0, 2).map((imageUrl, index) => (
           <div
-            className="flex items-center justify-center w-[80px]  cursor-pointer border-2 border-black rounded-md"
+            className="flex items-center justify-center border bg-[#f5f5f5]   cursor-pointer  mt-4 rounded-[20px]"
             key={index}
             onClick={() => handleImageClick(imageUrl)}
           >
-            {/* Render the image using CanvasCapture */}
             <CanvasCapture
               mainImageSrc={imageUrl}
               overlayImageSrc={overlayImageSrc}
               canvasCaptureProps={canvasCaptureProps}
               scale={0.2}
             />
-            {/* <ImageEditor
-              mainImageSrc={imageUrl}
-              overlayImageSrc={overlayImageSrc}
-              showBoundingBox={false}
-              imageSize={0.2}
-            /> */}
           </div>
         ))}
       </div>
 
-      <div>
+      <div className=" flex  mt-4 justify-center bg-[#f5f5f5] py-1 rounded-full">
         <ColorSelection onColorChange={handleColorChange} />
       </div>
-      <br />
-      {overlayImageSrc && (
-        <EditorModal
-          category={category}
-          selectedColor={selectedColor}
-          overlayImg={overlayImageSrc}
-          canvasCaptureProps={canvasCaptureProps}
-        />
-      )}
-    </>
+    </div>
   );
 };
 

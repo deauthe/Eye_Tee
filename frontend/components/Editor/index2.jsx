@@ -7,6 +7,12 @@ import {
   faSave,
 } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "@nextui-org/react";
+import { BiHide } from "react-icons/bi";
+import { BiShow } from "react-icons/bi";
+import { MdOutlinePreview } from "react-icons/md";
+
+
+
 // import dynamic from "next/dynamic";
 // const Image = dynamic(() => import("next/image"), { ssr: false });
 
@@ -391,8 +397,9 @@ function ImageEditor({
   };
 
   return (
-    <div style={{ position: "relative" }}>
+    <div style={{ position: "relative" }} >
       <canvas
+    
         ref={canvasRef}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
@@ -400,20 +407,20 @@ function ImageEditor({
         style={{
           cursor: isDragging ? "grabbing" : isResizing ? "se-resize" : "grab",
         }}
+     
       />
 
       {showBoundingBox && (
-        <div className="mt-[-26px] flex gap-2 mx-9 w-full ">
+        <div className="mt-[-26px] flex justify-center w-full gap-4 ">
           <Button onClick={hideButtons}>
-            {scaleButtonsVisible ? <b>Hide Buttons</b> : <b>Show Buttons</b>}
-            <br />
-            <FontAwesomeIcon icon={faSave} />
+            {scaleButtonsVisible ? <b className="flex items-center gap-1 ">Hide Buttons<span className="text-lg"><BiHide/></span></b> : <b className="flex items-center gap-1 ">Show Buttons<span className="text-lg"><BiShow/></span></b>}
+          
           </Button>
 
           <Button onClick={handlePreview}>
             <b>Preview Product</b>
             <br />
-            <FontAwesomeIcon icon={faSave} />
+          <span className="text-lg"><MdOutlinePreview/></span>
           </Button>
         </div>
       )}
