@@ -4,14 +4,16 @@ import React from "react";
 import { FiShare2 } from "react-icons/fi";
 import { FcLike } from "react-icons/fc";
 import { AiOutlineHeart } from "react-icons/ai";
+//TODO: tshirt animations vertical, pnHover: show backside image
+//later on TODO: add models in conjunction with
 const ProductCard = () => {
 	return (
 		<Link
 			href="/"
-			className="transform overflow-hidden shadow-md duration-200 hover:scale-[1.02] cursor-pointer rounded-[20px] bg-red-200 w-3/4 border-zinc-600 border-3 bg-white/[0.5] hover:bg-white/[0.85]"
+			className="transform overflow-hidden shadow-lg md duration-200 hover:scale-[1.02] cursor-pointer rounded-[20px] border-zinc-600 bg-white/[0.5] hover:bg-white/[0.85]"
 		>
 			<div className=" ">
-				<div className="mt-2 mx-2 rounded-lg bg-[#bdcd5b] flex-row flex justify-center ">
+				<div className="mt-2 mx-2 rounded-lg flex-row flex justify-center ">
 					<Image width={300} height={300} src="/shirt.png" alt="shirt" />
 					<div className="flex flex-col md:flex-col absolute bottom-48 right-4 justify-center p-1">
 						<div className="border-2 border-black bg-white/[0.8]  rounded-full w-10 h-10 mr-2"></div>
