@@ -6,11 +6,16 @@ import { FcLike } from "react-icons/fc";
 import { AiOutlineHeart } from "react-icons/ai";
 //TODO: tshirt animations vertical, pnHover: show backside image
 //later on TODO: add models in conjunction with
-const ProductCard = () => {
+const ProductCard = ({
+	product_photo,
+	product_colors,
+	product_price,
+	product_stock,
+}) => {
 	return (
 		<Link
 			href="/"
-			className="transform overflow-hidden shadow-lg md duration-200 hover:scale-[1.02] cursor-pointer rounded-[20px] border-zinc-600 bg-white/[0.5] hover:bg-white/[0.85]"
+			className="transform overflow-hidden  shadow-lg md duration-200 hover:scale-[1.02] cursor-pointer rounded-[20px] border-zinc-600 bg-white/[0.4] hover:bg-white/[0.8]"
 		>
 			<div className=" ">
 				<div className="mt-2 mx-2 rounded-lg flex-row flex justify-center ">
@@ -39,7 +44,7 @@ const ProductCard = () => {
 					{true && (
 						<>
 							<p className="text-base  font-medium line-through">&#8377;3468</p>
-							<button className="bg-transparent border-zinc-600 border-2 text-base ml-auto font-bold text-black rounded-md py-1 px-2">
+							<button className="bg-zinc-200 shadow-sm text-base ml-auto font-bold text-black rounded-md py-1 px-1">
 								add to cart
 							</button>
 						</>
