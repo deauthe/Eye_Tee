@@ -63,12 +63,6 @@ const Header = () => {
     };
   }, [lastScrollY]);
 
-  // const fetchCategories = async () => {
-  //     const { data } = await fetchDataFromApi("/api/categories?populate=*");
-  //     setCategories(data);
-  // };
-
-  // handle function for sell your art
 
   const handleSellArtButton = async () => {
     if (typeof sessionStorage !== "undefined") {
@@ -98,13 +92,7 @@ const Header = () => {
     }
   };
   const handleLogOut = async () => {
-    // sessionStorage.setItem("idDesigner", designer);
-    // sessionStorage.setItem("userID", userID);
-
-    // if(!designer || !userID){
-    //   alert("You are alredy logout")
-    // }
-
+   
     try {
       const response = await fetch("http://localhost:8080/api/logout", {
         method: "GET",
@@ -125,21 +113,21 @@ const Header = () => {
   };
 
   return (
-    <header
-      className={`w-full h-[50px] md:h-[80px] bg-white flex items-center justify-between z-20 sticky top-0 transition-transform duration-300 ${show}`}
+    <div
+      className={`w-full h-[50px] md:h-[80px] bg-transparent flex justify-between z-20 sticky top-0 transition-transform duration-300 `}
     >
-      <Wrapper className="h-[60px] flex justify-between items-center">
-        <div className="flex gap-2">
+    {/* <div
+    className={`bg-red-w-full flex justify-between`}
+  > */}
+        <div className="flex gap-2 items-center ">
           <Link href="/">
-            <img src="/logo.png" className="w-[40px] md:w-[50px]" />
+            <img
+              src="/logo.png"
+              className="w-[40px] md:w-[50px] drop-shadow-lg"
+            />
           </Link>
 
-          <Menu
-            showCatMenu={showCatMenu}
-            setShowCatMenu={setShowCatMenu}
-            categories={categories}
-          />
-
+        
           {mobileMenu && (
             <MenuMobile
               showCatMenu={showCatMenu}
@@ -149,108 +137,49 @@ const Header = () => {
             />
           )}
 
-          {/* {Search button} */}
-          <div class="input-container ml-2 ">
-            <input
-              type="text"
-              name="text"
-              class="input"
-              placeholder="search..."
-            />
-            <span class="icon">
-              <svg
-                width="19px"
-                height="19px"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                <g
-                  id="SVGRepo_tracerCarrier"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                ></g>
-                <g id="SVGRepo_iconCarrier">
-                  {" "}
-                  <path
-                    opacity="1"
-                    d="M14 5H20"
-                    stroke="#000"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  ></path>{" "}
-                  <path
-                    opacity="1"
-                    d="M14 8H17"
-                    stroke="#000"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  ></path>{" "}
-                  <path
-                    d="M21 11.5C21 16.75 16.75 21 11.5 21C6.25 21 2 16.75 2 11.5C2 6.25 6.25 2 11.5 2"
-                    stroke="#000"
-                    stroke-width="2.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  ></path>{" "}
-                  <path
-                    opacity="1"
-                    d="M22 22L20 20"
-                    stroke="#000"
-                    stroke-width="3.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  ></path>{" "}
-                </g>
-              </svg>
-            </span>
-          </div>
+         
         </div>
 
-        <div className="flex items-center gap-2 text-black">
+        <div className=" flex items-center gap-2 text-black ">
           {/* {Button } */}
-          <button onClick={handleSellArtButton}>
-            <a class="fancy " href="#">
-              <span class="top-key"></span>
-              <span class="text">Sell Your Art</span>
-              <span class="bottom-key-1"></span>
-              <span class="bottom-key-2"></span>
+          <button onClick={handleSellArtButton} >
+            <a
+              className="border border-[#c1bcb6] p-2 rounded-full px-5 py-4 hover:bg-black/[0.05] transition-all duration-200"
+              href="#"
+            >
+              <span class="text font-bold text-[#616060]  ">Sell Your Art</span>
             </a>
           </button>
 
-          {/* Icon start */}
-          <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative">
-            <IoMdHeartEmpty className="text-[19px] md:text-[24px]" />
-            <div className="h-[14px] md:h-[18px] min-w-[14px] md:min-w-[18px] rounded-full bg-red-600 absolute top-1 left-5 md:left-7 text-white text-[10px] md:text-[12px] flex justify-center items-center px-[2px] md:px-[5px]">
-              51
-            </div>
-          </div>
-          {/* Icon end */}
-
-          {/* Icon start */}
-          <Link href="/cart">
+          <div className="flex border border-[#c1bcb6] rounded-full   ">
             <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative">
-              <BsCart className="text-[15px] md:text-[20px]" />
-              {cartItems.length > 0 && (
-                <div className="h-[14px] md:h-[18px] min-w-[14px] md:min-w-[18px] rounded-full bg-red-600 absolute top-1 left-5 md:left-7 text-white text-[10px] md:text-[12px] flex justify-center items-center px-[2px] md:px-[5px]">
-                  {cartItems.length}
-                </div>
-              )}
+              <IoMdHeartEmpty className="text-[19px] md:text-[24px]" />
+              <div className="h-[14px] md:h-[18px] min-w-[14px] md:min-w-[18px] rounded-full bg-red-600 absolute top-1 left-5 md:left-7 text-white text-[10px] md:text-[12px] flex justify-center items-center px-[2px] md:px-[5px]">
+                51
+              </div>
             </div>
-          </Link>
 
-          {/* profile  dropdown section  */}
+            <Link href="/cart">
+              <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative">
+                <BsCart className="text-[15px] md:text-[20px]" />
+                {cartItems.length > 0 && (
+                  <div className="h-[14px] md:h-[18px] min-w-[14px] md:min-w-[18px] rounded-full bg-red-600 absolute top-1 left-5 md:left-7 text-white text-[10px] md:text-[12px] flex justify-center items-center px-[2px] md:px-[5px]">
+                    {cartItems.length}
+                  </div>
+                )}
+              </div>
+            </Link>
 
-          <div className="relative inline-block text-left">
             <div onClick={toggleDropdown} onMouseOver={handleMouseEvents}>
               <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative">
                 <CgProfile className="text-[17px] md:text-[25px]" />
               </div>
             </div>
+          </div>
 
+          {/* profile  dropdown section  */}
+
+          <div className="relative inline-block text-left">
             {isOpen && (
               <ul className="absolute z-10 right-0 mt-2 w-36 bg-white border rounded-lg shadow-lg">
                 <li>
@@ -267,13 +196,7 @@ const Header = () => {
                     </p>
                   </button>
                 </li>
-                {/* <li>
-                  <Link href="/">
-                    <p className="block px-4 py-2 text-gray-800 hover-bg-gray-200  hover:bg-gray-200">
-                      Graphic Design
-                    </p>
-                  </Link>
-                </li> */}
+               
               </ul>
             )}
           </div>
@@ -297,9 +220,8 @@ const Header = () => {
           {/* Mobile icon end */}
         </div>
 
-        <ToastContainer />
-      </Wrapper>
-    </header>
+        {/* <ToastContainer /> */}
+    </div>
   );
 };
 
