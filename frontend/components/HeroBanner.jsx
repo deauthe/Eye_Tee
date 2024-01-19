@@ -46,7 +46,7 @@ const HeroBanner = () => {
         <p className="text-3xl text-[#595957]">Your Signature Style Awaits</p>
       </div>
 
-      <div className="absolute left-[50px]">
+      <div className="absolute left-[50px] lg:left-[15%]">
         <Image src="/sparkle_img.png" alt="sparkle_img.png" width={80} height={80} />
       </div>
 
@@ -59,11 +59,11 @@ const HeroBanner = () => {
         </button>
       </div>
 
-      <div className="absolute right-[40px] bottom-[-80px]">
+      <div className="absolute right-[40px] bottom-[-80px] lg:right-[15%]">
         <Image src="/sparkle_img.png" alt="sparkle_img.png" width={80} height={80} />
       </div>
 
-      <div className="mt-[20px] mx-[10%] ">
+      <div className="mt-[20px] mx-[10%] lg:mx-[30%] ">
         <Slider {...settings} className="">
           <div className="">
             <Image src="/banner_image.png" width="700" height="200" />

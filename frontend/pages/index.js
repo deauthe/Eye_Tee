@@ -22,7 +22,7 @@ export default function Home() {
 
 					Explore the latest Products
 				</div>
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 my-6 px-5 md:px-0">
+				<div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5 my-6 px-5 md:px-0">
 					{[0, 1, 2, 3, 4, 5, 6, 7, 8].map((product, index) => (
 						<ProductCard key={index} />
 					))}

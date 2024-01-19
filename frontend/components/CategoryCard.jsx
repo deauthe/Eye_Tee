@@ -58,7 +58,7 @@ const CategoryCard = (props) => {
       {/* {`${[props.category]}`} */}
 
 	  <div className="absolute bottom-2 right-1">
-      <p className="text-[0.9em] font-bold text-[#C494D6]">OVERSIZED</p>
+      <p className="text-[0.9em] font-bold text-[#C494D6] text-end">OVERSIZED</p>
       <p className="text-[1em] font-bold   text-gray-600 text-end">{props.name}</p>
 	  </div>
     </div>
