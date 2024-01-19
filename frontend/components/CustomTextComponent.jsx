@@ -9,7 +9,7 @@ const CustomTextComponent = ({ fontSize, children }) => {
 
   return (
     <div className="mb-[1.4em] flex gap-3 text-start" style={textStyle}>
-      <div className="bg-black w-2 h-full">.</div>
+      {/* <div className="bg-black w-2 h-full">.</div> */}
       {children}
     </div>
   );

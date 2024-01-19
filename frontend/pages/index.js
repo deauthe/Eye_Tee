@@ -14,12 +14,12 @@ export default function Home() {
 			</div>
 
 			<Wrapper>
-				<div className=" text-start  mx-0 my-[20px] md:my-[40px]">
+				<div className=" text-start  mx-0 my-[90px]">
 					<CategorySection />
 				</div>
 
-				<div className=" mb-[1.4em] flex gap-3  text-start text-[28px] md:text-[34px]   font-semibold leading-tight">
-					<div className="bg-black w-2 h-full">.</div>
+				<div className=" mb-[1.4em] flex gap-3  justify-center   text-4xl text-[#595957] ">
+
 					Explore the latest Products
 				</div>
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 my-6 px-5 md:px-0">

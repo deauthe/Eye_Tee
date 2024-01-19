@@ -3,54 +3,66 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 
 const categoryImages = {
-	Hoodie: "/hoodie_category.png",
-	Tshirt: "/t_shirt.png",
-	Mugs: "/C_mug.png",
-	"T-Shirts": "/C_shirt.png",
-	"Z-Shirts": "/C_shirt.png",
-	"Z-Hoodies": "/hoodie_category.png",
-	Stickers: "/t_shirt.png",
-	Bottles: "/C_mug.png",
-	"Phone Covers": "/C_shirt.png",
-	"Tote Bags": "/C_mug.png",
+  Hoodie: "/hoodie_category.png",
+  Tshirt: "/t_shirt.png",
+  Mugs: "/C_mug.png",
+  "T-Shirts": "/C_shirt.png",
+  "Z-Shirts": "/C_shirt.png",
+  "Z-Hoodies": "/hoodie_category.png",
+  Stickers: "/t_shirt.png",
+  Bottles: "/C_mug.png",
+  "Phone Covers": "/C_shirt.png",
+  "Tote Bags": "/C_mug.png",
 
-	// Add other categories and their images as needed
+  // Add other categories and their images as needed
 };
 
 const CategoryCard = (props) => {
-	const router = useRouter();
+  const router = useRouter();
 
-	const handleCategoryClick = (category) => {
-		// Get the existing query parameters
-		const existingQuery = { ...router.query };
+  const handleCategoryClick = (category) => {
+    // Get the existing query parameters
+    const existingQuery = { ...router.query };
 
-		// Add or update the 'category' parameter
-		existingQuery.category = category;
+    // Add or update the 'category' parameter
+    existingQuery.category = category;
 
-		// Use the router to replace the URL with the updated query parameters
-		router.replace({
-			pathname: router.pathname,
-			query: existingQuery,
-		});
-	};
+    // Use the router to replace the URL with the updated query parameters
+    router.replace({
+      pathname: router.pathname,
+      query: existingQuery,
+    });
+  };
 
-	return (
-		<div
-			className={`border-5 border-white rounded-[50px] w-[180px] h-[200px] bg-${props.color}-400 flex flex-col gap-3 justify-center items-center shadow-md cursor-pointer`}
-			onClick={() => {
-				handleCategoryClick(props.category);
-			}}
-		>
-			<p className="text-2xl font-bold text-white">{props.name}</p>
-			<Image
-				src={categoryImages[props.category]}
-				alt="none"
-				width={95}
-				height={95}
-			/>
-			{`${[props.category]}`}
-		</div>
-	);
+  return (
+    <div
+      className={` relative border border-[#bdbdb9] rounded-md w-[180px] h-[190px] flex flex-col gap-3 justify-center items-center  cursor-pointer`}
+      onClick={() => {
+        handleCategoryClick(props.category);
+      }}
+    >
+
+      <div className="absolute top-[-63px] ">
+		
+		<Image
+          src="/category_hoodie_mockup.png"
+          alt="none"
+          width={200}
+          height={200}
+        />
+		<Image className="absolute -bottom-6 left-4" src="/category_shadow.png" alt="category_shadow" width={500} height={60}/>
+     
+		
+        </div>
+	  <div className="w-[102%] bg-[#bdbdb9] h-[1px] absolute bottom-[62px] -rotate-12"></div>
+      {/* {`${[props.category]}`} */}
+
+	  <div className="absolute bottom-2 right-1">
+      <p className="text-[0.9em] font-bold text-[#C494D6]">OVERSIZED</p>
+      <p className="text-[1em] font-bold   text-gray-600 text-end">{props.name}</p>
+	  </div>
+    </div>
+  );
 };
 
 export default CategoryCard;

@@ -114,7 +114,7 @@ const Header = () => {
 
   return (
     <div
-      className={`w-full h-[50px] md:h-[80px] bg-transparent flex justify-between z-20 sticky top-0 transition-transform duration-300 `}
+      className={`w-full h-[50px] md:h-[80px] bg-transparent flex justify-between z-20 sticky top-0 transition-transform duration-300 border border-b-[#c1bcb6] `}
     >
     {/* <div
     className={`bg-red-w-full flex justify-between`}

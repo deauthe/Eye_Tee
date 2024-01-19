@@ -8,7 +8,8 @@ import store from "@/store/store";
 import LoadingBar from "react-top-loading-bar";
 import { NextUIProvider } from "@nextui-org/react";
 import { useRouter } from "next/router";
-export default function App({ Component, pageProps,emotionCache }) {
+import AnimatedCursor from "react-animated-cursor";
+export default function App({ Component, pageProps, emotionCache }) {
   const router = useRouter();
   const [progress, setProgress] = useState(0);
 
@@ -42,6 +43,21 @@ export default function App({ Component, pageProps,emotionCache }) {
           rel="stylesheet"
         />
       </Head>
+
+      <AnimatedCursor
+        innerSize={8}
+        outerSize={25}
+        innerScale={1}
+        outerScale={2}
+        outerAlpha={0}
+        hasBlendMode={true}
+        innerStyle={{
+          backgroundColor: "black",
+        }}
+        outerStyle={{
+          border: "1px solid black",
+        }}
+      />
 
       <Provider store={store}>
         <NextUIProvider>
