@@ -10,12 +10,7 @@ const categoriesData = [
 	{ item: "T-Shirts", color: "blue" },
 	{ item: "Z-Hoodies", color: "red" },
 	{ item: "Mugs", color: "purple" },
-	{ item: "Z-Shirts", color: "blue" },
-	{ item: "Bottles", color: "" },
-	{ item: "Stickers", color: "" },
-	{ item: "Tote Bags", color: "" },
-	{ item: "Phone Covers", color: "" },
-];
+	];
 
 const PrevArrow = (props) => {
 	const [isClicked, setIsClicked] = useState(false);
