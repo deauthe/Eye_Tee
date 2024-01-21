@@ -5,7 +5,7 @@ import { FiShare2 } from "react-icons/fi";
 import { FcLike } from "react-icons/fc";
 import { AiOutlineHeart } from "react-icons/ai";
 //TODO: tshirt animations vertical, pnHover: show backside image
-//later on TODO: add models in conjunction with
+//later on TODO: add humanmodels in conjunction with clothes on hover
 const ProductCard = ({
 	product_photo,
 	product_colors,
@@ -20,6 +20,7 @@ const ProductCard = ({
 			<div className=" ">
 				<div className="-mt-4 mx-2 rounded-lg flex-row flex justify-center ">
 					<Image width={300} height={300} src="/shirt.png" alt="shirt" />
+
 					<div className="flex flex-col md:flex-col absolute bottom-48 right-4 justify-center p-1">
 						{/* <div className="border-2 border-black bg-white/[0.8]  rounded-full w-10 h-10 mr-2"></div> */}
 					</div>
