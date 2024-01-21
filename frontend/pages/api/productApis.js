@@ -1,9 +1,18 @@
-export const getProductImages = async ({ category }) => {
-	let url = `${process.env.API_URL}/api/product/images?category=${category}`;
+import axios from "axios";
+const API_URL = process.env.API_URL || "http://localhost:8080";
+console.log("api url :", API_URL);
 
-	if (!category) {
-		url = `${process.env.API_URL}/api/product/images`;
+export const getProductImages = async ({ category }) => {
+	let url;
+	if (category) {
+		url = `${API_URL}/api/product/images?category=${category}`;
+	} else {
+		url = `${API_URL}/api/product/images`;
 	}
+
+	// if (!category) {
+	// 	url = `${API_URL}/api/product/images`;
+	// }
 	const config = {
 		method: "GET",
 		headers: {
@@ -23,7 +32,7 @@ export const getProductImages = async ({ category }) => {
 };
 
 export const getCategoryColor = async ({ category }) => {
-	let url = `${process.env.API_URL}/api/product/getColor?category=hoodie`;
+	let url = `${API_URL}/api/product/getColor?category=hoodie`;
 	if (!category) {
 		console.error("no category selected");
 		throw new Error("please select a category");
@@ -46,7 +55,7 @@ export const getCategoryColor = async ({ category }) => {
 };
 
 export const getProducts = async ({ product_id }) => {
-	let url = `${process.env.API_URL}/api/product/read/${product_id}`;
+	let url = `${API_URL}/api/product/read/${product_id}`;
 	if (!product_id) {
 		console.error("no category selected");
 		throw new Error("please select a category");

@@ -1,18 +1,18 @@
-import React from 'react';
+import React from "react";
 
 const CustomTextComponent = ({ fontSize, children }) => {
-  const textStyle = {
-    fontSize: fontSize || 'inherit', 
-    fontWeight: 'bold',
-    lineHeight: '1.2',
-  };
+	const textStyle = {
+		fontSize: fontSize || "inherit",
+		fontWeight: "bold",
+		lineHeight: "1.2",
+	};
 
-  return (
-    <div className="mb-[1.4em] flex gap-3 text-start" style={textStyle}>
-      <div className="bg-black w-2 h-full">.</div>
-      {children}
-    </div>
-  );
+	return (
+		<div className="mb-[1.4em] flex gap-3 text-start" style={textStyle}>
+			{/* <div className="bg-black w-2 h-full">.</div> */}
+			{children}
+		</div>
+	);
 };
 
 export default CustomTextComponent;

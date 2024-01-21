@@ -6,10 +6,10 @@ import "slick-carousel/slick/slick-theme.css";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 
 const categoriesData = [
-	{ item: "Hoodie", color: "red" },
-	{ item: "T-Shirts", color: "blue" },
+	{ item: "t-shirts", color: "red" },
+	{ item: "shirt", color: "blue" },
 	{ item: "Z-Hoodies", color: "red" },
-	{ item: "Mugs", color: "purple" },
+	{ item: "hoodie", color: "purple" },
 	{ item: "Z-Shirts", color: "blue" },
 	{ item: "Bottles", color: "" },
 	{ item: "Stickers", color: "" },
@@ -166,26 +166,28 @@ const CategorySection = () => {
 
 	return (
 		<>
-			<div className="flex gap-3 m-0 text-start border text-[28px] md:text-[34px] mb-1 font-semibold leading-tight">
-				<div className="bg-black w-2 h-full">.</div>
+			<div className="flex justify-center gap-3 m-0 text-start border text-[28px] md:text-[34px] mb-1  leading-tight">
+				{/* <div className="bg-black w-2 h-full">.</div> */}
 				<div>
-					<p>Unleash The Unique Style Categories</p>
+					<p className="text-4xl text-[#595957]">
+						Unleash The Unique Style Categories
+					</p>
 				</div>
 			</div>
 
-			<div className="relative">
-				<Slider {...settings}>
-					{categoriesData.map((category, index) => (
-						<div key={index} className="my-4">
-							<CategoryCard
-								key={index}
-								name={category.item}
-								color={category.color}
-								category={category.item}
-							/>
-						</div>
-					))}
-				</Slider>
+			<div className=" flex  flex-wrap gap-[40px] mt-[60px] justify-center ">
+				{/* <Slider {...settings}> */}
+				{categoriesData.map((category, index) => (
+					<div key={index} className="mt-[30px]">
+						<CategoryCard
+							key={index}
+							name={category.item}
+							color={category.color}
+							category={category.item}
+						/>
+					</div>
+				))}
+				{/* </Slider> */}
 			</div>
 		</>
 	);
