@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
+
 import { getProductImages } from "@/pages/api/productApis";
 
 const CategoryCard = (props) => {
@@ -79,6 +80,7 @@ const CategoryCard = (props) => {
 			</div>
 		</div>
 	);
+
 };
 
 export default CategoryCard;

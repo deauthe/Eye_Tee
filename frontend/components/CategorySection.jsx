@@ -9,6 +9,7 @@ const categoriesData = [
 	{ item: "t-shirts", color: "red" },
 	{ item: "shirt", color: "blue" },
 	{ item: "Z-Hoodies", color: "red" },
+
 	{ item: "hoodie", color: "purple" },
 	{ item: "Z-Shirts", color: "blue" },
 	{ item: "Bottles", color: "" },
@@ -16,6 +17,7 @@ const categoriesData = [
 	{ item: "Tote Bags", color: "" },
 	{ item: "Phone Covers", color: "" },
 ];
+
 
 const PrevArrow = (props) => {
 	const [isClicked, setIsClicked] = useState(false);
@@ -169,14 +171,17 @@ const CategorySection = () => {
 			<div className="flex justify-center gap-3 m-0 text-start border text-[28px] md:text-[34px] mb-1  leading-tight">
 				{/* <div className="bg-black w-2 h-full">.</div> */}
 				<div>
+
 					<p className="text-4xl text-[#595957]">
 						Unleash The Unique Style Categories
 					</p>
+
 				</div>
 			</div>
 
 			<div className=" flex  flex-wrap gap-[40px] mt-[60px] justify-center ">
 				{/* <Slider {...settings}> */}
+
 				{categoriesData.map((category, index) => (
 					<div key={index} className="mt-[30px]">
 						<CategoryCard

@@ -7,6 +7,7 @@ const CustomTextComponent = ({ fontSize, children }) => {
 		lineHeight: "1.2",
 	};
 
+
 	return (
 		<div className="mb-[1.4em] flex gap-3 text-start" style={textStyle}>
 			{/* <div className="bg-black w-2 h-full">.</div> */}

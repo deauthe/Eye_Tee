@@ -18,7 +18,9 @@ export default function Home() {
 					<CategorySection />
 				</div>
 
+
 				<ExploreSection />
+
 			</Wrapper>
 		</main>
 	);
