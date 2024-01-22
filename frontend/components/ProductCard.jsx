@@ -15,7 +15,7 @@ const ProductCard = ({
 	return (
 		<Link
 			href="/"
-			className="transform overflow-hidden  shadow-sm border border-black/10 md duration-200  cursor-pointer rounded-[20px]"
+			className="transform overflow-hidden  shadow-sm border border-black/90 md duration-200  cursor-pointer rounded-[7px] backdrop-blur-md shadow-sm"
 		>
 			<div className=" ">
 				<div className="-mt-4 mx-2 rounded-lg flex-row flex justify-center ">
@@ -36,7 +36,7 @@ const ProductCard = ({
 					<div className="border-1 border-black/20 bg-yellow-300 rounded-full w-7 h-7 mr-2"></div>
 					<div className="border-1 border-black/20 bg-white rounded-full w-7 h-7 mr-2"></div>
 				</div>
-				<div className="flex items-center text-black/[0.5] ">
+				<div className="flex items-center text-black/[0.5] mb-2 ">
 					<p className="mr-2 text-lg font-semibold bg-[#bdcd5b] px-1 skew-x-3 ">
 						&#8377; 1234
 					</p>
@@ -44,7 +44,7 @@ const ProductCard = ({
 					{true && (
 						<>
 							<p className="text-base  font-medium line-through">&#8377;3468</p>
-							<button className="skew-x-1 text-sm ml-auto px-2  text-black/70 rounded-sm py-1 border border-black/50 hover:bg-black/[0.05] transition-all duration-200 ">
+							<button className="skew-x-1 text-sm ml-auto px-2  text-black/90 rounded-sm py-1 border border-black/90 hover:bg-black/[0.05] transition-all duration-200 ">
 								Add to cart
 							</button>
 						</>

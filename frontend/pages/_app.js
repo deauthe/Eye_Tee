@@ -61,7 +61,9 @@ export default function App({ Component, pageProps, emotionCache }) {
 
       <Provider store={store}>
         <NextUIProvider>
-          <Header />
+          <div className="bg-white shadow-sm">
+            <Header />
+          </div>
           <LoadingBar
             color="rgb(0, 0, 0)"
             height={7}

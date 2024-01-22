@@ -161,14 +161,14 @@ const CategorySection = () => {
 
 	return (
 		<>
-			<div className="flex justify-center gap-3 m-0 text-start border text-[28px] md:text-[34px] mb-1  leading-tight">
+			<div className="flex justify-center gap-3 m-0 text-start text-[28px] md:text-[34px] mb-1  leading-tight">
 				{/* <div className="bg-black w-2 h-full">.</div> */}
 				<div>
 					<p className="text-4xl text-[#595957]">Unleash The Unique Style Categories</p>
 				</div>
 			</div>
 
-			<div className=" flex  flex-wrap gap-[40px] mt-[60px] justify-center ">
+			<div className=" flex  flex-wrap gap-[40px] mt-[60px] justify-center bg-white py-[70px] shadow-sm border  rounded-lg  ">
 				{/* <Slider {...settings}> */}
 					{categoriesData.map((category, index) => (
 						<div key={index} className="mt-[30px]">

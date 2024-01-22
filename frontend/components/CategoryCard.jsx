@@ -36,7 +36,7 @@ const CategoryCard = (props) => {
 
   return (
     <div
-      className={` relative border border-[#bdbdb9] rounded-md w-[180px] h-[190px] flex flex-col gap-3 justify-center items-center  cursor-pointer`}
+      className={` relative border border-[#bdbdb9] bg-black/5 rounded-md w-[180px] h-[190px] flex flex-col gap-3 justify-center items-center  cursor-pointer`}
       onClick={() => {
         handleCategoryClick(props.category);
       }}
