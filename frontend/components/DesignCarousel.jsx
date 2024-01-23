@@ -42,14 +42,14 @@ const DesignCarousel = () => {
 	};
 
 	return (
-		<div className=" mb-[100px]">
+		<div className=" ">
 			<Carousel
 				responsive={responsive}
 				containerClass="-mx-[10px]"
 				itemClass="px-[10px]"
 			>
 				{designData.map((product, index) => (
-					<div className="bg-gray-400 border-[6px] border-black h-full w-full  rounded-full p-2  shadow">
+					<div>
 						<DesignerCard
 							key={index}
 							cardNo={index}
