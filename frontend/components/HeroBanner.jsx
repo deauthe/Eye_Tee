@@ -1,9 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { GoArrowRight, GoArrowLeft } from "react-icons/go";
 import Image from "next/image";
 import Slider from "react-slick";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
+import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
+import { TypeAnimation } from "react-type-animation";
 
 const CustomArrow = ({ onClick, icon: Icon, direction }) => {
+
+  const designIt = "Design it";
+  const wearIt = "Wear it";
+  const lovieIt = "Love it";
+  const [isClicked, setIsClicked] = useState(false);
+
 
 	const [isClicked, setIsClicked] = useState(false);
 
@@ -26,77 +38,102 @@ const CustomArrow = ({ onClick, icon: Icon, direction }) => {
 };
 
 const HeroBanner = () => {
-	const settings = {
-		dots: true,
-		infinite: true,
-		speed: 500,
-		slidesToShow: 1,
-		slidesToScroll: 1,
-		// prevArrow: (
-		//   <CustomArrow onClick={() => {}} icon={GoArrowLeft} direction="prev" />
-		// ),
-		// nextArrow: (
-		//   <CustomArrow onClick={() => {}} icon={GoArrowRight} direction="next" />
-		// ),
-	};
 
-	return (
-		<div className="m-auto relative">
-			<div className="flex justify-center mt-6 flex-col text-center gap-3 ">
-				<p className="text-7xl font-bold">Design it, Wear it, Love it</p>
-				<p className="text-3xl mt-3 text-[#595957]">
-					Your Signature Style Awaits
-				</p>
-			</div>
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
 
-			<div className="absolute left-[50px] lg:left-[15%]">
-				<Image
-					src="/sparkle_img.png"
-					alt="sparkle_img.png"
-					width={100}
-					height={80}
-				/>
-			</div>
+  return (
+    <div className="m-auto relative mt-9 ">
+      <div className="h-[40px] w-full"></div>
+      <div className="flex justify-center mt-[70px] flex-col text-center gap-3 ">
+        {/* <p className="text-7xl font-bold" ref={element}>Design it, Wear it, Love it</p>
+         */}
+        {/* <div className="text-7xl font-bold" id="good"></div> */}
 
-			{/* <div className="absolute -left-9 ">
-        <Image src="/blob_pattern_1.png" alt="blob_pattern" width={400} height={400} />
-      </div> */}
+        <div className="text-4xl font-bold ">
+          <TypeAnimation
+            preRenderFirstString={true}
+            sequence={[
+              500,
+              "Design it", // initially rendered starting point
+              1000,
+              "Design it , Wear it",
+              1000,
+              "Design it , Wear it , Love it",
+             
+            ]}
+            speed={50}
+            style={{ fontSize: "2em" }}
+            repeat={1}
+            cursor={false}
+          />
+        </div>
+        <p className="text-4xl mt-3 text-[#595957]">
+          Your Signature Style Awaits
+        </p>
+      </div>
 
-			<div className="flex justify-center mt-3  ">
-				<button className="flex items-center gap-2 border border-[#c1bcb6] p-3 rounded-full pl-6 pr-4 text-[#70706f] hover:bg-black/10 trasitions-all duration-300 hover:gap-3 ">
-					Explore
-					<span className="text-3xl ">
-						<GoArrowRight />
-					</span>
-				</button>
-			</div>
+      <div className="flex justify-center mt-7  ">
+        <button className="flex items-center gap-2 border bg-black  p-3 rounded-full pl-6 pr-4 text-white hover:bg-black/10 trasitions-all duration-300 hover:gap-3 active:scale-105 dir ">
+          Explore
+          <span className="text-3xl  ">
+            <GoArrowRight />
+          </span>
+        </button>
+      </div>
 
-			{/* <div className="blob_1 w-6 h-5 absolute ">.</div> */}
-
-			<div className="absolute right-[40px] bottom-[-80px] lg:right-[15%]">
-				<Image
-					src="/sparkle_img.png"
-					alt="sparkle_img.png"
-					width={80}
-					height={80}
-				/>
-			</div>
-
-			<div className="mt-[20px] mx-[10%] lg:mx-[30%] ">
-				<Slider {...settings} className="">
-					<div className="">
-						<Image src="/banner_image.png" width="800" height="300" />
-					</div>
-					<div>
-						<Image src="/banner_image.png" width="800" height="300" />
-					</div>
-					<div>
-						<Image src="/banner_image.png" width="00" height="300" />
-					</div>
-				</Slider>
-			</div>
-		</div>
-	);
+      <div className="flex justify-center">
+        <div className="mt-[35px]  lg:w-[70%]  md:w-[80%] ">
+          <Swiper
+            effect={"coverflow"}
+            grabCursor={true}
+            centeredSlides={true}
+            slidesPerView={"auto"}
+            coverflowEffect={{
+              rotate: 50,
+              stretch: 0,
+              depth: 100,
+              modifier: 1,
+              slideShadows: true,
+            }}
+            pagination={true}
+            modules={[EffectCoverflow, Pagination, Navigation]}
+            className="mySwiper "
+          >
+            <SwiperSlide>
+              <img
+                src="/bannerImage.webp"
+                alt="Banner Image"
+                width="full"
+                height="full"
+              />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img
+                src="/bannerImage.webp"
+                alt="Banner Image"
+                width="full"
+                height="full"
+              />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img
+                src="/bannerImage.webp"
+                alt="Banner Image"
+                width="full"
+                height="full"
+              />
+            </SwiperSlide>
+          </Swiper>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default HeroBanner;

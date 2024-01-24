@@ -27,6 +27,7 @@ export default function App({ Component, pageProps, emotionCache }) {
 		});
 	}, []);
 
+
 	return (
 		<>
 			<Head>
@@ -80,4 +81,5 @@ export default function App({ Component, pageProps, emotionCache }) {
 			</Provider>
 		</>
 	);
+
 }
