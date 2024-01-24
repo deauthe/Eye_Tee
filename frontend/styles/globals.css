@@ -3,12 +3,13 @@
 @tailwind utilities;
 @import url("https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap");
 @font-face {
-  font-family: "joshep";
-  src: url("./JosefinSlab-Thin.ttf");
+
+	font-family: "joshep";
+	src: url("./JosefinSlab-Thin.ttf");
 }
 @font-face {
-  font-family: "sora";
-  src: url('./Sora-Medium.ttf');
+	font-family: "sora";
+	src: url("./Sora-Medium.ttf");
 }
 @font-face {
   font-family: "anaconda";
@@ -52,6 +53,7 @@
 }
 
 :root {
+
     font-family:"salmond" ,sans-serif;
     font-weight: 400;
     font-size: 16px;
@@ -76,135 +78,132 @@
 
 
     /* background: rgb(27,21,55);
-    background: linear-gradient(164deg, rgba(27,21,55,1) 31%, rgba(129,55,72,1) 86%);  */
 
+    background: linear-gradient(164deg, rgba(27,21,55,1) 31%, rgba(129,55,72,1) 86%);  */
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    letter-spacing: 1px;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	letter-spacing: 1px;
 }
 
 /* PRODUCT DETAILS CAROUSEL STYLING CUSTOMIZATION START */
 .productCarousel.carousel-root {
-    display: flex;
-    flex-direction: row;
-    gap: 0px;
+	display: flex;
+	flex-direction: row;
+	gap: 0px;
 }
 .productCarousel.carousel-root .carousel {
-    width: auto;
+	width: auto;
 }
 .productCarousel.carousel-root .carousel.carousel-slider {
-    width: 90%;
+	width: 90%;
 }
 .productCarousel.carousel-root .carousel.carousel-slider .slider-wrapper {
-    border-radius: 30px;
+	border-radius: 30px;
 }
 .productCarousel.carousel-root .carousel .thumbs-wrapper {
-    margin: 10px;
-    position: absolute;
-  
+	margin: 10px;
+	position: absolute;
 }
 .productCarousel.carousel-root .carousel .thumb {
-    height: 60px;
-    border-radius: 6px;
-    overflow: hidden;
-    position: relative;
-
+	height: 60px;
+	border-radius: 6px;
+	overflow: hidden;
+	position: relative;
 }
 .productCarousel.carousel-root .carousel .thumb img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
 }
 .productCarousel.carousel-root .carousel .thumb:after {
-    content: "";
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: black;
-    opacity: 0;
+	content: "";
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: black;
+	opacity: 0;
 }
 .productCarousel.carousel-root .carousel .thumb.selected,
 .productCarousel.carousel-root .carousel .thumb:hover {
-    border: 0;
+	border: 0;
 }
 .productCarousel.carousel-root .carousel .thumb:hover:after,
 .productCarousel.carousel-root .carousel .thumb.selected:after {
-    opacity: 0.2;
+	opacity: 0.2;
 }
 .productCarousel .control-arrow {
-    display: none;
+	display: none;
 }
 @media screen and (max-width: 767px) {
-    .productCarousel.carousel-root {
-        flex-direction: column;
-    }
-    .productCarousel.carousel-root .carousel .thumb {
-        border: 0;
-        padding: 0;
-    }
+	.productCarousel.carousel-root {
+		flex-direction: column;
+	}
+	.productCarousel.carousel-root .carousel .thumb {
+		border: 0;
+		padding: 0;
+	}
 }
 @media screen and (min-width: 768px) {
-    .productCarousel.carousel-root .carousel .thumbs {
-        transform: none !important;
-        flex-direction: column;
-        display: flex;
-        gap: 10px;
-    }
-    .productCarousel.carousel-root .carousel .thumb {
-        border: 0;
-        padding: 0;
-        margin: 0;
-    }
+	.productCarousel.carousel-root .carousel .thumbs {
+		transform: none !important;
+		flex-direction: column;
+		display: flex;
+		gap: 10px;
+	}
+	.productCarousel.carousel-root .carousel .thumb {
+		border: 0;
+		padding: 0;
+		margin: 0;
+	}
 }
 /* PRODUCT DETAILS CAROUSEL STYLING CUSTOMIZATION END */
 
 .markdown ul {
-    margin: 0;
-    padding: 0;
-    list-style-type: disc;
-    margin: 20px 0;
+	margin: 0;
+	padding: 0;
+	list-style-type: disc;
+	margin: 20px 0;
 }
 .markdown ul li {
-    margin: 10px 0;
+	margin: 10px 0;
 }
-
 
 /* Search button css */
 
 .input-container {
-  width: 220px;
-  position: relative;
-  top: 4px;  
+	width: 220px;
+	position: relative;
+	top: 4px;
 }
 
 .icon {
-  position: absolute;
-  right: 16px;
-  top: calc(50% - 1px);
-  transform: translateY(calc(-50% - 5px));
+	position: absolute;
+	right: 16px;
+	top: calc(50% - 1px);
+	transform: translateY(calc(-50% - 5px));
 }
 
 .input {
-  width: 100%;
-  height: 37px;
-  padding: 7px;
-  padding-inline: 10px;
-  /* padding-block: 3px;
+	width: 100%;
+	height: 37px;
+	padding: 7px;
+	padding-inline: 10px;
+	/* padding-block: 3px;
   padding-inline: 7px; */
-  transition: .2s linear;
-  border: 2.5px solid black;
-  font-size: 14px;
-  border-radius: 22px;
-  /* text-transform: uppercase; */
-  letter-spacing: 2px;
-  outline: none;
+	transition: 0.2s linear;
+	border: 2.5px solid black;
+	font-size: 14px;
+	border-radius: 22px;
+	/* text-transform: uppercase; */
+	letter-spacing: 2px;
+	outline: none;
 }
 
 /* .input:focus {
@@ -214,484 +213,484 @@
 } */
 
 .input-container:hover > .icon {
-  animation: anim 1s linear infinite;
+	animation: anim 1s linear infinite;
 }
 
 @keyframes anim {
-  0%,
-  100% {
-    transform: translateY(calc(-50% - 5px)) scale(1);
-  }
+	0%,
+	100% {
+		transform: translateY(calc(-50% - 5px)) scale(1);
+	}
 
-  50% {
-    transform: translateY(calc(-50% - 5px)) scale(1.1);
-  }
+	50% {
+		transform: translateY(calc(-50% - 5px)) scale(1.1);
+	}
 }
 
 /* Button Css */
 
 .fancy {
-  background-color: transparent;
-  border: 2px solid #000;
-  border-radius: 24px;
-  box-sizing: border-box;
-  /* color: #fff; */
-  background-color: white;
-  cursor: pointer;
-  display: inline-block;
-  float: right;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  margin: 0;
-  outline: none;
-  overflow: visible;
-  padding: 0.7em 1.5em;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  text-transform: none;
-  transition: all 0.3s ease-in-out;
-  user-select: none;
-  font-size: 12px;
-  
- }
- 
- .fancy::before {
-  content: " ";
-  width: 1.3625rem;
-  height: 2px;
-  background: black;
-  top: 50%;
-  left: 0.5em;
-  position: absolute;
-  transform: translateY(-50%);
-  transform-origin: center;
-  transition: background 0.3s linear, width 0.3s linear;
- }
- 
- .fancy .text {
-  font-size: 1.125em;
-  line-height: 1.33333em;
-  padding-left: 2em;
-  display: block;
-  text-align: left;
-  transition: all 0.3s ease-in-out;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: black;
- }
- 
- .fancy .top-key {
-  height: 2px;
-  width: 1.5625rem;
-  top: -2px;
-  left: 0.625rem;
-  position: absolute;
-  /* background: #e8e8e8; */
-  transition: width 0.5s ease-out, left 0.3s ease-out;
- }
- 
- .fancy .bottom-key-1 {
-  height: 2px;
-  width: 1.5625rem;
-  right: 1.875rem;
-  bottom: -2px;
-  position: absolute;
-  /* background: #e8e8e8; */
-  transition: width 0.5s ease-out, right 0.3s ease-out;
- }
- 
- .fancy .bottom-key-2 {
-  height: 2px;
-  width: 0.625rem;
-  right: 0.625rem;
-  bottom: -2px;
-  position: absolute;
-  /* background: #e8e8e8; */
-  transition: width 0.5s ease-out, right 0.3s ease-out;
- }
- 
- .fancy:hover {
-  color: white;
-  background: black;
- }
- 
- .fancy:hover::before {
-  width: 0.9375rem;
-  background: white;
- }
- 
- .fancy:hover .text {
-  color: white;
-  padding-left: 1.5em;
- }
- 
- .fancy:hover .top-key {
-  left: -2px;
-  width: 0px;
- }
- 
- .fancy:hover .bottom-key-1,
-  .fancy:hover .bottom-key-2 {
-  right: 0;
-  width: 0;
- }
+	background-color: transparent;
+	border: 2px solid #000;
+	border-radius: 24px;
+	box-sizing: border-box;
+	/* color: #fff; */
+	background-color: white;
+	cursor: pointer;
+	display: inline-block;
+	float: right;
+	font-weight: 600;
+	letter-spacing: 0.05em;
+	margin: 0;
+	outline: none;
+	overflow: visible;
+	padding: 0.7em 1.5em;
+	position: relative;
+	text-align: center;
+	text-decoration: none;
+	text-transform: none;
+	transition: all 0.3s ease-in-out;
+	user-select: none;
+	font-size: 12px;
+}
 
+.fancy::before {
+	content: " ";
+	width: 1.3625rem;
+	height: 2px;
+	background: black;
+	top: 50%;
+	left: 0.5em;
+	position: absolute;
+	transform: translateY(-50%);
+	transform-origin: center;
+	transition: background 0.3s linear, width 0.3s linear;
+}
 
- /* Design pattern container */
+.fancy .text {
+	font-size: 1.125em;
+	line-height: 1.33333em;
+	padding-left: 2em;
+	display: block;
+	text-align: left;
+	transition: all 0.3s ease-in-out;
+	text-transform: uppercase;
+	text-decoration: none;
+	color: black;
+}
 
- .container {
-    width: 100%;
-    height: 100%;
-    --s: 82px;
-    --c1: #b2b2b2;
-    --c2: #ffffff;
-    --c3: #d9d9d9;
-  
-    --_g: var(--c3) 0 120deg, #0000 0;
-    background: conic-gradient(from -60deg at 50% calc(100% / 3), var(--_g)),
-      conic-gradient(from 120deg at 50% calc(200% / 3), var(--_g)),
-      conic-gradient(
-        from 60deg at calc(200% / 3),
-        var(--c3) 60deg,
-        var(--c2) 0 120deg,
-        #0000 0
-      ),
-      conic-gradient(from 180deg at calc(100% / 3), var(--c1) 60deg, var(--_g)),
-      linear-gradient(
-        90deg,
-        var(--c1) calc(100% / 6),
-        var(--c2) 0 50%,
-        var(--c1) 0 calc(500% / 6),
-        var(--c2) 0
-      );
-    background-size: calc(1.732 * var(--s)) var(--s);
-  }
-  
+.fancy .top-key {
+	height: 2px;
+	width: 1.5625rem;
+	top: -2px;
+	left: 0.625rem;
+	position: absolute;
+	/* background: #e8e8e8; */
+	transition: width 0.5s ease-out, left 0.3s ease-out;
+}
 
-  /* design  */
+.fancy .bottom-key-1 {
+	height: 2px;
+	width: 1.5625rem;
+	right: 1.875rem;
+	bottom: -2px;
+	position: absolute;
+	/* background: #e8e8e8; */
+	transition: width 0.5s ease-out, right 0.3s ease-out;
+}
 
-  /* src/components/LogoUploader.css */
+.fancy .bottom-key-2 {
+	height: 2px;
+	width: 0.625rem;
+	right: 0.625rem;
+	bottom: -2px;
+	position: absolute;
+	/* background: #e8e8e8; */
+	transition: width 0.5s ease-out, right 0.3s ease-out;
+}
+
+.fancy:hover {
+	color: white;
+	background: black;
+}
+
+.fancy:hover::before {
+	width: 0.9375rem;
+	background: white;
+}
+
+.fancy:hover .text {
+	color: white;
+	padding-left: 1.5em;
+}
+
+.fancy:hover .top-key {
+	left: -2px;
+	width: 0px;
+}
+
+.fancy:hover .bottom-key-1,
+.fancy:hover .bottom-key-2 {
+	right: 0;
+	width: 0;
+}
+
+/* Design pattern container */
+
+.container {
+	width: 100%;
+	height: 100%;
+	--s: 82px;
+	--c1: #b2b2b2;
+	--c2: #ffffff;
+	--c3: #d9d9d9;
+
+	--_g: var(--c3) 0 120deg, #0000 0;
+	background: conic-gradient(from -60deg at 50% calc(100% / 3), var(--_g)),
+		conic-gradient(from 120deg at 50% calc(200% / 3), var(--_g)),
+		conic-gradient(
+			from 60deg at calc(200% / 3),
+			var(--c3) 60deg,
+			var(--c2) 0 120deg,
+			#0000 0
+		),
+		conic-gradient(from 180deg at calc(100% / 3), var(--c1) 60deg, var(--_g)),
+		linear-gradient(
+			90deg,
+			var(--c1) calc(100% / 6),
+			var(--c2) 0 50%,
+			var(--c1) 0 calc(500% / 6),
+			var(--c2) 0
+		);
+	background-size: calc(1.732 * var(--s)) var(--s);
+}
+
+/* design  */
+
+/* src/components/LogoUploader.css */
 .logo-uploader-container {
-    text-align: center;
-    padding: 20px;
-  }
-  
-  .upload-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-  }
-  
-  .upload-button:hover {
-    background-color: #0056b3;
-  }
-  
-  .output-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  
-  .output-image {
-    width: 300px;
-    height: 300px;
-    border: 2px solid #007bff;
-    border-radius: 5px;
-  }
-  
+	text-align: center;
+	padding: 20px;
+}
 
+.upload-button {
+	background-color: #007bff;
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	cursor: pointer;
+}
 
-  .image-pattern{
-    background: url("/pattern.png");
-  }
+.upload-button:hover {
+	background-color: #0056b3;
+}
 
+.output-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
 
-  .user-pattern{
-    background: url("/UserProfile/pattern.jpg");
-  }
+.output-image {
+	width: 300px;
+	height: 300px;
+	border: 2px solid #007bff;
+	border-radius: 5px;
+}
 
+.image-pattern {
+	background: url("/pattern.png");
+}
 
+.user-pattern {
+	background: url("/UserProfile/pattern.jpg");
+}
 
-  .slick-slide>div{
-    margin: 0 20px;
-  }
+.slick-slide > div {
+	margin: 0 20px;
+}
 
-  .slick-slide>div:nth-child(1){
-    margin-left: 2em;
-  }
+.slick-slide > div:nth-child(1) {
+	margin-left: 2em;
+}
 
-  .slick-list{
-    margin-right: -30;
-  }
+.slick-list {
+	margin-right: -30;
+}
 
+/* glassmorphism */
 
+.glass {
+	background: rgba(76, 71, 71, 0.595);
+	box-shadow: 0 8px 32px 0 rgba(95, 95, 105, 0.37);
+	backdrop-filter: blur(50.5px);
+	-webkit-backdrop-filter: blur(50.5px);
+	border-radius: 10px;
+	border: 1px solid rgba(255, 255, 255, 0.18);
+}
 
-  /* glassmorphism */
+/* Checkbox */
 
-  .glass {
-    background: rgba(76, 71, 71, 0.595);
-    box-shadow: 0 8px 32px 0 rgba(95, 95, 105, 0.37);
-    backdrop-filter: blur( 50.5px );
-    -webkit-backdrop-filter: blur( 50.5px );
-    border-radius: 10px;
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
-  }
-
-
-  /* Checkbox */
-
-  /* Button 18 */
+/* Button 18 */
 #button-18 .knobs:before,
 #button-18 .knobs span {
-  content: "YES";
-  position: absolute;
-  top: 4px;
-  left: 4px;
-  color: #fff;
-  font-size: 10px;
-  font-weight: bold;
-  text-align: center;
-  line-height: 1;
-  background-color: #03a9f4;
-  border-radius: 2px;
+	content: "YES";
+	position: absolute;
+	top: 4px;
+	left: 4px;
+	color: #fff;
+	font-size: 10px;
+	font-weight: bold;
+	text-align: center;
+	line-height: 1;
+	background-color: #03a9f4;
+	border-radius: 2px;
 }
 
 #button-18 .knobs:before {
-  top: 50%;
-  left: 8px;
-  width: 20px;
-  height: 10px;
-  margin-top: -5px;
-  background-color: transparent;
-  z-index: 2;
+	top: 50%;
+	left: 8px;
+	width: 20px;
+	height: 10px;
+	margin-top: -5px;
+	background-color: transparent;
+	z-index: 2;
 }
 
 #button-18 .knobs span {
-  width: 20px;
-  height: 10px;
-  padding: 9px 4px;
-  transition: 0.3s ease all, left 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
-  z-index: 1;
+	width: 20px;
+	height: 10px;
+	padding: 9px 4px;
+	transition: 0.3s ease all, left 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
+	z-index: 1;
 }
 
 #button-18 .checkbox:active + .knobs:before {
-  left: 10px;
-  width: 46px;
-  height: 4px;
-  color: transparent;
-  margin-top: -2px;
-  background-color: #0095d8;
-  transition: 0.3s ease all;
-  overflow: hidden;
+	left: 10px;
+	width: 46px;
+	height: 4px;
+	color: transparent;
+	margin-top: -2px;
+	background-color: #0095d8;
+	transition: 0.3s ease all;
+	overflow: hidden;
 }
 
 #button-18 .checkbox:active + .knobs span {
-  width: 58px;
+	width: 58px;
 }
 
 #button-18 .checkbox:checked:active + .knobs:before {
-  left: auto;
-  right: 10px;
-  background-color: #d80000;
+	left: auto;
+	right: 10px;
+	background-color: #d80000;
 }
 
 #button-18 .checkbox:checked:active + .knobs span {
-  margin-left: -38px;
+	margin-left: -38px;
 }
 
 #button-18 .checkbox:checked + .knobs:before {
-  content: "NO";
-  left: 47px;
+	content: "NO";
+	left: 47px;
 }
 
 #button-18 .checkbox:checked + .knobs span {
-  left: 42px;
-  background-color: #f44336;
+	left: 42px;
+	background-color: #f44336;
 }
 
 #button-18 .checkbox:checked ~ .layer {
-  background-color: #fcebeb;
+	background-color: #fcebeb;
 }
 .toggle-button-cover {
-  display: table-cell;
-  position: relative;
-  width: 200px;
-  height: 140px;
-  box-sizing: border-box;
+	display: table-cell;
+	position: relative;
+	width: 200px;
+	height: 140px;
+	box-sizing: border-box;
 }
 
 .button-cover {
-  height: 100px;
-  margin: 20px;
-  background-color: #fff;
-  box-shadow: 0 10px 20px -8px #c5d6d6;
-  border-radius: 4px;
+	height: 100px;
+	margin: 20px;
+	background-color: #fff;
+	box-shadow: 0 10px 20px -8px #c5d6d6;
+	border-radius: 4px;
 }
 
 .button-cover:before {
-  counter-increment: button-counter;
-  content: counter(button-counter);
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  color: #d7e3e3;
-  font-size: 12px;
-  line-height: 1;
-  padding: 5px;
+	counter-increment: button-counter;
+	content: counter(button-counter);
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	color: #d7e3e3;
+	font-size: 12px;
+	line-height: 1;
+	padding: 5px;
 }
 
 .button-cover,
 .knobs,
 .layer {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
 }
 
 .button {
-  position: relative;
-  top: 50%;
-  width: 74px;
-  height: 36px;
-  margin: -20px auto 0 auto;
-  overflow: hidden;
+	position: relative;
+	top: 50%;
+	width: 74px;
+	height: 36px;
+	margin: -20px auto 0 auto;
+	overflow: hidden;
 }
 
 .button.r,
 .button.r .layer {
-  border-radius: 100px;
+	border-radius: 100px;
 }
 
 .button.b2 {
-  border-radius: 2px;
+	border-radius: 2px;
 }
 
 .checkbox {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  opacity: 0;
-  cursor: pointer;
-  z-index: 3;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	opacity: 0;
+	cursor: pointer;
+	z-index: 3;
 }
 
 .knobs {
-  z-index: 2;
+	z-index: 2;
 }
 
 .layer {
-  width: 100%;
-  background-color: #ebf7fc;
-  transition: 0.3s ease all;
-  z-index: 1;
+	width: 100%;
+	background-color: #ebf7fc;
+	transition: 0.3s ease all;
+	z-index: 1;
 }
 
 /* Button 1 */
 #button-1 .knobs:before {
-  content: "YES";
-  position: absolute;
-  top: 4px;
-  left: 4px;
-  width: 20px;
-  height: 10px;
-  color: #fff;
-  font-size: 10px;
-  font-weight: bold;
-  text-align: center;
-  line-height: 1;
-  padding: 9px 4px;
-  background-color: #03a9f4;
-  border-radius: 50%;
-  transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
+	content: "YES";
+	position: absolute;
+	top: 4px;
+	left: 4px;
+	width: 20px;
+	height: 10px;
+	color: #fff;
+	font-size: 10px;
+	font-weight: bold;
+	text-align: center;
+	line-height: 1;
+	padding: 9px 4px;
+	background-color: #03a9f4;
+	border-radius: 50%;
+	transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
 }
 
 #button-1 .checkbox:checked + .knobs:before {
-  content: "NO";
-  left: 42px;
-  background-color: #f44336;
+	content: "NO";
+	left: 42px;
+	background-color: #f44336;
 }
 
 #button-1 .checkbox:checked ~ .layer {
-  background-color: #fcebeb;
+	background-color: #fcebeb;
 }
 
 #button-1 .knobs,
 #button-1 .knobs:before,
 #button-1 .layer {
-  transition: 0.3s ease all;
+	transition: 0.3s ease all;
 }
 
 /* Button 2 */
 #button-2 .knobs:before,
 #button-2 .knobs:after {
-  content: "YES";
-  position: absolute;
-  top: 4px;
-  left: 4px;
-  width: 20px;
-  height: 10px;
-  color: #fff;
-  font-size: 10px;
-  font-weight: bold;
-  text-align: center;
-  line-height: 1;
-  padding: 9px 4px;
-  background-color: #03a9f4;
-  border-radius: 50%;
-  transition: 0.3s ease all;
+	content: "YES";
+	position: absolute;
+	top: 4px;
+	left: 4px;
+	width: 20px;
+	height: 10px;
+	color: #fff;
+	font-size: 10px;
+	font-weight: bold;
+	text-align: center;
+	line-height: 1;
+	padding: 9px 4px;
+	background-color: #03a9f4;
+	border-radius: 50%;
+	transition: 0.3s ease all;
 }
 
 #button-2 .knobs:before {
-  content: "YES";
+	content: "YES";
 }
 
 #button-2 .knobs:after {
-  content: "NO";
+	content: "NO";
 }
 
 #button-2 .knobs:after {
-  right: -28px;
-  left: auto;
-  background-color: #f44336;
+	right: -28px;
+	left: auto;
+	background-color: #f44336;
 }
 
 #button-2 .checkbox:checked + .knobs:before {
-  left: -28px;
+	left: -28px;
 }
 
 #button-2 .checkbox:checked + .knobs:after {
-  right: 4px;
+	right: 4px;
 }
 
 #button-2 .checkbox:checked ~ .layer {
-  background-color: #fcebeb;
+	background-color: #fcebeb;
 }
 
 /* Button 3 */
 #button-3 .knobs:before {
-  content: "YES";
-  position: absolute;
-  top: 4px;
-  left: 4px;
-  width: 20px;
-  height: 10px;
-  color: #fff;
-  font-size: 10px;
-  font-weight: bold;
-  text-align: center;
-  line-height: 1;
-  padding: 9px 4px;
-  background-color: #03a9f4;
-  border-radius: 50%;
-  transition: 0.3s ease all, left 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
+	content: "YES";
+	position: absolute;
+	top: 4px;
+	left: 4px;
+	width: 20px;
+	height: 10px;
+	color: #fff;
+	font-size: 10px;
+	font-weight: bold;
+	text-align: center;
+	line-height: 1;
+	padding: 9px 4px;
+	background-color: #03a9f4;
+	border-radius: 50%;
+	transition: 0.3s ease all, left 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
+}
+
+/* blobs */
+
+.blob_1 {
+	width: 100%;
+	height: 100%;
+	background-size: cover;
+	background-position: center center;
+	background-repeat: repeat;
+	background-image: url("data:image/svg+xml;utf8,%3Csvg viewBox=%220 0 1000 1000%22 xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cdefs%3E%3CradialGradient id=%22b%22 r=%22100%25%22 cx=%2250%25%22 cy=%2256%25%22%3E%3Cstop offset=%220%25%22 stop-color=%22%23FBAB7E%22%2F%3E%3Cstop offset=%22100%25%22 stop-color=%22%23F7CE68%22%2F%3E%3C%2FradialGradient%3E%3CclipPath id=%22a%22%3E%3Cpath fill=%22currentColor%22 d=%22M855.5 626q-8.5 126-115 205.5T495 927q-139 16-218.5-95.5T110.5 610Q24 500 80.5 368T261 191q124-45 245.5-64.5t258 31.5q136.5 51 118 196.5t-27 271.5Z%22%2F%3E%3C%2FclipPath%3E%3C%2Fdefs%3E%3Cg clip-path=%22url(%23a)%22%3E%3Cpath fill=%22url(%23b)%22 d=%22M855.5 626q-8.5 126-115 205.5T495 927q-139 16-218.5-95.5T110.5 610Q24 500 80.5 368T261 191q124-45 245.5-64.5t258 31.5q136.5 51 118 196.5t-27 271.5Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
 }
 
 

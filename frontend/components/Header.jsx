@@ -19,6 +19,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Router, { useRouter } from "next/router";
 import designer from "@/pages/auth/designer";
 const Header = () => {
+
   const [isOpen, setIsOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
@@ -230,6 +231,7 @@ const Header = () => {
       {/* <ToastContainer /> */}
     </div>
   );
+
 };
 
 export default Header;

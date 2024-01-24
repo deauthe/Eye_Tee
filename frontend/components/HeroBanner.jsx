@@ -10,30 +10,35 @@ import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
 import { TypeAnimation } from "react-type-animation";
 
 const CustomArrow = ({ onClick, icon: Icon, direction }) => {
+
   const designIt = "Design it";
   const wearIt = "Wear it";
   const lovieIt = "Love it";
   const [isClicked, setIsClicked] = useState(false);
 
-  const handleClick = () => {
-    setIsClicked(true);
-    setTimeout(() => {
-      setIsClicked(false);
-    }, 300); // Adjust the timeout duration based on your preference
-    onClick();
-  };
 
-  return (
-    <div
-      className={`custom-arrow ${direction} ${isClicked ? "clicked" : ""}`}
-      onClick={handleClick}
-    >
-      <Icon />
-    </div>
-  );
+	const [isClicked, setIsClicked] = useState(false);
+
+	const handleClick = () => {
+		setIsClicked(true);
+		setTimeout(() => {
+			setIsClicked(false);
+		}, 300); // Adjust the timeout duration based on your preference
+		onClick();
+	};
+
+	return (
+		<div
+			className={`custom-arrow ${direction} ${isClicked ? "clicked" : ""}`}
+			onClick={handleClick}
+		>
+			<Icon />
+		</div>
+	);
 };
 
 const HeroBanner = () => {
+
   const settings = {
     dots: true,
     infinite: true,

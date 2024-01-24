@@ -1,6 +1,9 @@
 import { data } from "autoprefixer";
 import axios from "axios";
 
+const API_URL = process.env.API_URL || "http://localhost:8080";
+console.log("api url :", API_URL);
+
 export const designerRequest = async (data) => {
 	// const {
 	// 	userId,
@@ -28,7 +31,7 @@ export const designerRequest = async (data) => {
 			"x-api-key": "token",
 			"Content-Type": "multipart/form-data",
 		},
-		url: `${process.env.API_URL}/api/designer/request`,
+		url: `${API_URL}/api/designer/request`,
 		data: formData,
 	};
 
@@ -52,7 +55,7 @@ export const getDesignerPersonalData = async ({ designer_id }) => {
 		headers: {
 			"x-api-key": "token",
 		},
-		url: `${process.env.API_URL}/api/designer/personalProfile/${designer_id}`,
+		url: `${API_URL}/api/designer/personalProfile/${designer_id}`,
 	};
 
 	try {
@@ -75,7 +78,7 @@ export const getDesignerPublicProfile = async ({ designer_id }) => {
 		headers: {
 			"x-api-key": "token",
 		},
-		url: `${process.env.API_URL}/api/designer/viewProfile//${designer_id}`,
+		url: `${API_URL}/api/designer/viewProfile//${designer_id}`,
 	};
 
 	try {
@@ -98,7 +101,7 @@ export const getDesignerProducts = async ({ designer_id, productCategory }) => {
 		headers: {
 			"x-api-key": "token",
 		},
-		url: `${process.env.API_URL}/api/designer/design-images-category/${designer_id}?productCategory=${productCategory}`,
+		url: `${API_URL}/api/designer/design-images-category/${designer_id}?productCategory=${productCategory}`,
 	};
 
 	try {
@@ -117,11 +120,13 @@ export const getAllDesigns = async () => {
 		headers: {
 			"x-api-key": "token",
 		},
-		url: `${process.env.API_URL}/api/designer/design-images/651515097dfd1f7338a6b04b`,
+		url: `${API_URL}/api/designer/design-images/651515097dfd1f7338a6b04b`,
 	};
+	console.log(config);
 
 	try {
 		let response = await axios(config);
+
 		return response.data;
 	} catch (error) {
 		console.error("Error while getting designs", error);
