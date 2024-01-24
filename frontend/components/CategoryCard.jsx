@@ -44,6 +44,7 @@ const CategoryCard = (props) => {
 		return <div>Loading...</div>;
 	}
 
+
 	return (
 		<div
 			className={` relative border border-[#bdbdb9] rounded-md w-[180px] h-[190px] flex flex-col gap-3 justify-center items-center  cursor-pointer`}
@@ -69,6 +70,7 @@ const CategoryCard = (props) => {
 			</div>
 			<div className="w-[102%] bg-[#bdbdb9] h-[1px] absolute bottom-[62px] -rotate-12"></div>
 			{/* {`${[props.category]}`} */}
+
 
 			<div className="absolute bottom-2 right-1">
 				<p className="text-[0.9em] font-bold text-[#C494D6] text-end">
