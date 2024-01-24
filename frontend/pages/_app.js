@@ -10,8 +10,10 @@ import { NextUIProvider } from "@nextui-org/react";
 import { useRouter } from "next/router";
 import AnimatedCursor from "react-animated-cursor";
 export default function App({ Component, pageProps, emotionCache }) {
+
 	const router = useRouter();
 	const [progress, setProgress] = useState(0);
+
 
 	useEffect(() => {
 		// START VALUE - WHEN LOADING WILL START
@@ -43,6 +45,7 @@ export default function App({ Component, pageProps, emotionCache }) {
 					rel="stylesheet"
 				/>
 			</Head>
+
 
 			<AnimatedCursor
 				innerSize={8}
