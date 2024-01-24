@@ -22,6 +22,7 @@ const ProductCard = ({
 			href="/"
 			className="transform overflow-hidden  shadow-lg border border-black/10 md duration-200  cursor-pointer rounded-[20px] "
 		>
+
 			<div className="h-[350px]">
 				<div className="mt-2 mx-2 rounded-lg flex-row flex justify-center ">
 					{product_photo ? (
@@ -36,8 +37,9 @@ const ProductCard = ({
 						<Image width={300} height={300} src="/shirt.png" alt="shirt" />
 					)}
 
+
 					<div className="flex flex-col md:flex-col absolute bottom-48 right-4 justify-center p-1">
-						<div className="border-2 border-black bg-white/[0.8]  rounded-full w-10 h-10 mr-2"></div>
+						{/* <div className="border-2 border-black bg-white/[0.8]  rounded-full w-10 h-10 mr-2"></div> */}
 					</div>
 				</div>
 			</div>

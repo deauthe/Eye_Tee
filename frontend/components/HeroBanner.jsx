@@ -4,6 +4,7 @@ import Image from "next/image";
 import Slider from "react-slick";
 
 const CustomArrow = ({ onClick, icon: Icon, direction }) => {
+
 	const [isClicked, setIsClicked] = useState(false);
 
 	const handleClick = () => {
