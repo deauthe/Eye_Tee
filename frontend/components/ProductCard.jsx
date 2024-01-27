@@ -6,6 +6,7 @@ import { FcLike } from "react-icons/fc";
 import { AiOutlineHeart } from "react-icons/ai";
 //TODO: tshirt animations vertical, pnHover: show backside image
 //later on TODO: add humanmodels in conjunction with clothes on hover
+import { motion } from "framer-motion";
 
 const ProductCard = ({
 	card_type,
@@ -20,7 +21,7 @@ const ProductCard = ({
 	return (
 		<Link
 			href="/"
-			className="transform overflow-hidden  shadow-sm border border-black/90 md duration-200  cursor-pointer rounded-[7px] backdrop-blur-md shadow-sm"
+			className="transform overflow-hidden  shadow-sm border bg-white/80 md duration-200  cursor-pointer rounded-[7px] backdrop-blur-md shadow-sm"
 
 		>
 
@@ -45,7 +46,7 @@ const ProductCard = ({
 				</div>
 			</div>
 
-			<div className="p-2 -mt-5 px-3   shadow-md">
+			<div className="p-2 -mt-[4em] px-3   shadow-md">
 				<h3 className="text-xs  text-black/[0.4]">T-Shirt</h3>
 				<h2 className="text-[0.9em] font-extrabold">
 					Game Over Black Men T-Shirt
