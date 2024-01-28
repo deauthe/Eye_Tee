@@ -179,7 +179,7 @@ const CategorySection = () => {
 				</div>
 			</div>
 
-			<div className=" flex  flex-wrap gap-[40px] mt-[60px] justify-center bg-white py-[70px] shadow-sm border  rounded-lg  ">
+			<div className=" flex  flex-wrap gap-[40px] mt-[60px] justify-center bg-white/80 py-[70px] shadow-sm border  rounded-lg  ">
 				{/* <Slider {...settings}> */}
 
 				{categoriesData.map((category, index) => (

@@ -50,7 +50,7 @@ const HeroBanner = () => {
 				 */}
 				{/* <div className="text-7xl font-bold" id="good"></div> */}
 
-				<div className="text-4xl font-bold ">
+				<div className="text-4xl mt-6 font-bold ">
 					<TypeAnimation
 						preRenderFirstString={true}
 						sequence={[
@@ -63,19 +63,19 @@ const HeroBanner = () => {
 						]}
 						speed={50}
 						style={{ fontSize: "2em" }}
-						repeat={1}
+						repeat={3}
 						cursor={false}
 					/>
 				</div>
-				<p className="text-4xl mt-3 text-[#595957]">
+				<p className="text-4xl mt-8 text-[#595957]">
 					Your Signature Style Awaits
 				</p>
 			</div>
 
-			<div className="flex justify-center mt-7  ">
-				<button className="flex items-center gap-2 border bg-black  p-3 rounded-full pl-6 pr-4 text-white hover:bg-black/10 trasitions-all duration-300 hover:gap-3 active:scale-105 dir ">
+			<div className="flex justify-center mt-[3em]   ">
+				<button className="flex items-center gap-2 border bg-black   p-3 rounded-full pl-[3em] pr-[2em] text-white hover:bg-black/10 trasitions-all duration-300 hover:gap-3 active:scale-105  ">
 					Explore
-					<span className="text-3xl  ">
+					<span className="text-4xl  ">
 						<GoArrowRight />
 					</span>
 				</button>

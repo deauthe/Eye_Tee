@@ -6,6 +6,7 @@ import { FcLike } from "react-icons/fc";
 import { AiOutlineHeart } from "react-icons/ai";
 //TODO: tshirt animations vertical, pnHover: show backside image
 //later on TODO: add humanmodels in conjunction with clothes on hover
+import { motion } from "framer-motion";
 
 const ProductCard = ({
 	card_type,
