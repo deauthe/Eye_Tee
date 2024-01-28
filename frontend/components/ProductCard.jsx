@@ -20,10 +20,8 @@ const ProductCard = ({
 	return (
 		<Link
 			href="/"
-			className="transform overflow-hidden  shadow-sm border border-black/90 md duration-200  cursor-pointer rounded-[7px] backdrop-blur-md shadow-sm"
-
+			className="transform overflow-hidden  border border-black/90 md duration-200  cursor-pointer rounded-[7px] backdrop-blur-md shadow-sm"
 		>
-
 			<div className="h-[350px]">
 				<div className="mt-2 mx-2 rounded-lg flex-row flex justify-center ">
 					{product_photo ? (
@@ -38,14 +36,13 @@ const ProductCard = ({
 						<Image width={300} height={300} src="/shirt.png" alt="shirt" />
 					)}
 
-
 					<div className="flex flex-col md:flex-col absolute bottom-48 right-4 justify-center p-1">
 						{/* <div className="border-2 border-black bg-white/[0.8]  rounded-full w-10 h-10 mr-2"></div> */}
 					</div>
 				</div>
 			</div>
 
-			<div className="p-2 -mt-5 px-3   shadow-md">
+			<div className="p-2 -mt-5 px-3 shadow-md">
 				<h3 className="text-xs  text-black/[0.4]">T-Shirt</h3>
 				<h2 className="text-[0.9em] font-extrabold">
 					Game Over Black Men T-Shirt
@@ -67,7 +64,6 @@ const ProductCard = ({
 							<p className="text-base  font-medium line-through">&#8377;3468</p>
 
 							<button className="skew-x-1 text-sm ml-auto px-2  text-black/90 rounded-sm py-1 border border-black/90 hover:bg-black/[0.05] transition-all duration-200 ">
-
 								Add to cart
 							</button>
 						</>
@@ -88,9 +84,9 @@ const DashboardProductCard = ({
 	return (
 		<Link
 			href="/"
-			className="transform overflow-hidden  shadow-lg border border-black/10 md duration-200  cursor-pointer rounded-[20px] "
+			className="transform overflow-hidden  shadow-lg bg-white/[0.5] border border-black/10 md duration-200  cursor-pointer rounded-[20px] "
 		>
-			<div className="h-[350px]">
+			<div className="h-[250px]">
 				<div className="mt-2 mx-2 rounded-lg flex-row flex justify-center ">
 					{product_photo ? (
 						<Image
@@ -101,7 +97,7 @@ const DashboardProductCard = ({
 							className="object-cover"
 						/>
 					) : (
-						<Image width={300} height={300} src="/shirt.png" alt="shirt" />
+						<Image width={200} height={200} src="/shirt.png" alt="shirt" />
 					)}
 				</div>
 			</div>
