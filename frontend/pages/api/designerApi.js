@@ -45,7 +45,7 @@ export const designerRequest = async (data) => {
 	}
 };
 
-export const getDesignerPersonalData = async ({ designer_id }) => {
+export const getDesignerPersonalData = async (designer_id) => {
 	if (!designer_id) {
 		console.error("please provide a designer id");
 		throw new Error("no id Provided");
@@ -121,6 +121,27 @@ export const getAllDesigns = async () => {
 			"x-api-key": "token",
 		},
 		url: `${API_URL}/api/designer/design-images/651515097dfd1f7338a6b04b`,
+	};
+	console.log(config);
+
+	try {
+		let response = await axios(config);
+
+		return response.data;
+	} catch (error) {
+		console.error("Error while getting designs", error);
+		// Handle the error appropriately
+		throw error;
+	}
+};
+
+export const getArtistsDesigns = async (designer_id) => {
+	const config = {
+		method: "GET",
+		headers: {
+			"x-api-key": "token",
+		},
+		url: `${API_URL}/api/designer/design-images/${designer_id}`,
 	};
 	console.log(config);
 
