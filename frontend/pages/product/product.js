@@ -7,6 +7,7 @@ import RelatedProducts from "@/components/RelatedProducts";
 import ReactMarkdown from "react-markdown";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart } from "@/store/cartSlice";
+import { IoCartOutline } from "react-icons/io5";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

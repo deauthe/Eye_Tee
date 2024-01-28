@@ -54,12 +54,12 @@ export default function App({ Component, pageProps, emotionCache }) {
 				innerScale={1}
 				outerScale={2}
 				outerAlpha={0}
-				hasBlendMode={true}
+				hasBlendMode={false}
 				innerStyle={{
 					backgroundColor: "black",
 				}}
 				outerStyle={{
-					border: "1px solid black",
+					border: "2px solid black",
 				}}
 			/>
 
