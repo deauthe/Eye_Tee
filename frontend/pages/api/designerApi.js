@@ -78,7 +78,7 @@ export const getDesignerPublicProfile = async (designer_id) => {
 		headers: {
 			"x-api-key": "token",
 		},
-		url: `${API_URL}/api/designer/viewProfile//${designer_id}`,
+		url: `${API_URL}/api/designer/viewProfile/${designer_id}`,
 	};
 
 	try {

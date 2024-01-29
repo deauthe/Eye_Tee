@@ -1,9 +1,9 @@
 import Wrapper from "@/components/Wrapper";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import profile from "../../public/profileImage.png";
 import EditProfile from "@/components/EditProfile";
-import banerImage from "../../public/coverImage.png";
+import bannerImage from "../../public/coverImage.png";
 import DesignCarousel from "@/components/DesignCarousel";
 import CreateProduct from "@/components/CreateProduct";
 import Products from "../../utils/Products.json";
@@ -11,7 +11,11 @@ import ProductCard from "@/components/ProductCard";
 import { useRouter } from "next/router";
 import { MdPerson3 } from "react-icons/md";
 import { RiUserFollowLine } from "react-icons/ri";
-import { getDesignerPublicProfile } from "../api/designerApi";
+import {
+	getDesignerPersonalData,
+	getDesignerPublicProfile,
+} from "../api/designerApi";
+import ShareButton from "@/components/utils/ShareButton";
 const items = [
 	{ item: "Hoodie", color: "red" },
 	{ item: "T-Shirts", color: "blue" },
@@ -24,26 +28,67 @@ const items = [
 	{ item: "Phone Covers", color: "" },
 ];
 
-const ArtistInfoCard = () => {
+const ArtistInfoCard = ({ designerId }) => {
+	const [name, setName] = useState("eye eye tee user");
+	const [followerData, setFollowerData] = useState({
+		followers: 0,
+		following: 0,
+	});
+	const [socialMediaLinks, setSocialMediaLinks] = useState([]);
+
+	useEffect(() => {
+		const fetchArtistInfo = async () => {
+			try {
+				let data;
+				let publicData;
+				if (designerId) {
+					data = await getDesignerPersonalData(designerId);
+					publicData = await getDesignerPublicProfile(designerId);
+					console.log("designerData = ", data, publicData);
+					if (data) {
+						setName(data.fullname);
+						if (data.socialMedia) {
+							setSocialMediaLinks(data.socialMedia);
+						}
+					}
+					if (publicData) {
+						setFollowerData({
+							following: publicData.followers
+								? length(publicData.following)
+								: 0,
+							followers: publicData.followers
+								? length(publicData.followers)
+								: 0,
+						});
+					}
+				}
+			} catch (error) {
+				console.error("Error fetching designer Data, please check Id:", error);
+			}
+		};
+		fetchArtistInfo();
+	}, []);
 	return (
 		<>
-			<h3 className="font-[600] text-3xl uppercase text-black">
+			<h3 className="font-[600] text-3xl uppercase text-center text-black">
 				{" "}
-				Samanvay Arya
+				{name}
 			</h3>
 			<div className="border-t-1  border-[#918b85] my-1"></div>
 			<div className="flex flex-col mx-auto text-center">
-				<span className="mr-2 text-md flex flex-row justify-center gap-5 text-black font-mono font-semibold ">
-					300 Followers <MdPerson3 />
+				<span className="mr-2 text-lg flex flex-row justify-center gap-5 text-black font-mono font-semibold ">
+					{followerData.followers} Followers <MdPerson3 />
 				</span>
-				<span className="mr-2 text-md font-mono font-semibold flex flex-row justify-center gap-5">
-					300 Following <RiUserFollowLine />
+				<span className="mr-2 text-lg font-mono font-semibold flex flex-row justify-center gap-5">
+					{followerData.following} Following <RiUserFollowLine />
 				</span>
-				<button className="rounded-md w-1/2 text-center border-2 border-black/[0.7] mx-auto text-clip mt-4 bg-gradient-instagram-link opacity-90">
-					<p className="w-full overflow-hidden overflow-ellipsis text-black/[0.9] py-1 opacity-90 text-sm">
-						@Samanvay
-					</p>
-				</button>
+				{socialMediaLinks[0] ? (
+					<button className="rounded-md w-1/2 text-center border-2 border-black/[0.7] mx-auto text-clip mt-4 bg-gradient-instagram-link opacity-90">
+						<p className="w-full overflow-hidden overflow-ellipsis text-black/[0.9] py-1 opacity-90 text-sm">
+							{socialMediaLinks[0] ? socialMedia[0] : 0}
+						</p>
+					</button>
+				) : null}
 			</div>
 		</>
 	);
@@ -53,32 +98,60 @@ const UserProfile = () => {
 	const [selectedItem, setSelectedItem] = useState("all");
 	const [filteredProducts, setFilteredProducts] = useState(Products);
 	const [loading, setLoading] = useState(true);
+	const [designerData, setDesignerData] = useState();
 	const [analytics, setAnalytics] = useState([]);
 	const [profileImage, setProfileImage] = useState({ profile });
+	const [coverImage, setCoverImage] = useState(bannerImage);
+	const parentRef = useRef(null);
+
+	// Function to update the image width based on the parent width
+	const updateCoverParentWidth = () => {
+		const parentWidth = parentRef.current.clientWidth;
+		// Set the width of the image to the parent width
+		setImageWidth(parentWidth);
+	};
+
+	// State to store the image width
+	const [imageWidth, setImageWidth] = useState(0);
+
+	useEffect(() => {
+		updateCoverParentWidth();
+
+		// Event listener for parent element resize
+		window.addEventListener("resize", updateCoverParentWidth);
+
+		// Cleanup the event listener on component unmount
+		return () => {
+			window.removeEventListener("resize", updateCoverParentWidth);
+		};
+	}, []);
+
 	const router = useRouter();
 
 	// Access query parameters
 	const { query } = router;
 	const id = query.designer_id;
-	const designerId = id;
+	let designerId = id;
+	if (!designerId) designerId = "656f24446f2ab5347da947bd"; //TODO:remove static data
 
 	useEffect(() => {
-		const fetchImages = async () => {
+		const fetchData = async () => {
 			try {
 				let data;
 				if (designerId) {
 					data = await getDesignerPublicProfile(designerId);
-				} else {
+					console.log("profile Image: ", data.profileImage);
+					if (data.profileImage) setProfileImage(data.profileImage);
+					if (data.coverImage) setCoverImage(data.coverImage);
 				}
 			} catch (error) {
-				// Handle error
-				console.error("Error fetching su images:", error);
+				console.error("Error fetching designer Data, please check Id:", error);
 			} finally {
 				setLoading(false);
 			}
 		};
 
-		fetchImages();
+		fetchData();
 	}, []);
 
 	const handleItemChange = (event) => {
@@ -95,30 +168,39 @@ const UserProfile = () => {
 		}
 	};
 
+	console.log("designerID:", designerId);
 	return (
 		<Wrapper>
 			<div className="bg-[#f7d59c] h-[11em] relative mb-[60px] mt-2">
-				<div className="  h-[11em] overflow-hidden relative rounded-md">
+				<div
+					ref={parentRef}
+					className="h-[11em] overflow-hidden relative rounded-md"
+				>
 					<Image
-						src={banerImage}
+						src={coverImage}
 						alt="Banner"
 						className="w-full h-full object-cover -z-10"
+						width={imageWidth}
+						height={"200"}
 					></Image>
 				</div>
 				<div className="overflow-hidden rounded-md  inline-block absolute bottom-[-40px] left-[20px]">
-					<Image src={profile} alt="profile" width={170} height={170} />
+					<Image src={profileImage} alt="profile" width={170} height={170} />
 				</div>
 				<div>
 					<div className=" text-white font-[500] flex items-center justify-center gap-1 rounded-full  absolute right-[200px] bottom-[-15px]">
 						<CreateProduct />
+					</div>
+					<div className=" text-white font-[500] flex items-center justify-center gap-1 rounded-full  absolute right-[410px] bottom-[-15px]">
+						<ShareButton />
 					</div>
 				</div>
 
 				<div className="text-white font-[500] flex items-center justify-center gap-1 bg-blue-400 rounded-full p-1 px-3 absolute right-[40px] bottom-[-15px]">
 					<EditProfile />
 				</div>
-				<div className="absolute left-[200px] top-[80px] text-black bg-white/[0.8] p-2 rounded-lg  shadow-lg z-10 border-black/[0.5] border-1 ">
-					<ArtistInfoCard />
+				<div className="absolute left-[200px] top-[80px] text-black bg-white/[0.8] p-2 rounded-lg  shadow-lg z-10 border-black/[0.5] border-1 w-80 ">
+					<ArtistInfoCard designerId={designerId} />
 				</div>
 			</div>
 
