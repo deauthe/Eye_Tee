@@ -1,5 +1,5 @@
 import Wrapper from "@/components/Wrapper";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import profile from "../../public/profileImage.png";
 import EditProfile from "@/components/EditProfile";
@@ -10,6 +10,7 @@ import products from "../../utils/Products.json";
 import ProductCard from "@/components/ProductCard";
 import LineChart from "@/components/utils/LineChart";
 import BarChart from "@/components/utils/BarCharts";
+import { getDesignerPersonalData } from "../api/designerApi";
 
 const items = [
 	{ item: "Hoodie", color: "red" },
@@ -112,7 +113,7 @@ const Products = () => {
 	);
 };
 
-const ArtistInfo = () => {
+const ArtistInfo = ({ designerData }) => {
 	return (
 		<div className="h-96 shadow-lg  bg-black/[0.2] rounded-xl border-1 border-black/[0.2]">
 			<div className=" mx-auto grid grid-cols-2 gap-1 p-10 h-full">
@@ -137,10 +138,17 @@ const ArtistInfo = () => {
 				</div>
 				<div className="h-48">
 					<Image
-						src={profile}
+						src={
+							designerData
+								? designerData.profileImage
+									? designerData.profileImage.url
+									: profile
+								: profile
+						}
 						alt="haha"
 						className="object-cover mx-auto mb-auto"
-						height={250}
+						height={250 | 300}
+						width={250 | 200}
 					/>
 				</div>
 			</div>
@@ -180,11 +188,41 @@ const SalesInfo = ({ data }) => {
 };
 
 const DesignerDashboard = () => {
-	return (
+	const [designerId, setDesignerId] = useState("6582e851c96c5d839da3f526");
+	const [doesNotExist, setDoesNotExist] = useState(false);
+	const [designerData, setDesignerData] = useState();
+	const [loading, setLoading] = useState(true);
+
+	useEffect(() => {
+		const fetchDesignerData = async (designerId) => {
+			try {
+				let data;
+				if (designerId) {
+					data = await getDesignerPersonalData(designerId);
+					console.log("designer data:", data);
+					setDesignerData(data);
+					if (!data) {
+						setDoesNotExist(true);
+					}
+				} else {
+					setDoesNotExist(true);
+				}
+			} catch (error) {
+				// Handle error
+				console.error("designer data not found:", error);
+			} finally {
+				setLoading(false);
+			}
+		};
+
+		fetchDesignerData(designerId);
+	}, []);
+
+	return !doesNotExist ? (
 		<Wrapper>
 			<div className="mx-10">
 				<div className="grid grid-cols-2 gap-10 mt-32 h-96">
-					<ArtistInfo />
+					<ArtistInfo designerData={designerData} />
 					<SalesInfo />
 				</div>
 				<div className="mt-10 mb-10">
@@ -196,6 +234,8 @@ const DesignerDashboard = () => {
 				</div>
 			</div>
 		</Wrapper>
+	) : (
+		<div>designer does not exist</div>
 	);
 };
 

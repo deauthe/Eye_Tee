@@ -4,16 +4,23 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import ProductCard from "./ProductCard";
 import DesignerCard from "./DesignerCard";
-import { getAllDesigns } from "@/pages/api/designerApi";
+import { getAllDesigns, getArtistsDesigns } from "@/pages/api/designerApi";
 
-const DesignCarousel = () => {
+const DesignCarousel = ({ designerId }) => {
 	const [designData, setProductData] = useState([]);
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		const fetchImages = async () => {
 			try {
-				const data = await getAllDesigns();
+				let data;
+				if (designerId) {
+					console.log("id exists as", designerId);
+
+					data = await getArtistsDesigns(designerId);
+				} else {
+					data = await getAllDesigns();
+				}
 				console.log("designData = ", data);
 				setProductData(data.designs);
 			} catch (error) {

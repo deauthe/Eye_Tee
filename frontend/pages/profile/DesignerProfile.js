@@ -1,5 +1,5 @@
 import Wrapper from "@/components/Wrapper";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import profile from "../../public/profileImage.png";
 import EditProfile from "@/components/EditProfile";
@@ -8,6 +8,8 @@ import DesignCarousel from "@/components/DesignCarousel";
 import CreateProduct from "@/components/CreateProduct";
 import Products from "../../utils/Products.json";
 import ProductCard from "@/components/ProductCard";
+import { useRouter } from "next/router";
+import { getDesignerPublicProfile } from "../api/designerApi";
 const items = [
 	{ item: "Hoodie", color: "red" },
 	{ item: "T-Shirts", color: "blue" },
@@ -23,6 +25,33 @@ const items = [
 const UserProfile = () => {
 	const [selectedItem, setSelectedItem] = useState("all");
 	const [filteredProducts, setFilteredProducts] = useState(Products);
+	const [analytics, setAnalytics] = useState([]);
+	const [profileImage, setProfileImage] = useState({ profile });
+	const router = useRouter();
+
+	// Access query parameters
+	const { query } = router;
+	const id = query.designer_id;
+	const designerId = id;
+
+	useEffect(() => {
+		const fetchImages = async () => {
+			try {
+				let data;
+				if (designerId) {
+					data = await getDesignerPublicProfile();
+				} else {
+				}
+			} catch (error) {
+				// Handle error
+				console.error("Error fetching su images:", error);
+			} finally {
+				setLoading(false);
+			}
+		};
+
+		fetchImages();
+	}, []);
 
 	const handleItemChange = (event) => {
 		const selectedCategory = event.target.value;
@@ -81,7 +110,7 @@ const UserProfile = () => {
 				</div>
 
 				<div className="w-3/4 mx-auto border-[#c1bcb6] border-1 pt-10 px-20 pb-0 border-b-0 drop-shadow-2xl shadow-[0px_-35px_25px_-30px_rgba(0,0,0,0.3)] rounded-lg">
-					<DesignCarousel />
+					<DesignCarousel designerId={designerId} />
 				</div>
 			</div>
 
