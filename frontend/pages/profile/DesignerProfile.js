@@ -9,6 +9,8 @@ import CreateProduct from "@/components/CreateProduct";
 import Products from "../../utils/Products.json";
 import ProductCard from "@/components/ProductCard";
 import { useRouter } from "next/router";
+import { MdPerson3 } from "react-icons/md";
+import { RiUserFollowLine } from "react-icons/ri";
 import { getDesignerPublicProfile } from "../api/designerApi";
 const items = [
 	{ item: "Hoodie", color: "red" },
@@ -22,9 +24,35 @@ const items = [
 	{ item: "Phone Covers", color: "" },
 ];
 
+const ArtistInfoCard = () => {
+	return (
+		<>
+			<h3 className="font-[600] text-3xl uppercase text-black">
+				{" "}
+				Samanvay Arya
+			</h3>
+			<div className="border-t-1  border-[#918b85] my-1"></div>
+			<div className="flex flex-col mx-auto text-center">
+				<span className="mr-2 text-md flex flex-row justify-center gap-5 text-black font-mono font-semibold ">
+					300 Followers <MdPerson3 />
+				</span>
+				<span className="mr-2 text-md font-mono font-semibold flex flex-row justify-center gap-5">
+					300 Following <RiUserFollowLine />
+				</span>
+				<button className="rounded-md w-1/2 text-center border-2 border-black/[0.7] mx-auto text-clip mt-4 bg-gradient-instagram-link opacity-90">
+					<p className="w-full overflow-hidden overflow-ellipsis text-black/[0.9] py-1 opacity-90 text-sm">
+						@Samanvay
+					</p>
+				</button>
+			</div>
+		</>
+	);
+};
+
 const UserProfile = () => {
 	const [selectedItem, setSelectedItem] = useState("all");
 	const [filteredProducts, setFilteredProducts] = useState(Products);
+	const [loading, setLoading] = useState(true);
 	const [analytics, setAnalytics] = useState([]);
 	const [profileImage, setProfileImage] = useState({ profile });
 	const router = useRouter();
@@ -39,7 +67,7 @@ const UserProfile = () => {
 			try {
 				let data;
 				if (designerId) {
-					data = await getDesignerPublicProfile();
+					data = await getDesignerPublicProfile(designerId);
 				} else {
 				}
 			} catch (error) {
@@ -89,18 +117,8 @@ const UserProfile = () => {
 				<div className="text-white font-[500] flex items-center justify-center gap-1 bg-blue-400 rounded-full p-1 px-3 absolute right-[40px] bottom-[-15px]">
 					<EditProfile />
 				</div>
-				<div className="absolute left-[675px] top-[70px] text-[#555555] bg-[#eee2dcf1] p-2 rounded-lg  shadow-lg z-10 border-[#a1a1a1] border-1 ">
-					<h3 className="font-[600] text-3xl uppercase"> Samanvay Arya</h3>
-					<div className="border-t-1  border-[#c1bcb6] my-1"></div>
-					<div className="flex flex-col">
-						<p>
-							<span className="mr-2 font-[700]">300</span>Followers
-						</p>
-						<p>
-							<span className="mr-2 font-[700]">300</span>Following
-						</p>
-					</div>
-					<p>@asamanvay</p>
+				<div className="absolute left-[200px] top-[80px] text-black bg-white/[0.8] p-2 rounded-lg  shadow-lg z-10 border-black/[0.5] border-1 ">
+					<ArtistInfoCard />
 				</div>
 			</div>
 
