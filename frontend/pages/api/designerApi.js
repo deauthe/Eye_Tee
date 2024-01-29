@@ -68,7 +68,7 @@ export const getDesignerPersonalData = async (designer_id) => {
 	}
 };
 
-export const getDesignerPublicProfile = async ({ designer_id }) => {
+export const getDesignerPublicProfile = async (designer_id) => {
 	if (!designer_id) {
 		console.error("please provide a designer id");
 		throw new Error("no id Provided");
