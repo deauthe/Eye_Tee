@@ -12,7 +12,7 @@ const RelatedProducts = () => {
     },
     tablet: {
       breakpoint: { max: 1023, min: 464 },
-      items: 2,
+      items: 3,
     },
     mobile: {
       breakpoint: { max: 767, min: 0 },
@@ -29,9 +29,7 @@ const RelatedProducts = () => {
         itemClass="px-[10px]"
       >
         {[0, 1, 2, 3, 4].map((product, index) => (
-          <div className="bg-white rounded-md shadow">
-            <ProductCard key={index} />
-          </div>
+          <ProductCard />
         ))}
       </Carousel>
     </div>

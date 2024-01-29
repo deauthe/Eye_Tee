@@ -21,7 +21,7 @@ const ProductCard = ({
 	return (
 		<Link
 			href="/"
-			className="transform overflow-hidden  border border-black/90 md duration-200  cursor-pointer rounded-[7px] backdrop-blur-md shadow-sm"
+			className="transform overflow-hidden  border-2 border-black md duration-200  cursor-pointer rounded-[20px] backdrop-blur-md shadow-sm bg-white"
 		>
 			<div className="h-[350px]">
 				<div className="mt-2 mx-2 rounded-lg flex-row flex justify-center ">
@@ -64,7 +64,7 @@ const ProductCard = ({
 						<>
 							<p className="text-base  font-medium line-through">&#8377;3468</p>
 
-							<button className="skew-x-1 text-sm ml-auto px-2  text-black/90 rounded-sm py-1 border border-black/90 hover:bg-black/[0.05] transition-all duration-200 ">
+							<button className="skew-x-1 text-sm ml-auto px-2  text-black/90 rounded-md py-1 border border-black/90 hover:bg-black/[0.05] transition-all duration-200 ">
 								Add to cart
 							</button>
 						</>
@@ -85,7 +85,7 @@ const DashboardProductCard = ({
 	return (
 		<Link
 			href="/"
-			className="transform overflow-hidden  shadow-lg bg-white/[0.5] border border-black/10 md duration-200  cursor-pointer rounded-[20px] "
+			className="transform overflow-hidden  "
 		>
 			<div className="h-[250px]">
 				<div className="mt-2 mx-2 rounded-lg flex-row flex justify-center ">

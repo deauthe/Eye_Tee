@@ -113,7 +113,7 @@ const Header = () => {
 
   return (
     <div
-      className={`w-full h-[50px] md:h-[80px]  flex justify-between  z-20 fixed bg-white top-0 transition-all duration-500  px-5   ${show}  `}
+      className={`w-full h-[50px] md:h-[80px]  flex justify-between  z-20 fixed bg-white top-0 transition-all duration-500  px-5    `}
     >
       {/* <div
     className={`bg-red-w-full flex justify-between`}
@@ -178,9 +178,9 @@ const Header = () => {
           </Link>
 
           <div onClick={toggleDropdown} onMouseOver={handleMouseEvents}>
-            <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative">
+            <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex justify-center items-center cursor-pointer relative hover:bg-black/10">
               <CgProfile
-                className={`text-[17px] md:text-[25px] ${textColor}`}
+                className={`text-[17px] md:text-[25px] `}
               />
             </div>
           </div>
