@@ -10,6 +10,7 @@ import products from "../../utils/Products.json";
 import ProductCard from "@/components/ProductCard";
 import LineChart from "@/components/utils/LineChart";
 import BarChart from "@/components/utils/BarCharts";
+
 const items = [
 	{ item: "Hoodie", color: "red" },
 	{ item: "T-Shirts", color: "blue" },
@@ -36,7 +37,13 @@ const Analytics = () => {
 		// Add more data as needed
 	];
 	return (
-		<div className="grid grid-cols-4 gap-10">
+		<div className="grid grid-cols-4 gap-10 bg-black/[0.8] p-5 rounded-xl shadow-lg">
+			<div className="">
+				<LineChart data={lineChartData} />
+			</div>
+			<div className="">
+				<BarChart data={barChartData} />
+			</div>
 			<div className="">
 				<LineChart data={lineChartData} />
 			</div>
@@ -55,9 +62,9 @@ const Products = () => {
 		setSelectedItem(selectedCategory);
 
 		if (selectedCategory === "all") {
-			setFilteredProducts(Products);
+			setFilteredProducts(products);
 		} else {
-			const filteredItems = Products.filter(
+			const filteredItems = products.filter(
 				(product) => product.category.toLowerCase() === selectedCategory
 			);
 			setFilteredProducts(filteredItems);
@@ -65,15 +72,18 @@ const Products = () => {
 	};
 
 	return (
-		<div>
-			<div className="flex flex-row justify-end">
+		<div className="">
+			<div className="flex flex-row justify-between">
+				<div className="text-white/[0.5] uppercase text-3xl">
+					Product Wise Analysis
+				</div>
 				<div className="">
 					{/* <label htmlFor="itemDropdown">Select an item:</label> */}
 					<select
 						id="itemDropdown"
 						value={selectedItem}
 						onChange={handleItemChange}
-						className="p-2 text-xl bg-transparent border-1 text-[#504d4a] border-[#c1bcb6] rounded-xl"
+						className="p-2 text-xl border-1 border-black/[0.5] text-[#504d4a] rounded-md bg-white/[0.5]"
 					>
 						<option value="all">All</option>
 						{items.map((item, index) => (
@@ -84,7 +94,7 @@ const Products = () => {
 								{item.item}
 							</option>
 						))}
-					</select>
+					</select>{" "}
 				</div>
 			</div>
 
@@ -102,36 +112,88 @@ const Products = () => {
 	);
 };
 
+const ArtistInfo = () => {
+	return (
+		<div className="h-96 shadow-lg  bg-black/[0.2] rounded-xl border-1 border-black/[0.2]">
+			<div className=" mx-auto grid grid-cols-2 gap-1 p-10 h-full">
+				<div className="text-black/[0.7]  p-2 rounded-lg z-10 h-fit">
+					<h3 className="font-[600] text-5xl uppercase mb-5"> Samanvay Arya</h3>
+					<div className="border-t-1 border-[#c1bcb6] my-1"></div>
+					<div className="grid grid-rows-4 gap-2 uppercase justify-between mt-5">
+						<p>
+							<span className="mr-2 font-[700]">300</span>Followers
+						</p>
+						<p>
+							<span className="mr-2 font-[700]">300</span>Following
+						</p>
+						<p>
+							<span className="mr-2 font-[700]">700</span>products sold
+						</p>
+						<p>
+							<span className="mr-2 font-[700]">6</span>designs
+						</p>
+					</div>
+					<p className="mt-5">@asamanvay</p>
+				</div>
+				<div className="h-48">
+					<Image
+						src={profile}
+						alt="haha"
+						className="object-cover mx-auto mb-auto"
+						height={250}
+					/>
+				</div>
+			</div>
+		</div>
+	);
+};
+
+const SalesInfo = ({ data }) => {
+	return (
+		<div className="grid grid-cols-2 gap-5 shadow-lg bg-black/[0.2] p-5 h-96 rounded-xl border-1 border-black">
+			<div className="artist_info grid grid-rows-3 h-3/4 my-auto  text-black/[0.7] font-extrabold text-2xl gap-5">
+				<div className="flex flex-col ">
+					<div className="uppercase">total sales</div>
+					<div className="text-xl">$400</div>
+				</div>
+				<div className="flex flex-col">
+					<div className="uppercase">revenue</div>
+					<div className="text-xl">$250</div>
+				</div>
+				<div className="flex flex-col">
+					<div className="uppercase">artist cut</div>
+					<div className="text-xl text-green-800/[0.8]">$100</div>
+				</div>
+
+				<div className="mt-10">
+					<CreateProduct />
+				</div>
+			</div>
+			<div className="flex flex-col">
+				<div className=" uppercase mx-auto text-2xl text-white/[0.5]">
+					MVP product
+				</div>
+				<ProductCard card_type="dashboard" />
+			</div>
+		</div>
+	);
+};
+
 const DesignerDashboard = () => {
 	return (
 		<Wrapper>
-			<div className="grid grid-cols-2 gap-10  my-5">
-				<div className="artist_photo h-48 ">
-					<div className="border-2  w-48 h-48 object-cover mx-auto">
-						<Image src={profile} alt="haha" className="object-cover ml-auto" />
-					</div>
+			<div className="mx-10">
+				<div className="grid grid-cols-2 gap-10 mt-32 h-96">
+					<ArtistInfo />
+					<SalesInfo />
 				</div>
-				<div className="artist_info grid grid-rows-3 h-48 font-extrabold text-2xl gap-10">
-					<div className="flex flex-col ">
-						<div className="uppercase">total sales</div>
-						<div className="text-xl">$400</div>
-					</div>
-					<div className="flex flex-col">
-						<div className="uppercase">revenue</div>
-						<div className="text-xl">$250</div>
-					</div>
-					<div className="flex flex-col">
-						<div className="uppercase">artist cut</div>
-						<div className="text-xl">$100</div>
-					</div>
+				<div className="mt-10 mb-10">
+					<Analytics />
 				</div>
-			</div>
-			<div className="mx-10 mt-32 mb-10">
-				<Analytics />
-			</div>
 
-			<div className="mx-10 my-10">
-				<Products />
+				<div className=" mt-10 bg-black/[0.8] p-5 rounded-xl mb-10">
+					<Products />
+				</div>
 			</div>
 		</Wrapper>
 	);
