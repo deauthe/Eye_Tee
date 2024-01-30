@@ -3,7 +3,8 @@ import Image from "next/image";
 import Carousel from "react-multi-carousel";
 
 
-const Designers = ({ data }) => {
+const 
+Designers = ({ data }) => {
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
