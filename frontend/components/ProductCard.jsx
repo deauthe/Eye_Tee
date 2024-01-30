@@ -21,6 +21,7 @@ const ProductCard = ({
 	return (
 		<Link
 			href="/"
+			
 			className="transform overflow-hidden  border-2 border-black md duration-200  cursor-pointer rounded-[20px] backdrop-blur-md shadow-sm bg-white"
 		>
 			<div className="h-[350px]">
@@ -84,7 +85,7 @@ const DashboardProductCard = ({
 }) => {
 	return (
 		<Link
-			href="/"
+			href="/productDetails"
 			className="transform overflow-hidden  "
 		>
 			<div className="h-[250px]">
