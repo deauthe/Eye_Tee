@@ -9,6 +9,10 @@ import {
 	useDisclosure,
 } from "@nextui-org/react";
 import { MdOutlineIosShare } from "react-icons/md";
+import { TbClipboardCopy } from "react-icons/tb";
+import { GrInstagram } from "react-icons/gr";
+import { FaXTwitter } from "react-icons/fa6";
+import { FaFacebook } from "react-icons/fa";
 
 export default function ShareButton() {
 	const { isOpen, onOpen, onClose } = useDisclosure();
@@ -59,6 +63,30 @@ export default function ShareButton() {
 		// Close the modal after submission
 		onClose();
 	};
+	const copyToClipboard = () => {
+		const currentUrl = window.location.href;
+
+		// Attempt to use the modern clipboard API
+		if (navigator.clipboard) {
+			navigator.clipboard
+				.writeText(currentUrl)
+				.then(() => {
+					console.log("URL copied to clipboard");
+				})
+				.catch((err) => {
+					console.error("Failed to copy URL to clipboard", err);
+				});
+		} else {
+			// Fallback for older browsers
+			const textarea = document.createElement("textarea");
+			textarea.value = currentUrl;
+			document.body.appendChild(textarea);
+			textarea.select();
+			document.execCommand("copy");
+			document.body.removeChild(textarea);
+			console.log("URL copied to clipboard (fallback)");
+		}
+	};
 
 	return (
 		<>
@@ -86,16 +114,35 @@ export default function ShareButton() {
 					{(onClose) => (
 						<>
 							<ModalHeader className="flex flex-col gap-1">Share</ModalHeader>
-							<ModalBody>
-								<div className="rounded-md"></div>
+							<ModalBody className="">
+								<div className="rounded-md mx-auto flex flex-row gap-5">
+									<Button
+										color="default"
+										variant="ghost"
+										onPress={copyToClipboard}
+									>
+										<TbClipboardCopy className="text-xl" />
+									</Button>
+									<Button
+										color="primary"
+										variant="ghost"
+										onPress={copyToClipboard}
+									>
+										<FaFacebook className="text-2xl" />
+									</Button>
+									<Button
+										color="primary"
+										variant="ghost"
+										onPress={copyToClipboard}
+									>
+										<GrInstagram className="text-2xl" />
+									</Button>
+								</div>
 							</ModalBody>
 							<ModalFooter>
 								{/* <Button color="primary" variant="light" onPress={onClose}>
                   Close
                 </Button> */}
-								<Button color="primary" variant="ghost" onPress={onClose}>
-									Next
-								</Button>
 							</ModalFooter>
 						</>
 					)}
