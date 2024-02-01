@@ -52,7 +52,7 @@ const DesignCarousel = ({ designerId }) => {
 		<div className=" ">
 			<Carousel
 				responsive={responsive}
-				containerClass="-mx-[10px]"
+				containerClass="-mx-[10px] h-[300px]"
 				itemClass="px-[10px]"
 			>
 				{designData.map((product, index) => (

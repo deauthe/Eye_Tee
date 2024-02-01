@@ -73,7 +73,7 @@ const HeroBanner = () => {
 			</div>
 
 			<div className="flex justify-center mt-[3em]   ">
-				<button className="flex items-center gap-2 border bg-black   p-3 rounded-full pl-[3em] pr-[2em] text-white hover:bg-black/10 trasitions-all duration-300 hover:gap-3 active:scale-105  ">
+				<button className="flex items-center gap-2 border bg-black   p-3 rounded-full pl-[3em] pr-[2em] text-white   hover:gap-3 active:scale-105  ">
 					Explore
 					<span className="text-4xl  ">
 						<GoArrowRight />

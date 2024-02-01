@@ -192,7 +192,7 @@ const UserProfile = () => {
 					<div className=" text-white font-[500] flex items-center justify-center gap-1 rounded-full  absolute right-[200px] bottom-[-15px]">
 						<CreateProduct />
 					</div>
-					<div className=" text-white font-[500] flex items-center justify-center gap-1 rounded-full  absolute right-[410px] bottom-[-15px]">
+					<div className=" text-white font-[500] flex items-center justify-center gap-1 rounded-full  absolute right-[410px] bottom-[-15px] shadow-sm">
 						<ShareButton />
 					</div>
 					<div className=" text-white font-[500] flex items-center justify-center gap-1 rounded-full  absolute right-[610px] bottom-[-15px]">

@@ -6,6 +6,7 @@ import CategorySection from "@/components/CategorySection";
 import Designers from "@/components/Designers";
 
 import ExploreSection from "@/components/ExploreSection";
+import { CarouselSpacing } from "@/components/carasoul";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,6 +16,7 @@ export default function Home() {
 			<div className="mt-1 text-start">
 				<HeroBanner />
 			</div>
+
 
 			<Wrapper>
 
