@@ -1,5 +1,6 @@
 import Wrapper from "@/components/Wrapper";
 import React, { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import Image from "next/image";
 import profile from "../../public/profileImage.png";
 import EditProfile from "@/components/EditProfile";
@@ -194,6 +195,9 @@ const UserProfile = () => {
 					<div className=" text-white font-[500] flex items-center justify-center gap-1 rounded-full  absolute right-[410px] bottom-[-15px]">
 						<ShareButton />
 					</div>
+					<div className=" text-white font-[500] flex items-center justify-center gap-1 rounded-full  absolute right-[610px] bottom-[-15px]">
+						<Link href="localhost:3000/profile/DesignerProfile">dashboard</Link>
+					</div>
 				</div>
 
 				<div className="text-white font-[500] flex items-center justify-center gap-1 bg-blue-400 rounded-full p-1 px-3 absolute right-[40px] bottom-[-15px]">
@@ -209,7 +213,7 @@ const UserProfile = () => {
 					Your Designs
 				</div>
 
-				<div className="w-3/4 mx-auto border-[#c1bcb6] border-1 pt-10 px-20 pb-0 border-b-0 drop-shadow-2xl shadow-[0px_-35px_25px_-30px_rgba(0,0,0,0.3)] rounded-lg">
+				<div className="w-3/4 mx-auto mt-10 mb-14 border-[#c1bcb6] border-1 pt-10 px-20 pb-0 border-b-0 drop-shadow-2xl shadow-[0px_-35px_25px_-30px_rgba(0,0,0,0.3)] rounded-lg">
 					<DesignCarousel designerId={designerId} />
 				</div>
 			</div>
