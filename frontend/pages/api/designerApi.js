@@ -96,12 +96,18 @@ export const getDesignerProducts = async ({ designer_id, productCategory }) => {
 		console.error("please provide a designer id");
 		throw new Error("no id Provided");
 	}
+	let url;
+	if (!productCategory) {
+		url = `${API_URL}/api/designer/design-images-category/${designer_id}`;
+	} else {
+		url = `${API_URL}/api/designer/design-images-category/${designer_id}?productCategory=${productCategory}`;
+	}
 	const config = {
 		method: "GET",
 		headers: {
 			"x-api-key": "token",
 		},
-		url: `${API_URL}/api/designer/design-images-category/${designer_id}?productCategory=${productCategory}`,
+		url,
 	};
 
 	try {
@@ -151,6 +157,27 @@ export const getArtistsDesigns = async (designer_id) => {
 		return response.data;
 	} catch (error) {
 		console.error("Error while getting designs", error);
+		// Handle the error appropriately
+		throw error;
+	}
+};
+
+export const getPublicSettings = async (designer_id) => {
+	const config = {
+		method: "GET",
+		headers: {
+			"x-api-key": "token",
+		},
+		url: `${API_URL}/api/designer/update-settings/${designer_id}`,
+	};
+	console.log(config);
+
+	try {
+		let response = await axios(config);
+
+		return response.data;
+	} catch (error) {
+		console.error("Error while getting public settings", error);
 		// Handle the error appropriately
 		throw error;
 	}
