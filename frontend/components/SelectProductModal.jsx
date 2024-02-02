@@ -14,6 +14,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { getProducts } from "@/pages/api/productApis";
 import { getDesignerProducts } from "@/pages/api/designerApi";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const SelectProductModal = ({ designerId }) => {
 	const [products, setProducts] = useState();
@@ -46,12 +47,13 @@ const SelectProductModal = ({ designerId }) => {
 				// Handle error
 				console.error("Error fetching su images:", error);
 			} finally {
-				setLoading(false);
+				setLoading(true);
 			}
 		};
 
 		fetchProducts();
 	}, []);
+
 	return (
 		<Dialog>
 			<DialogTrigger className="text-sm   w-full h-full my-auto ">
@@ -68,7 +70,15 @@ const SelectProductModal = ({ designerId }) => {
 					</DialogDescription>
 				</DialogHeader>
 				<div className="grid grid-cols-3 gap-5 items-center">
-					{products ? (
+					{loading ? (
+						[1, 2, 3, 4, 5].map((e) => {
+							return (
+								<div className="rounded-md shadow-md h-40 flex flex-col gap-2 bg-black/[0.1] ">
+									<Skeleton className="w-full h-full rounded-md" />
+								</div>
+							);
+						})
+					) : products ? (
 						products.map((p) => (
 							<div className="rounded-md shadow-md h-40 flex flex-col gap-2 bg-black/[0.1] p-2">
 								<Image
