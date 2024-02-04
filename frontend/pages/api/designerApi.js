@@ -120,13 +120,13 @@ export const getDesignerProducts = async ({ designer_id, productCategory }) => {
 	}
 };
 
-export const getAllDesigns = async () => {
+export const getAllDesigns = async ({ designer_id }) => {
 	const config = {
 		method: "GET",
 		headers: {
 			"x-api-key": "token",
 		},
-		url: `${API_URL}/api/designer/design-images/651515097dfd1f7338a6b04b`,
+		url: `${API_URL}/api/designer/design-images/${designer_id}`,
 	};
 	console.log(config);
 
@@ -168,7 +168,30 @@ export const getPublicSettings = async (designer_id) => {
 		headers: {
 			"x-api-key": "token",
 		},
+		url: `${API_URL}/api/designer/show-designer-settings/${designer_id}`,
+	};
+	console.log(config);
+
+	try {
+		let response = await axios(config);
+		console.log("public settings", response.data);
+
+		return response.data;
+	} catch (error) {
+		console.error("Error while getting public settings", error);
+		// Handle the error appropriately
+		throw error;
+	}
+};
+
+export const setPublicSettings = async ({ designer_id, settings }) => {
+	const config = {
+		method: "POST",
+		headers: {
+			"x-api-key": "token",
+		},
 		url: `${API_URL}/api/designer/update-settings/${designer_id}`,
+		data: settings,
 	};
 	console.log(config);
 
@@ -178,6 +201,29 @@ export const getPublicSettings = async (designer_id) => {
 		return response.data;
 	} catch (error) {
 		console.error("Error while getting public settings", error);
+		// Handle the error appropriately
+		throw error;
+	}
+};
+
+export const getDesignerMadeFinalProducts = async ({ designer_id }) => {
+	const config = {
+		method: "GET",
+		headers: {
+			"x-api-key": "token",
+		},
+		url: `${API_URL}/api/finalproduct/products/designer/${designer_id}`,
+	};
+	console.log(config);
+
+	try {
+		let response = await axios(config);
+		console.log("response fronm api: ", response);
+		console.log("designer Id", designer_id);
+
+		return response.data;
+	} catch (error) {
+		console.error("Error while getting desiner products", error);
 		// Handle the error appropriately
 		throw error;
 	}

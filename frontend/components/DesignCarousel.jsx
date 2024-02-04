@@ -56,9 +56,8 @@ const DesignCarousel = ({ designerId }) => {
 				itemClass="px-[10px]"
 			>
 				{designData.map((product, index) => (
-					<div>
+					<div key={index}>
 						<DesignerCard
-							key={index}
 							cardNo={index}
 							photo={product.designImages[0].url}
 							description={product.description}

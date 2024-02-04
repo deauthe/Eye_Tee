@@ -96,7 +96,7 @@ export default function ShareButton() {
 					variant="flat"
 					color="warning"
 					onPress={() => handleOpen()}
-					className="flex items-center gap-1 bg-black hover:bg-black text-white hover:text-white transition-all duration-300 px-0 py-2 rounded-full"
+					className="flex items-center gap-1 bg-black hover:bg-black text-white hover:text-white transition-all duration-300 px-2 py-2 rounded-full"
 				>
 					<span>
 						<MdOutlineIosShare />

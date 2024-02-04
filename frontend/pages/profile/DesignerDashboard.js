@@ -217,7 +217,7 @@ const DesignerDashboard = () => {
 				// Handle error
 				console.error("designer data not found:", error);
 			} finally {
-				setLoading(false);
+				setLoading(true);
 			}
 		};
 
