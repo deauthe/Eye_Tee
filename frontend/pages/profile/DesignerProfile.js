@@ -13,21 +13,12 @@ import { useRouter } from "next/router";
 import { MdPerson3 } from "react-icons/md";
 import { RiUserFollowLine } from "react-icons/ri";
 import {
+	getDesignerMadeFinalProducts,
 	getDesignerPersonalData,
 	getDesignerPublicProfile,
 } from "../api/designerApi";
 import ShareButton from "@/components/utils/ShareButton";
-const items = [
-	{ item: "Hoodie", color: "red" },
-	{ item: "T-Shirts", color: "blue" },
-	{ item: "Z-Hoodies", color: "red" },
-	{ item: "Mugs", color: "purple" },
-	{ item: "Z-Shirts", color: "blue" },
-	{ item: "Bottles", color: "" },
-	{ item: "Stickers", color: "" },
-	{ item: "Tote Bags", color: "" },
-	{ item: "Phone Covers", color: "" },
-];
+import useDesignerProducts from "@/components/utils/useDesignerProducts";
 
 const ArtistInfoCard = ({ designerId }) => {
 	const [name, setName] = useState("eye eye tee user");
@@ -96,14 +87,28 @@ const ArtistInfoCard = ({ designerId }) => {
 };
 
 const UserProfile = () => {
+	const router = useRouter();
+
+	// Access query parameters
+	const { query } = router;
+	const id = query.designer_id;
+	let designerId = id;
+	if (!designerId) designerId = "651515097dfd1f7338a6b04b"; //TODO:remove static data
+
+	const [products, loadingproducts] = useDesignerProducts(designerId);
 	const [selectedItem, setSelectedItem] = useState("all");
-	const [filteredProducts, setFilteredProducts] = useState(Products);
+	const [filteredProducts, setFilteredProducts] = useState(products);
+	console.log("filtered products", filteredProducts);
 	const [loading, setLoading] = useState(true);
 	const [designerData, setDesignerData] = useState();
 	const [analytics, setAnalytics] = useState([]);
 	const [profileImage, setProfileImage] = useState({ profile });
 	const [coverImage, setCoverImage] = useState(bannerImage);
 	const parentRef = useRef(null);
+
+	useEffect(() => {
+		setFilteredProducts(products);
+	}, [products]);
 
 	// Function to update the image width based on the parent width
 	const updateCoverParentWidth = () => {
@@ -127,16 +132,8 @@ const UserProfile = () => {
 		};
 	}, []);
 
-	const router = useRouter();
-
-	// Access query parameters
-	const { query } = router;
-	const id = query.designer_id;
-	let designerId = id;
-	if (!designerId) designerId = "656f24446f2ab5347da947bd"; //TODO:remove static data
-
 	useEffect(() => {
-		const fetchData = async () => {
+		const fetchDesignerData = async () => {
 			try {
 				let data;
 				if (designerId) {
@@ -152,17 +149,19 @@ const UserProfile = () => {
 			}
 		};
 
-		fetchData();
+		fetchDesignerData();
 	}, []);
 
 	const handleItemChange = (event) => {
 		const selectedCategory = event.target.value;
 		setSelectedItem(selectedCategory);
+		console.log("current products:", products);
 
 		if (selectedCategory === "all") {
-			setFilteredProducts(Products);
+			setFilteredProducts(products);
+			console.log("current products:", products);
 		} else {
-			const filteredItems = Products.filter(
+			const filteredItems = products.filter(
 				(product) => product.category.toLowerCase() === selectedCategory
 			);
 			setFilteredProducts(filteredItems);
@@ -224,7 +223,7 @@ const UserProfile = () => {
 			<div className="border-t-1  border-[#c1bcb6] my-2"></div>
 			<div className="flex flex-row justify-end">
 				<div className="">
-					{/* <label htmlFor="itemDropdown">Select an item:</label> */}
+					<label htmlFor="itemDropdown">Select an item:</label>
 					<select
 						id="itemDropdown"
 						value={selectedItem}
@@ -232,14 +231,18 @@ const UserProfile = () => {
 						className="p-2 text-xl bg-transparent border-1 text-[#504d4a] border-[#c1bcb6] rounded-xl"
 					>
 						<option value="all">All</option>
-						{items.map((item, index) => (
-							<option
-								key={index}
-								value={item.item.toLowerCase().replace(" ", "")}
-							>
-								{item.item}
-							</option>
-						))}
+						{!products ? (
+							<div>loading</div>
+						) : (
+							products.map((item, index) => (
+								<option
+									key={index}
+									value={item.category.toLowerCase().replace(" ", "")}
+								>
+									{item.category}
+								</option>
+							))
+						)}
 					</select>
 				</div>
 			</div>
@@ -248,6 +251,7 @@ const UserProfile = () => {
 				{filteredProducts.map((e, index) => (
 					<ProductCard key={index} product={e} product_photo="/C_hoodie.png" />
 				))}
+				{console.log("inside component", filteredProducts)}
 			</div>
 		</Wrapper>
 	);

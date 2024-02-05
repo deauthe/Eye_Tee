@@ -11,7 +11,6 @@ import { FaMugHot } from "react-icons/fa";
 import { IoIosMore } from "react-icons/io";
 
 const DesignerCard = (props) => {
-	console.log(props);
 	const [imgSrc, setImgSrc] = useState(props.photo);
 	const [fade, setFade] = useState(false);
 
