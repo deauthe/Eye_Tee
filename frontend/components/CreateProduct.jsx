@@ -1,81 +1,77 @@
 import React, { useState } from "react";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
 } from "@/components/ui/dialog";
 
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 import Editor from "./Editor";
 
 export default function CreateProduct() {
-  // body content
+	// body content
 
-  // const [formData, setFormData] = useState({
-  // 	description: "",
-  // 	address: "",
-  // 	firstName: "",
-  // 	lastName: "",
-  // 	portfolioLinks: "",
-  // 	socialMediaLinks: "",
-  // });
+	// const [formData, setFormData] = useState({
+	// 	description: "",
+	// 	address: "",
+	// 	firstName: "",
+	// 	lastName: "",
+	// 	portfolioLinks: "",
+	// 	socialMediaLinks: "",
+	// });
 
-  // const [errorMsg, setErrorMsg] = useState("");
+	// const [errorMsg, setErrorMsg] = useState("");
 
-  // const handleInputChange = (e) => {
-  // 	const { name, value } = e.target;
-  // 	setFormData({
-  // 		...formData,
-  // 		[name]: value,
-  // 	});
-  // };
+	// const handleInputChange = (e) => {
+	// 	const { name, value } = e.target;
+	// 	setFormData({
+	// 		...formData,
+	// 		[name]: value,
+	// 	});
+	// };
 
-  // const handleSubmit = (e) => {
-  // 	e.preventDefault();
+	// const handleSubmit = (e) => {
+	// 	e.preventDefault();
 
-  // 	// Check for blank inputs
-  // 	const emptyFields = Object.keys(formData).filter((key) => !formData[key]);
-  // 	if (emptyFields.length > 0) {
-  // 		setErrorMsg("Please fill in all fields.");
-  // 		return;
-  // 	}
+	// 	// Check for blank inputs
+	// 	const emptyFields = Object.keys(formData).filter((key) => !formData[key]);
+	// 	if (emptyFields.length > 0) {
+	// 		setErrorMsg("Please fill in all fields.");
+	// 		return;
+	// 	}
 
-  // Clear error message
-  // setErrorMsg("");
+	// Clear error message
+	// setErrorMsg("");
 
-  // Perform other actions (e.g., submit the form)
-  // Add your logic here
+	// Perform other actions (e.g., submit the form)
+	// Add your logic here
 
-  // Close the modal after submission
-  // onClose();
-  // };
+	// Close the modal after submission
+	// onClose();
+	// };
 
-  return (
-    <>
-      <Dialog>
-        <DialogTrigger>
-        
-            <div className="flex items-center gap-1 bg-black hover:bg-black text-white hover:text-white transition-all duration-300 px-5 py-2 rounded-full">
-              Create a Product
-              <span>
-                <MdOutlineProductionQuantityLimits />
-              </span>
-            </div>
-        
-        </DialogTrigger>
-		<DialogContent maxWidth="max-w-xl">
-          <DialogHeader>
-            <DialogTitle>Edit Your Profile</DialogTitle>
-            <DialogDescription className="max-w-full">
-              <Editor/>
-            </DialogDescription>
-          </DialogHeader>
-        </DialogContent>
-      
-      </Dialog>
-    </>
-  );
+	return (
+		<>
+			<Dialog className="w-full">
+				<DialogTrigger>
+					<div className="flex items-center gap-1 bg-black hover:bg-black text-white hover:text-white transition-all duration-300 px-5 py-2 rounded-full">
+						Create a Product
+						<span>
+							<MdOutlineProductionQuantityLimits />
+						</span>
+					</div>
+				</DialogTrigger>
+				<DialogContent className="w-2/3">
+					<DialogHeader>
+						<DialogTitle>Edit Your Profile</DialogTitle>
+						<DialogDescription className="max-w-full"></DialogDescription>
+					</DialogHeader>
+					<Editor />
+				</DialogContent>
+			</Dialog>
+		</>
+	);
 }
