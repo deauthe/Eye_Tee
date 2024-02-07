@@ -88,7 +88,7 @@ const DashboardProductCard = ({
 			href="/productDetails"
 			className="transform overflow-hidden  "
 		>
-			<div className="h-[250px]">
+			<div className="h-[250px] w-[200px]">
 				<div className="mt-2 mx-2 rounded-lg flex-row flex justify-center ">
 					{product_photo ? (
 						<Image
