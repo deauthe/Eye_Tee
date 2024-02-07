@@ -11,6 +11,7 @@ import ProductCard from "@/components/ProductCard";
 import LineChart from "@/components/utils/LineChart";
 import BarChart from "@/components/utils/BarCharts";
 import { getDesignerPersonalData } from "../api/designerApi";
+import SettingsSheet from "@/components/SettingsSheet";
 
 const items = [
 	{ item: "Hoodie", color: "red" },
@@ -158,23 +159,28 @@ const ArtistInfo = ({ designerData }) => {
 
 const SalesInfo = ({ data }) => {
 	return (
-		<div className="grid grid-cols-2 gap-5 shadow-lg bg-black/[0.2] p-5 h-96 rounded-xl border-1 border-black">
-			<div className="artist_info grid grid-rows-3 h-3/4 my-auto  text-black/[0.7] font-extrabold text-2xl gap-5">
-				<div className="flex flex-col ">
-					<div className="uppercase">total sales</div>
-					<div className="text-xl">$400</div>
-				</div>
-				<div className="flex flex-col">
-					<div className="uppercase">revenue</div>
-					<div className="text-xl">$250</div>
-				</div>
-				<div className="flex flex-col">
-					<div className="uppercase">artist cut</div>
-					<div className="text-xl text-green-800/[0.8]">$100</div>
+		<div className="grid grid-cols-2 gap-5 shadow-lg bg-black/[0.2] p-5 h-96 rounded-xl border-1 border-black ">
+			<div className="artist_info grid grid-rows-6 h-3/4 text-black/[0.7] font-extrabold text-2xl gap-3 ">
+				<div className="row-span-3">
+					<div className="flex flex-col ">
+						<div className="uppercase">total sales</div>
+						<div className="text-xl">$400</div>
+					</div>
+					<div className="flex flex-col">
+						<div className="uppercase">revenue</div>
+						<div className="text-xl">$250</div>
+					</div>
+					<div className="flex flex-col">
+						<div className="uppercase">artist cut</div>
+						<div className="text-xl text-green-800/[0.8]">$100</div>
+					</div>
 				</div>
 
-				<div className="mt-10">
+				<div className="mt-5">
 					<CreateProduct />
+				</div>
+				<div className="mt-7">
+					<SettingsSheet />
 				</div>
 			</div>
 			<div className="flex flex-col">
@@ -211,7 +217,7 @@ const DesignerDashboard = () => {
 				// Handle error
 				console.error("designer data not found:", error);
 			} finally {
-				setLoading(false);
+				setLoading(true);
 			}
 		};
 
