@@ -1,112 +1,81 @@
 import React, { useState } from "react";
 import {
-	Modal,
-	ModalContent,
-	ModalHeader,
-	ModalBody,
-	ModalFooter,
-	Button,
-	useDisclosure,
-} from "@nextui-org/react";
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 import Editor from "./Editor";
 
 export default function CreateProduct() {
-	const { isOpen, onOpen, onClose } = useDisclosure();
-	const [backdrop, setBackdrop] = React.useState("opaque");
+  // body content
 
-	const handleOpen = () => {
-		setBackdrop("opaque");
-		onOpen();
-	};
+  // const [formData, setFormData] = useState({
+  // 	description: "",
+  // 	address: "",
+  // 	firstName: "",
+  // 	lastName: "",
+  // 	portfolioLinks: "",
+  // 	socialMediaLinks: "",
+  // });
 
-	// body content
+  // const [errorMsg, setErrorMsg] = useState("");
 
-	const [formData, setFormData] = useState({
-		description: "",
-		address: "",
-		firstName: "",
-		lastName: "",
-		portfolioLinks: "",
-		socialMediaLinks: "",
-	});
+  // const handleInputChange = (e) => {
+  // 	const { name, value } = e.target;
+  // 	setFormData({
+  // 		...formData,
+  // 		[name]: value,
+  // 	});
+  // };
 
-	const [errorMsg, setErrorMsg] = useState("");
+  // const handleSubmit = (e) => {
+  // 	e.preventDefault();
 
-	const handleInputChange = (e) => {
-		const { name, value } = e.target;
-		setFormData({
-			...formData,
-			[name]: value,
-		});
-	};
+  // 	// Check for blank inputs
+  // 	const emptyFields = Object.keys(formData).filter((key) => !formData[key]);
+  // 	if (emptyFields.length > 0) {
+  // 		setErrorMsg("Please fill in all fields.");
+  // 		return;
+  // 	}
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
+  // Clear error message
+  // setErrorMsg("");
 
-		// Check for blank inputs
-		const emptyFields = Object.keys(formData).filter((key) => !formData[key]);
-		if (emptyFields.length > 0) {
-			setErrorMsg("Please fill in all fields.");
-			return;
-		}
+  // Perform other actions (e.g., submit the form)
+  // Add your logic here
 
-		// Clear error message
-		setErrorMsg("");
+  // Close the modal after submission
+  // onClose();
+  // };
 
-		// Perform other actions (e.g., submit the form)
-		// Add your logic here
-
-		// Close the modal after submission
-		onClose();
-	};
-
-	return (
-		<>
-			<div className="flex flex-wrap gap-3">
-				<Button
-					key="a"
-					variant="flat"
-					color="warning"
-					onPress={() => handleOpen()}
-					className="flex items-center gap-1 bg-black hover:bg-black text-white hover:text-white transition-all duration-300 px-5 py-2 rounded-full"
-				>
-					Create a Product
-					<span>
-						<MdOutlineProductionQuantityLimits />
-					</span>
-				</Button>
-			</div>
-			<Modal
-				size="5xl"
-				backdrop={backdrop}
-				isOpen={isOpen}
-				onClose={onClose}
-				className="w-[800px]"
-			>
-				<ModalContent>
-					{(onClose) => (
-						<>
-							<ModalHeader className="flex flex-col gap-1">
-								Edit Your Profile
-							</ModalHeader>
-							<ModalBody>
-								<div className="">
-									<Editor />
-								</div>
-							</ModalBody>
-							<ModalFooter>
-								{/* <Button color="primary" variant="light" onPress={onClose}>
-                  Close
-                </Button> */}
-								<Button color="primary" variant="ghost" onPress={onClose}>
-									Next
-								</Button>
-							</ModalFooter>
-						</>
-					)}
-				</ModalContent>
-			</Modal>
-		</>
-	);
+  return (
+    <>
+      <Dialog>
+        <DialogTrigger>
+        
+            <div className="flex items-center gap-1 bg-black hover:bg-black text-white hover:text-white transition-all duration-300 px-5 py-2 rounded-full">
+              Create a Product
+              <span>
+                <MdOutlineProductionQuantityLimits />
+              </span>
+            </div>
+        
+        </DialogTrigger>
+		<DialogContent maxWidth="max-w-xl">
+          <DialogHeader>
+            <DialogTitle>Edit Your Profile</DialogTitle>
+            <DialogDescription className="max-w-full">
+              <Editor/>
+            </DialogDescription>
+          </DialogHeader>
+        </DialogContent>
+      
+      </Dialog>
+    </>
+  );
 }

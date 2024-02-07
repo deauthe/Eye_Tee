@@ -19,6 +19,7 @@ import {
 } from "../api/designerApi";
 import ShareButton from "@/components/utils/ShareButton";
 import useDesignerProducts from "@/components/utils/useDesignerProducts";
+import ModelWindow from "@/components/modelWindow";
 
 const ArtistInfoCard = ({ designerId }) => {
 	const [name, setName] = useState("eye eye tee user");
@@ -191,9 +192,9 @@ const UserProfile = () => {
 					<div className=" text-white font-[500] flex items-center justify-center gap-1 rounded-full  absolute right-[200px] bottom-[-15px]">
 						<CreateProduct />
 					</div>
-					<div className=" text-white font-[500] flex items-center justify-center gap-1 rounded-full  absolute right-[410px] bottom-[-15px] shadow-sm">
+					{/* <div className=" text-white font-[500] flex items-center justify-center gap-1 rounded-full  absolute right-[410px] bottom-[-15px] shadow-sm">
 						<ShareButton />
-					</div>
+					</div> */}
 					<div className=" text-white font-[500] flex items-center justify-center gap-1 rounded-full  absolute right-[610px] bottom-[-15px]">
 						<Link href="localhost:3000/profile/DesignerProfile">dashboard</Link>
 					</div>
@@ -246,6 +247,8 @@ const UserProfile = () => {
 					</select>
 				</div>
 			</div>
+
+		
 
 			<div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5 my-6 px-5 md:px-0">
 				{filteredProducts.map((e, index) => (
