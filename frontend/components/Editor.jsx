@@ -20,7 +20,6 @@ const Editor = () => {
   const [nameError, setNameError] = useState("");
   const [descriptionError, setDescriptionError] = useState("");
 
-
   const handleUploadDesign = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -134,7 +133,6 @@ const Editor = () => {
         method: "POST",
         headers: {
           "x-api-key": apiKey,
-          
         },
         body: formData,
       });
@@ -144,12 +142,12 @@ const Editor = () => {
       // Check if the response contains designImage[0].url
       if (responseData.designImage && responseData.designImage.length > 0) {
         const imageUrl = responseData.designImage[0].url;
-        toast.success("Added Design Successfully")
+        toast.success("Added Design Successfully");
         // Navigate to the /image-design route
         router.push(`/image-editor?url=${imageUrl}`);
       }
     } catch (err) {
-      toast.error("Error in adding design")
+      toast.error("Error in adding design");
       console.log(err);
     }
   };
@@ -161,16 +159,18 @@ const Editor = () => {
           <div>
             <div className=" shadow-none image-pattern flex gap-[90px] justify-center items-center  h-[400px] bg-gray-100/75 my-6 rounded-md ">
               <div className="flex flex-col  items-center ">
-                <div className="border-2 border-dashed border-black rounded-md shadow-sm p-2 h-[300px] flex justify-center items-center ">
+                <div className="border-2 border-dashed border-black rounded-md shadow-sm p-2 h-[300px] flex justify-center items-center w-[300px]">
                   <img
                     src={userDesign || "/image_editor.png"}
                     alt="User Design"
                     width={300}
+                    className="object-contain w-full h-full"
+                    // prperty to fit the images in the container
                   />
                 </div>
 
                 {!isDesignUploaded && (
-                  <label>
+                  <label >
                     <input
                       type="file"
                       accept="image/*"
@@ -204,7 +204,7 @@ const Editor = () => {
                         onChange={handleUploadAgain}
                       />
                       <button
-                        className=" font-bold text-black border-2 border-black rounded-full p-2 px-4 bg-transparent shadow-md hover:bg-black hover:text-white mt-3"
+                        className=" flex justify-center items-center font-bold text-black border-2 border-black rounded-full p-2 px-4 bg-transparent shadow-md hover:bg-black hover:text-white mt-3"
                         style={{
                           border: "1px solid black",
                           textDecoration: "none",
@@ -257,7 +257,7 @@ const Editor = () => {
 
                     <button
                       onClick={handleSubmit}
-                      className="bg-blue-500 text-white font-bold text-xl p-3 px-6 rounded-full hover:bg-transparent hover:border-5 hover:border-blue-400 transitions-all duration-100 "
+                      className="bg-blue-500 text-white font-bold text-xl p-3 px-6 rounded-full  active:scale-95  transitions-all duration-100 "
                     >
                       Create Design
                     </button>

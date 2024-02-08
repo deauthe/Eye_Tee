@@ -213,7 +213,7 @@ const UserProfile = () => {
 					Your Designs
 				</div>
 
-				<div className="w-3/4 mx-auto mt-10 mb-14 border-[#c1bcb6] border-1 pt-10 px-20 pb-0 border-b-0 drop-shadow-2xl shadow-[0px_-35px_25px_-30px_rgba(0,0,0,0.3)] rounded-lg">
+				<div className="w-3/4 mx-auto mt-10 mb-14 border-[#c1bcb6] border-1 pt-10 px-20 pb-0 border-b-0  rounded-lg md:w-[97%]">
 					<DesignCarousel designerId={designerId} />
 				</div>
 			</div>
