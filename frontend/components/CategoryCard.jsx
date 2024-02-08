@@ -27,17 +27,7 @@ const CategoryCard = (props) => {
   }, [props.category]);
 
   const handleCategoryClick = (category) => {
-    // Get the existing query parameters
-    const existingQuery = { ...router.query };
-
-    // Add or update the 'category' parameter
-    existingQuery.category = category;
-
-    // Use the router to replace the URL with the updated query parameters
-    router.replace({
-      pathname: router.pathname,
-      query: existingQuery,
-    });
+   router.push(`/CategoryDetail?category=${category}`)
   };
 
   if (loading) {

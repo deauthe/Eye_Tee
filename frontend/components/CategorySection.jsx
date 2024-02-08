@@ -70,6 +70,9 @@ const NextArrow = (props) => {
 	);
 };
 
+
+
+
 const CategorySection = () => {
 	var settings = {
 		dots: true,
@@ -183,12 +186,16 @@ const CategorySection = () => {
 				{/* <Slider {...settings}> */}
 
 				{categoriesData.map((category, index) => (
-					<div key={index} className="mt-[30px]">
+					<div key={index} className="mt-[30px]" 
+					// onClick={handleCategoryPage}
+					>
 						<CategoryCard
 							key={index}
 							name={category.item}
 							color={category.color}
 							category={category.item}
+
+
 						/>
 					</div>
 				))}

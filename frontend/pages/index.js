@@ -24,7 +24,6 @@ export default function Home() {
 				<div>
 					<Designers/>
 				</div>
-				<SheetDemo/>
 				<div className="  text-start  mx-0 my-[90px]">
 					<CategorySection />
 				</div>
