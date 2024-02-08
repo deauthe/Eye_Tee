@@ -76,12 +76,13 @@ function ImageEditor() {
       <div className="flex  justify-between mx-8 mt-10  mb-5 ">
         <div className="grid grid-row-7 bg-zinc-300 w-[26em] rounded-[30px]">
           <div className="row-span-4 flex justify-center items-center object-contain">
-            <div className=" bg-gray-200 w-[90%] flex items-center justify-center h-[90%] rounded-lg shadow-none">
+            <div className=" bg-gray-200 w-[90%] flex items-center justify-center h-[90%] rounded-lg shadow-none relative">
               <Image
                 src={designImg}
                 width={200}
                 height={200}
                 alt="designImage"
+                className="object-contain"
               />
             </div>
           </div>

@@ -64,7 +64,7 @@ export default function CreateProduct() {
 						</span>
 					</div>
 				</DialogTrigger>
-				<DialogContent className="lg:w-[40%] md:w-[80%]">
+				<DialogContent className="lg:w-[40%] md:w-[80%] w-[80%]">
 					<DialogHeader>
 						<DialogTitle>Edit Your Profile</DialogTitle>
 						<DialogDescription className="max-w-full"></DialogDescription>
