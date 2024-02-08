@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { GrView } from "react-icons/gr";
 import {
   Sheet,
   SheetClose,
@@ -12,23 +13,24 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Image from "next/image";
-export function SheetDemo({ productPhoto }) {
+export function SheetDemo({ imageUrl}) {
+    console.log("this is sheet deo",imageUrl);
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline">O</Button>
+        <Button variant="outline"><GrView/></Button>
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
-          <SheetTitle>Edit profile</SheetTitle>
+          <SheetTitle>T-Shirt</SheetTitle>
           <SheetDescription>
-            Make changes to your profile here. Click save when you're done.
+          Game Over Black Men T-Shirt
           </SheetDescription>
         </SheetHeader>
         <div className="">
           <div className="">
             <Image
-              src={productPhoto}
+              src={imageUrl}
               alt="rpod"
               width={200}
               height={200}

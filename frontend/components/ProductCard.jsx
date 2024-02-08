@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React,{useState} from "react";
 import { FiShare2 } from "react-icons/fi";
 import { FcLike } from "react-icons/fc";
 import { AiOutlineHeart } from "react-icons/ai";
@@ -10,16 +10,32 @@ import { motion } from "framer-motion";
 import { SheetDemo } from "./Sheet";
 
 const ProductCard = ({
-	prodImageUrl,
+	mainImageUrl,
 	category,
 	color,
 	price,
-	productId
+	productId,
+	otherImages
 }) => {
-	console.log("prod iamge url", prodImageUrl)
+	console.log("prod iamge url", otherImages[2])
 	// if (card_type === "dashboard") {
 	// 	return <DashboardProductCard data="" />;
+
+
 	// }
+
+	 const [image, setImage] = useState(mainImageUrl ? mainImageUrl :'/shirt.png');
+
+	 const handleHover = ()=>{
+		setImage(otherImages[2]);
+	 }
+
+	 const handleMouseLeave = () => {
+		setImage(mainImageUrl ? mainImageUrl :'/shirt.png');
+	  };
+
+
+
 	return (
 		<Link
 			href="/"
@@ -27,14 +43,14 @@ const ProductCard = ({
 			className="transform overflow-hidden  border-2 border-black md duration-200  cursor-pointer rounded-[20px] backdrop-blur-md shadow-sm bg-white relative"
 		>
 			<div className="h-[350px]">
-				<div className="mt-2 mx-2 rounded-lg flex-row flex justify-center ">
-					{prodImageUrl ? (
+				<div className="mt-3	Q23 mx-2 rounded-lg flex-row flex justify-center w-[250px] h-[300px]   " onMouseEnter={handleHover} onMouseLeave={handleMouseLeave}>
+					{mainImageUrl? (
 						<Image
 							width={250}
 							height={250}
-							src={prodImageUrl}
+							src={image}
 							alt="shirt"
-							className="object-cover"
+							className="object-contain"
 						/>
 					) : (
 						<Image width={300} height={300} src="/shirt.png" alt="shirt" />
@@ -45,18 +61,13 @@ const ProductCard = ({
 				</div>
 			</div>
 
-			{/* <div className="absolute top-3 right-3">
+			<div className="absolute top-3 right-3">
 				<SheetDemo
-				cardType={card_type}
-				productPhoto={product_photo}
-				productColors={product_colors}
-				productPrice={product_price}
-				productStock={product_stock}
-				
+				imageUrl={mainImageUrl}
 				/>
-			</div> */}
+			</div>
 
-			{/* <div className="p-2 -mt-5 px-3 shadow-md">
+			<div className="p-2 -mt-5 px-3 shadow-md">
 				<h3 className="text-xs  text-black/[0.4]">T-Shirt</h3>
 				<h2 className="text-[0.9em] font-extrabold">
 					Game Over Black Men T-Shirt
@@ -83,7 +94,7 @@ const ProductCard = ({
 						</>
 					)}
 				</div>
-			</div> */}
+			</div>
 		</Link>
 	);
 };
