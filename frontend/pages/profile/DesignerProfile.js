@@ -248,13 +248,10 @@ const UserProfile = () => {
 				</div>
 			</div>
 
-<<<<<<< HEAD
 		
 
 			{/* <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5 my-6 px-5 md:px-0">
-=======
 			<div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5 my-6 px-5 md:px-0">
->>>>>>> refs/remotes/origin/main
 				{filteredProducts.map((e, index) => (
 					// <ProductCard key={index} product={e} product_photo="/C_hoodie.png" />
 				))}

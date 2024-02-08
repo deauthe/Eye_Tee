@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { getCategory } from "./api/categoryApi";
 import ProductCard from "@/components/ProductCard";
+import Wrapper from "@/components/Wrapper";
 const CategoryDetail = () => {
   const router = useRouter();
 
@@ -30,15 +31,20 @@ const CategoryDetail = () => {
   }, [category]);
 
   return (
-    <div>
-      <div className="h-[90px]"></div>
-      CategoryDetail
-      <div>
-        {data.map((product, index) => (
-          <ProductCard key={index} {...product} />
-        ))}
+    <Wrapper>
+      <div className="mx-3">
+        <div className="h-[90px]"></div>
+        <p className=" mt-[50px] text-center font-bold text-4xl">
+          {" "}
+          Explore the {category} Category
+        </p>
+        <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5 my-6 mt-[90px] px-5 md:px-0">
+          {data.map((product, index) => (
+            <ProductCard key={index} {...product} />
+          ))}
+        </div>
       </div>
-    </div>
+    </Wrapper>
   );
 };
 
