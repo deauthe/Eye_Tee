@@ -10,9 +10,10 @@ import {
 } from "@nextui-org/react";
 import { MdSave } from "react-icons/md";
 import FinalImage from "@/components/finalImage";
-import CanvasCapture from "./CanvasCapture";
+import { toast } from "react-toastify";
 
 export default function EditorModal({
+  designImageUrl,
   selectedColor,
   category,
   overlayImg,
@@ -22,22 +23,27 @@ export default function EditorModal({
   const [backdrop, setBackdrop] = useState("opaque");
   const [images, setImages] = useState([]);
   const [selectedImages, setSelectedImages] = useState([]);
-  const [selectedIds, setSelectedIds] = useState([]);
+  const [selectedIds, setSelectedIds] = useState({});
   const [loading, setLoading] = useState(true);
-
+  const [selectedFinalImages, setSelectedFinalImages] = useState([]);
   const handleOpen = () => {
     setBackdrop("opaque");
     onOpen();
   };
+  const handleImageSelect = (capturedImage, productId, imageUrl) => {
+    console.log("Image Select", capturedImage, productId);
 
-  const handleImageSelect = (imageUrl, productId) => {
-    const selectedImage = { imageUrl, productId };
-    console.log(selectedImages);
-    setSelectedImages((prevSelected) =>
-      prevSelected.some((img) => img.imageUrl === imageUrl)
-        ? prevSelected.filter((img) => img.imageUrl !== imageUrl)
-        : [...prevSelected, selectedImage]
-    );
+    // Check if an image with the same capturedImage and imageUrl already exists in prevArray
+    const selected = selectedImages.find((img) => img.imageUrl === imageUrl);
+
+    if (!selected) {
+      setSelectedImages((prevArray) => [
+        ...prevArray,
+        { capturedImage, productId, imageUrl },
+      ]);
+    } else {
+      console.log("Image is already selected.");
+    }
   };
 
   // function dataURLtoBlob(dataurl) {
@@ -51,48 +57,87 @@ export default function EditorModal({
   //   }
   //   return new Blob([u8arr], { type: mime });
   // }
+
+  const handleSave = (imageUrl) => {
+    // Check if the image with the same imageUrl already exists in selectedFinalImages
+    const isImageSelected = selectedFinalImages.some(
+      (img) => img.imageUrl === imageUrl
+    );
+
+    if (!isImageSelected) {
+      // Find the corresponding object in selectedImages based on imageUrl
+      const correspondingImage = selectedImages.find(
+        (img) => img.imageUrl === imageUrl
+      );
+
+      if (correspondingImage) {
+        setSelectedFinalImages((prevArray) => [
+          ...prevArray,
+          correspondingImage,
+        ]);
+      } else {
+        console.log("Corresponding image not found in selectedImages.");
+      }
+    } else {
+      console.log("Image is already selected.", selectedFinalImages);
+    }
+  };
   const handleSaveImages = async () => {
-    // Convert each data URL to a Blob and create a File
-    const files = selectedImages.map(async (dataUrl, index) => {
-      const res = await fetch(dataUrl);
-      const blob = await res.blob();
-
-      const file = new File([blob], "image_${index + 1}.png", {
-        type: "image/jpeg",
-        lastModified: new Date(),
-      });
-      return file;
-    });
-
-    // Create FormData and append files
-    const formData = new FormData();
-    files.forEach((file, index) => {
-      formData.append("image", file);
-    });
-
-    console.log("SAVED IMAGES", files, selectedImages);
-
-    const apiUrl = "http://localhost:8080/api/designer/createDesign";
-    const apiKey = "token";
-
     try {
-      const response = await fetch(apiUrl, {
-        method: "POST",
-        headers: {
-          "x-api-key": apiKey,
-        },
-        body: formData,
+      const files = await Promise.all(
+        selectedFinalImages.map(async (dataUrl, index) => {
+          const { capturedImage, productId } = dataUrl;
+
+          const res = await fetch(capturedImage);
+          const blob = await res.blob();
+
+          // Use the product ID to create a unique file name
+          const fileName = `product_${productId}_image_${index + 1}.png`;
+          console.log("SAVED IMAGES", fileName);
+          const file = new File([blob], fileName, {
+            type: "image/jpeg",
+            lastModified: new Date(),
+          });
+          return file;
+        })
+      );
+
+      // Create FormData and append files
+      const formData = new FormData();
+      files.forEach((file, index) => {
+        console.log("in files", file);
+        formData.append("image", file);
       });
 
-      const responseData = await response.json();
-      console.log(responseData);
+      // Append designImageUrl
+      formData.append("designImageUrl", designImageUrl);
+      console.log("in formData", formData);
 
-      if (response.ok) {
-        toast.success("Added Product Successfully");
+      // const apiUrl = "http://localhost:8080/api/designs/add-products";
+      const apiUrl =
+        "http://localhost:8080/api/finalproduct/create-final-products";
+
+      const apiKey = "token";
+
+      if (designImageUrl) {
+        const response = await fetch(apiUrl, {
+          method: "POST",
+          headers: {
+            "x-api-key": apiKey,
+          },
+          body: formData,
+        });
+
+        const responseData = await response.json();
+        console.log(responseData);
+
+        if (response.ok) {
+          toast.success("Added Product Successfully");
+        }
       }
     } catch (err) {
       toast.error("Error in adding Product");
-      console.log(err);
+      console.error(err);
     }
   };
 
@@ -100,7 +145,7 @@ export default function EditorModal({
     const fetchImages = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8080/api/product/images?category=${category}`,
+` http://localhost:8080/api/product/images?category=${category}`,
           {
             headers: {
               "x-api-key": "token",
@@ -157,31 +202,31 @@ export default function EditorModal({
                         (index + 1) % 3 !== 0 && (
                           <div
                             className={`relative flex-shrink-0 w-[390px] h-[550px] cursor-pointer border-2 border-black rounded-md ${
-                              selectedImages.some(
+                              selectedFinalImages.some(
                                 (img) => img.imageUrl === imageUrl
                               )
                                 ? "selected"
                                 : ""
                             }`}
                             key={index}
-                            onClick={() =>
-                              handleImageSelect(
-                                imageUrl,
-                                selectedIds[Math.floor(index / 3)]
-                              )
-                            }
+                            onClick={() => {
+                              handleSave(imageUrl);
+                            }}
                           >
                             <FinalImage
                               mainImageSrc={imageUrl}
                               overlayImageSrc={overlayImg}
                               canvasCaptureProps={canvasCaptureProps}
                               scale={1}
+                              url={imageUrl}
+                              productId={selectedIds[Math.floor(index / 3)]}
+                              onSave={handleImageSelect}
                             />
-                            {selectedImages.some(
+                            {selectedFinalImages.some(
                               (img) => img.imageUrl === imageUrl
                             ) && (
                               <div className="absolute top-2 right-2 text-green-500 w-[30px] h-[30px]">
-                                ✓
+                                <button>✅</button>
                               </div>
                             )}
                           </div>
@@ -196,7 +241,7 @@ export default function EditorModal({
                 </Button>
                 <Button
                   color="success"
-                  onPress={handleSaveImages}
+                  onClick={handleSaveImages}
                   disabled={selectedImages.length === 0}
                 >
                   Save Product

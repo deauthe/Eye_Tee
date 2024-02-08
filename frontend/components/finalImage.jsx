@@ -5,6 +5,9 @@ function FinalImage({
   overlayImageSrc,
   canvasCaptureProps,
   scale,
+  productId,
+  onSave,
+  url,
 }) {
   const canvasRef = useRef(null);
   const [capturedImage, setCapturedImage] = useState(null);
@@ -48,7 +51,8 @@ function FinalImage({
         // Capture the canvas content as an image
         const capturedImageData = canvas.toDataURL("image/png");
         setCapturedImage(capturedImageData);
-        // console.log("finalImage", capturedImageData);
+        // console.log("finalImage", productId, capturedImageData);
+        onSave(capturedImageData, productId, url);
       };
     };
   }, [mainImageSrc, overlayImageSrc, canvasCaptureProps, scale]);

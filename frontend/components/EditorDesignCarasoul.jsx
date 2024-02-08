@@ -22,7 +22,7 @@ const ColorSelection = ({ onColorChange }) => {
   const [selectedColors, setSelectedColors] = useState([]);
   const [loading, setLoading] = useState(true); // Add loading state
   const router = useRouter();
-  console.log("this is current url ",router.query.category)
+  console.log("this is current url ", router.query.category);
   const categoryC = router.query.category || "shirt";
   const [category, setCategory] = useState(`${categoryC}`);
 
@@ -32,7 +32,9 @@ const ColorSelection = ({ onColorChange }) => {
     const fetchColors = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8080/api/product/getColor?category=${router.query.category || 'shirt'}`,
+          `http://localhost:8080/api/product/getColor?category=${
+            router.query.category || "shirt"
+          }`,
           {
             headers: {
               "x-api-key": "token",
@@ -44,7 +46,7 @@ const ColorSelection = ({ onColorChange }) => {
 
         if (response.ok) {
           const data = await response.json();
-console.log("this is reposnse json of the fetchColor", data);
+          console.log("this is reposnse json of the fetchColor", data);
           setColors(data.colors);
         } else {
           console.error("Failed to fetch colors");
@@ -84,7 +86,7 @@ console.log("this is reposnse json of the fetchColor", data);
       {colors.map((color, index) => (
         <div
           key={index}
-          className={`w-[5em] h-[2em] cursor-pointer rounded-full`}
+          className={`{w-[5em] h-[2em] cursor-pointer rounded-full}`}
           style={{ backgroundColor: color }}
           onClick={() => handleColorChange(color)}
         ></div>
@@ -127,7 +129,9 @@ const EditorDesignCarasoul = () => {
     setSelectedColor(color); // Update the selected color state
     try {
       const response = await fetch(
-        `http://localhost:8080/api/product/images?color=${color}&category=${router.query.category || 'shirt'}`,
+        `http://localhost:8080/api/product/images?color=${color}&category=${
+          router.query.category || "shirt"
+        }`,
         {
           headers: {
             "x-api-key": "token",
@@ -156,10 +160,11 @@ const EditorDesignCarasoul = () => {
     // Fetch images based on color and category
     console.log("this is category2", category);
     const fetchData = async () => {
-  
       try {
         const response = await fetch(
-          `http://localhost:8080/api/product/images?category=${router.query.category || "shirt"}`,
+          `http://localhost:8080/api/product/images?category=${
+            router.query.category || "shirt"
+          }`,
           {
             headers: {
               "x-api-key": "token",
@@ -205,7 +210,6 @@ const EditorDesignCarasoul = () => {
       ...prevProps,
       ...newProps,
     }));
-
   };
 
   return (
@@ -225,6 +229,7 @@ const EditorDesignCarasoul = () => {
           <div className="absolute top-2 right-2 ">
             {overlayImageSrc && (
               <EditorModal
+                designImageUrl={overlayImageSrc}
                 category={category}
                 selectedColor={selectedColor}
                 overlayImg={overlayImageSrc}

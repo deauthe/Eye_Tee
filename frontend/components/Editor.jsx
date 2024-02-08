@@ -156,8 +156,10 @@ const Editor = () => {
     <>
       <Wrapper>
         <div className="">
+
+
           <div>
-            <div className=" shadow-none image-pattern flex gap-[90px] justify-center items-center  h-[400px] bg-gray-100/75 my-6 rounded-md ">
+            <div className=" shadow-none image-pattern flex gap-[90px] justify-center items-center  h-[400px] bg-gray-100/75 my-6 rounded-md mt-10 ">
               <div className="flex flex-col  items-center ">
                 <div className="border-2 border-dashed border-black rounded-md shadow-sm p-2 h-[300px] flex justify-center items-center w-[300px]">
                   <img

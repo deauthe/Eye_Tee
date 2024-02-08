@@ -34,7 +34,9 @@ function CanvasCapture({
           overlayImage
         );
         // Apply transformations and draw the overlay image
-        const { x, y } = canvasCaptureProps.overlayPosition;
+        let { x, y } = canvasCaptureProps.overlayPosition;
+        x = x * scale;
+        y = y * scale;
         const width =
           overlayImage.width * canvasCaptureProps.overlayScale * scale;
         const height =

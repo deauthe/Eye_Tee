@@ -52,11 +52,14 @@ const DesignCarousel = ({ designerId }) => {
 		<div className=" ">
 			<Carousel
 				responsive={responsive}
-				containerClass="-mx-[10px] h-[300px]"
+				containerClass="-mx-[10px] h-[300px] my-[40px] relative "
 				itemClass="px-[10px]"
 			>
 				{designData.map((product, index) => (
-					<div key={index}>
+					<div key={index}
+					className=""
+					
+					>
 						<DesignerCard
 							cardNo={index}
 							photo={product.designImages[0].url}

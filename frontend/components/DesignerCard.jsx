@@ -30,7 +30,7 @@ const DesignerCard = (props) => {
 			<div
 				className={`transition-opacity ${
 					fade ? "opacity-0 duration-100 ease-in-out" : "opacity-100"
-				} rounded-full`}
+				} rounded-full border-2 border-black `}
 			>
 				{imgSrc ? (
 					<Image
@@ -38,7 +38,7 @@ const DesignerCard = (props) => {
 						height={500}
 						src={imgSrc}
 						alt="shirt"
-						className="object-cover"
+						className=""
 					/>
 				) : (
 					<>loading...</>
