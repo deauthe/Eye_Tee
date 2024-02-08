@@ -7,7 +7,8 @@ import banerImage from "../../public/coverImage.png";
 import DesignCarousel from "@/components/DesignCarousel";
 import CreateProduct from "@/components/CreateProduct";
 import products from "../../utils/Products.json";
-import ProductCard from "@/components/ProductCard";
+import DashboardProductCard from "@/components/DashboardProductCard";
+
 import LineChart from "@/components/utils/LineChart";
 import BarChart from "@/components/utils/BarCharts";
 import { getDesignerPersonalData } from "../api/designerApi";
@@ -102,8 +103,8 @@ const Products = () => {
 
 			<div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5 my-6 px-5 md:px-0">
 				{filteredProducts.map((e, index) => (
-					<ProductCard
-						card_type="dashboard"
+					<DashboardProductCard
+						data=""
 						key={index}
 						product={e}
 						product_photo="/C_hoodie.png"
@@ -187,7 +188,7 @@ const SalesInfo = ({ data }) => {
 				<div className=" uppercase mx-auto text-2xl text-white/[0.5]">
 					MVP product
 				</div>
-				<ProductCard card_type="dashboard" />
+				<DashboardProductCard data="" />
 			</div>
 		</div>
 	);

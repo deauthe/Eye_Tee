@@ -189,7 +189,7 @@ const UserProfile = () => {
 					<Image src={profileImage} alt="profile" width={170} height={170} />
 				</div>
 				<div>
-					<div className=" text-white font-[500] flex items-center justify-center gap-1 rounded-full  absolute right-[200px] bottom-[-15px]">
+					<div className=" text-white font-[500] flex items-center justify-center gap-1 rounded-full  absolute right-[250px] bottom-[-15px]">
 						<CreateProduct />
 					</div>
 					{/* <div className=" text-white font-[500] flex items-center justify-center gap-1 rounded-full  absolute right-[410px] bottom-[-15px] shadow-sm">
@@ -200,7 +200,7 @@ const UserProfile = () => {
 					</div>
 				</div>
 
-				<div className="text-white font-[500] flex items-center justify-center gap-1 bg-blue-400 rounded-full p-1 px-3 absolute right-[40px] bottom-[-15px]">
+				<div className="text-white font-[500] flex items-center justify-center gap-1 bg-blue-400 rounded-full py-2 p-1 px-3 absolute right-[40px] bottom-[-15px]">
 					<EditProfile />
 				</div>
 				<div className="absolute left-[200px] top-[80px] text-black bg-white/[0.8] p-2 rounded-lg  shadow-lg z-10 border-black/[0.5] border-1 w-80 ">
@@ -248,9 +248,13 @@ const UserProfile = () => {
 				</div>
 			</div>
 
+<<<<<<< HEAD
 		
 
 			{/* <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5 my-6 px-5 md:px-0">
+=======
+			<div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5 my-6 px-5 md:px-0">
+>>>>>>> refs/remotes/origin/main
 				{filteredProducts.map((e, index) => (
 					// <ProductCard key={index} product={e} product_photo="/C_hoodie.png" />
 				))}
