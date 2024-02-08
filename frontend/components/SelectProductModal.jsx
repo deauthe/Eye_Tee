@@ -56,7 +56,7 @@ const SelectProductModal = ({ designerId }) => {
 					<MdOpenInBrowser className="text-3xl" />
 				</div>
 			</DialogTrigger>
-			<DialogContent className="h-2/3">
+			<DialogContent className="h-2/3 w-2/3">
 				<DialogHeader>
 					<DialogTitle>choose designs to feature on your page</DialogTitle>
 					<DialogDescription>
