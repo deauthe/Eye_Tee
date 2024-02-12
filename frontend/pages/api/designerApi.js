@@ -228,3 +228,26 @@ export const getDesignerMadeFinalProducts = async ({ designer_id }) => {
 		throw error;
 	}
 };
+
+export const getDesignData = async ({ design_Id }) => {
+	const config = {
+		method: "GET",
+		headers: {
+			"x-api-key": "token",
+		},
+		url: `${API_URL}/api/finalproduct/products/design/${design_Id}`,
+	};
+	console.log(config);
+
+	try {
+		let response = await axios(config);
+		console.log("response fronm api: ", response);
+		console.log("designer Id", design_Id);
+
+		return response.data;
+	} catch (error) {
+		console.error("Error while getting desiner products", error);
+		// Handle the error appropriately
+		throw error;
+	}
+};
