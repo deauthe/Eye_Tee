@@ -36,33 +36,35 @@ const ProductCard = ({
 	};
 
 	return (
-		<Link
+		<div
 			href="/"
 			className="transform overflow-hidden  border-2 border-black md duration-200  cursor-pointer rounded-[20px] backdrop-blur-md shadow-sm bg-white relative"
 		>
 			<div className="h-[350px]">
-				<div
-					className="mt-3	Q23 mx-2 rounded-lg flex-row flex justify-center w-[250px] h-[300px]   "
-					onMouseEnter={handleHover}
-					onMouseLeave={handleMouseLeave}
-				>
-					{mainImageUrl ? (
-						<Image
-							width={250}
-							height={250}
-							src={image}
-							alt="shirt"
-							className="object-contain"
-						/>
-					) : (
-						<Image width={300} height={300} src="/shirt.png" alt="shirt" />
-					)}
+				<Link href="">
+					<div
+						className="mt-3	Q23 mx-2 rounded-lg flex-row flex justify-center w-[250px] h-[300px]   "
+						onMouseEnter={handleHover}
+						onMouseLeave={handleMouseLeave}
+					>
+						{mainImageUrl ? (
+							<Image
+								width={250}
+								height={250}
+								src={image}
+								alt="shirt"
+								className="object-contain"
+							/>
+						) : (
+							<Image width={300} height={300} src="/shirt.png" alt="shirt" />
+						)}
 
-					<div className="flex flex-col md:flex-col absolute bottom-48 right-4 justify-center p-1"></div>
-				</div>
+						<div className="flex flex-col md:flex-col absolute bottom-48 right-4 justify-center p-1"></div>
+					</div>
+				</Link>
 			</div>
 
-			<div className="absolute top-3 right-3">
+			<div className="absolute top-3 right-3 z-10">
 				<SheetDemo imageUrl={mainImageUrl} />
 			</div>
 
@@ -94,7 +96,7 @@ const ProductCard = ({
 					)}
 				</div>
 			</div>
-		</Link>
+		</div>
 	);
 };
 

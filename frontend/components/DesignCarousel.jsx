@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import Link from "next/link";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import ProductCard from "./ProductCard";
@@ -56,16 +56,15 @@ const DesignCarousel = ({ designerId }) => {
 				itemClass="px-[10px]"
 			>
 				{designData.map((product, index) => (
-					<div key={index}
-					className=""
-					
-					>
-						<DesignerCard
-							cardNo={index}
-							photo={product.designImages[0].url}
-							description={product.description}
-						/>
-					</div>
+					<Link href="/" key={index}>
+						<div key={index} className="">
+							<DesignerCard
+								cardNo={index}
+								photo={product.designImages[0].url}
+								description={product.description}
+							/>
+						</div>
+					</Link>
 				))}
 			</Carousel>
 		</div>
