@@ -18,6 +18,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Router, { useRouter } from "next/router";
 import designer from "@/pages/auth/designer";
+import SearchComponent from "./SearchComponent";
 const Header = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [isHovered, setIsHovered] = useState(false);
@@ -136,6 +137,10 @@ const Header = () => {
 						categories={categories}
 					/>
 				)}
+			</div>
+
+			<div className="flex items-center">
+			<SearchComponent/>
 			</div>
 
 			<div className="  flex items-center gap-2   ">
