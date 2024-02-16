@@ -31,7 +31,6 @@ export default function Home() {
 
 
 				<ExploreSection />
-
 			</Wrapper>
 		</main>
 	);

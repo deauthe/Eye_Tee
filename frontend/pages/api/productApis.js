@@ -2,7 +2,7 @@ import axios from "axios";
 const API_URL = process.env.API_URL || "http://localhost:8080";
 console.log("api url :", API_URL);
 
-export const getProductImages = async ({ category }) => {
+export const getProductsByCategory = async ({ category }) => {
   let url;
   if (category) {
     url = `${API_URL}/api/product/images?category=${category}`;
@@ -101,3 +101,4 @@ export const getAllProducts = async () => {
     throw error;
   }
 };
+
