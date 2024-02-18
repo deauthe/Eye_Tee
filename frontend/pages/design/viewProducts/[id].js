@@ -31,13 +31,17 @@ const DesignProducts = () => {
 
 	return (
 		<Wrapper>
-			<div className="mx-auto w-fit mt-20 mb-16">
-				{"all products for $(design name)"}
+			<div className="mx-auto w-fit mt-20 mb-16 ">
+				<div className="mx-auto w-fit">{`all products for `}</div>
+				<div className="text-3xl mx-auto w-fit uppercase mt-2">
+					{designName}
+				</div>
+
 				<div className="mx-auto my-4 px-3 py-3 bg-white/[0.6] shadow-md rounded-md">
 					<Image src={designData.designUrl} height={250} width={250} />
 				</div>
 			</div>
-			<div className="mx-auto grid grid-cols-4 gap-10 h-96 my-5 ">
+			<div className="mx-auto grid grid-cols-4 gap-10 h-fit my-5 =">
 				{designData?.products.map((e) => {
 					return (
 						<ProductCardLocal
@@ -58,7 +62,7 @@ const ProductCardLocal = ({ design_name, product_category, imageUrl }) => {
 			href="/productDetails"
 			className="transform overflow-hidden bg-white/[0.5] rounded-md shadow-md"
 		>
-			<div className="h-[250px] w-[200px] mx-auto">
+			<div className="h-fit w-[200px] mx-auto">
 				<div className="mt-2 mx-2 rounded-lg flex-row flex justify-center ">
 					{imageUrl ? (
 						<Image

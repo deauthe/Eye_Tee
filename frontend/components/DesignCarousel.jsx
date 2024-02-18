@@ -56,7 +56,7 @@ const DesignCarousel = ({ designerId }) => {
 				itemClass="px-[10px]"
 			>
 				{designData.map((product, index) => (
-					<Link href="/" key={index}>
+					<Link href={`/design/viewProducts/1231234123`} key={index}>
 						<div key={index} className="">
 							<DesignerCard
 								cardNo={index}
